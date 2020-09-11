@@ -3,10 +3,10 @@ package models;
 import java.util.Objects;
 
 public class Category {
-    public int id;
-    public String title;
-    public String visuel;
-    
+    private int id;
+    private String title;
+    private String visuel;
+
     public Category(int id, String title, String visuel) {
         this.id = id;
         this.title = title;

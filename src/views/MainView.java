@@ -9,7 +9,7 @@ public class MainView {
 
     public static void openMainMenu() {
         System.out.println(
-                "\n" + "-- Main menu --" + "\n" + "0/ Exit" + "\n" + "1/ Category" + "\n" + "1/ Product" + "\n");
+                "\n" + "-- Main menu --" + "\n" + "0/ Exit" + "\n" + "1/ Category" + "\n" + "2/ Product" + "\n");
         System.out.print("Choice : ");
 
         Scanner scan = new Scanner(System.in);

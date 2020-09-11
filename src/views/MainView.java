@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class MainView {
     public static void main(String[] args) {
+        controllers.BaseSql.initConnection();
         openMainMenu();
     }
 

@@ -67,6 +67,7 @@ public class CategoryView {
         String visuel = scan.nextLine().trim();
 
         categController.addCategory(title, visuel);
+        openCategoryMenu();
         scan.close();
     }
 

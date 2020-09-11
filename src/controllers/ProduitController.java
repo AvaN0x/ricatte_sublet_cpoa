@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import models.Produit;
 import models.Category;
 
-public class ProduitController {
+public class ProduitController /*extends Controller*/ {
     private ArrayList<Produit> products = new ArrayList<Produit>();
 
     public ProduitController() {
-        getDistantCategories();
+        getDistantProducts();
     }
 
     /**
@@ -29,6 +29,7 @@ public class ProduitController {
         addProduit(new Produit(id, nom, description, tarif, visuel, categorie));
     }
 
+    //TODO: Abstract
     /**
      *  Add a new product to the list. The id is automaticly generated.
      * @param prod The product to add.
@@ -93,6 +94,7 @@ public class ProduitController {
         return false;
     }
 
+    //TODO: Factorize
     /**
      * Remove a product in the list.
      * @param prod The product to remove.
@@ -102,6 +104,7 @@ public class ProduitController {
         return removeProduit(prod.getId());
     }
 
+    //TODO: Abstract
     /**
      * Remove a product in the list.
      * @param id The id of the product
@@ -117,16 +120,17 @@ public class ProduitController {
      * Get all the distant cliories.
      * @return The ArrayList containing the cliories.
      */
-    public ArrayList<Produit> getDistantCategories() {
+    public ArrayList<Produit> getDistantProducts() {
         //TODO: clients = Sql.getCategories();
-        return getCategories();
+        return getProducts();
     }
 
+    //TODO: Factorize
     /**
      * Get all the cliories.
      * @return The ArrayList containing the cliories.
      */
-    public ArrayList<Produit> getCategories(){
+    public ArrayList<Produit> getProducts(){
         if (products == null)
             products = new ArrayList<Produit>();
         return products;

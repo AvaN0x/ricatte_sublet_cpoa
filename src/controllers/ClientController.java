@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import models.Client;
 
-public class ClientController {
+public class ClientController /*extends Controller*/ {
     private ArrayList<Client> clients = new ArrayList<Client>();
 
     public ClientController() {
@@ -25,6 +25,7 @@ public class ClientController {
         addClient(new Client(id, nom, prenom));
     }
 
+    //TODO: Abstract
     /**
      *  Add a new client to the list. The id is automaticly generated.
      * @param cli The client to add.
@@ -76,6 +77,7 @@ public class ClientController {
         return false;
     }
 
+    //TODO: Factorize
     /**
      * Remove a client in the list.
      * @param cli The client to remove.
@@ -85,6 +87,7 @@ public class ClientController {
         return removeClient(cli.getId());
     }
 
+    //TODO: Abstract
     /**
      * Remove a client in the list.
      * @param id The id of the client
@@ -105,6 +108,7 @@ public class ClientController {
         return getClients();
     }
 
+    //TODO: Factorize
     /**
      * Get all the cliories.
      * @return The ArrayList containing the cliories.

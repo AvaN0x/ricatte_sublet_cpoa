@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import models.Category;
 
-public class CategoryController {
+public class CategoryController /*extends Controller*/ {
     private ArrayList<Category> categories = new ArrayList<Category>();
 
     public CategoryController() {
@@ -25,6 +25,7 @@ public class CategoryController {
         addCategory(new Category(id, title, visuel));
     }
 
+    //TODO: Abstract
     /**
      *  Add a new category to the list. The id is automaticly generated.
      * @param categ The category to add.
@@ -76,6 +77,7 @@ public class CategoryController {
         return false;
     }
 
+    //TODO: Factorize
     /**
      * Remove a category in the list.
      * @param categ The category to remove.
@@ -85,6 +87,7 @@ public class CategoryController {
         return removeCategory(categ.getId());
     }
 
+    //TODO: Abstract
     /**
      * Remove a category in the list.
      * @param id The id of the category
@@ -105,6 +108,7 @@ public class CategoryController {
         return getCategories();
     }
 
+    //TODO: Factorize
     /**
      * Get all the categories.
      * @return The ArrayList containing the categories.

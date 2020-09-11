@@ -7,42 +7,35 @@ public class CategoryView {
     private static CategoryController categController;
 
     public static void openCategoryMenu() {
-        System.out.println("\n" + 
-            "-- Category menu --" + "\n" + 
-            "0/ Back to main menu" + "\n" +
-            "1/ SELECT" + "\n" + 
-            "2/ INSERT" + "\n" + 
-            "3/ UPDATE" + "\n" + 
-            "4/ DELETE" + "\n"
-        );
+        System.out.println("\n" + "-- Category menu --" + "\n" + "0/ Back to main menu" + "\n" + "1/ SELECT" + "\n"
+                + "2/ INSERT" + "\n" + "3/ UPDATE" + "\n" + "4/ DELETE" + "\n");
         System.out.print("Choice : ");
 
         Scanner scan = new Scanner(System.in);
         String prompted = scan.nextLine();
-	    try {
+        try {
             int submenu = Integer.parseInt(prompted.trim());
             switch (submenu) {
-                case 0 : 
+                case 0:
                     MainView.openMainMenu();
                     break;
-                case 1 : 
+                case 1:
                     printCategories();
                     break;
-                case 2 : 
+                case 2:
                     insertCategory();
                     break;
-                case 3 : 
+                case 3:
                     updateCategory();
                     break;
-                case 4 : 
+                case 4:
                     deleteCategory();
                     break;
-                default :
+                default:
                     openCategoryMenu();
                     break;
             }
-        }
-        catch (NumberFormatException nfe) {	    	
+        } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());
             openCategoryMenu();
         }
@@ -79,7 +72,7 @@ public class CategoryView {
         String idString = scan.nextLine();
         try {
             var id = Integer.parseInt(idString.trim());
-            
+
             System.out.print("New title : ");
             String newTitle = scan.nextLine().trim();
             System.out.print("New visuel : ");
@@ -87,8 +80,7 @@ public class CategoryView {
 
             categController.editCategory(id, newTitle, newVisuel);
             openCategoryMenu();
-        }
-        catch (NumberFormatException nfe) {	    	
+        } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());
             updateCategory();
         }
@@ -104,11 +96,10 @@ public class CategoryView {
         String idString = scan.nextLine();
         try {
             var id = Integer.parseInt(idString.trim());
-            
+
             categController.removeCategory(id);
             openCategoryMenu();
-        }
-        catch (NumberFormatException nfe) {	    	
+        } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());
             updateCategory();
         }

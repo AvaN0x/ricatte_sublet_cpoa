@@ -21,6 +21,7 @@ public class ProductController /*extends Controller*/ {
      * @param categorie The category of the product.
      */
     public void addProduct(String nom, String description, float tarif, String visuel, Category categorie) {
+        // TODO category as an int (id_categorie)
         int id;
         if (products.size() == 0)
             id = 1;

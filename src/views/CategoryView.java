@@ -28,6 +28,15 @@ public class CategoryView {
                 case 1 : 
                     printCategories();
                     break;
+                case 2 : 
+                    insertCategory();
+                    break;
+                case 3 : 
+                    updateCategory();
+                    break;
+                case 4 : 
+                    deleteCategory();
+                    break;
                 default :
                     openCategoryMenu();
                     break;
@@ -47,4 +56,63 @@ public class CategoryView {
         }
         openCategoryMenu();
     }
+
+    public static void insertCategory() {
+        System.out.println();
+
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Title : ");
+        String title = scan.nextLine().trim();
+        System.out.print("Visuel : ");
+        String visuel = scan.nextLine().trim();
+
+        categController.addCategory(title, visuel);
+        scan.close();
+    }
+
+    public static void updateCategory() {
+        System.out.println();
+
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Id : ");
+        String idString = scan.nextLine();
+        try {
+            var id = Integer.parseInt(idString.trim());
+            
+            System.out.print("New title : ");
+            String newTitle = scan.nextLine().trim();
+            System.out.print("New visuel : ");
+            String newVisuel = scan.nextLine().trim();
+
+            categController.editCategory(id, newTitle, newVisuel);
+            openCategoryMenu();
+        }
+        catch (NumberFormatException nfe) {	    	
+            System.out.println("NumberFormatException: " + nfe.getMessage());
+            updateCategory();
+        }
+
+        scan.close();
+    }
+
+    public static void deleteCategory() {
+        System.out.println();
+
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Id : ");
+        String idString = scan.nextLine();
+        try {
+            var id = Integer.parseInt(idString.trim());
+            
+            categController.removeCategory(id);
+            openCategoryMenu();
+        }
+        catch (NumberFormatException nfe) {	    	
+            System.out.println("NumberFormatException: " + nfe.getMessage());
+            updateCategory();
+        }
+
+        scan.close();
+    }
+
 }

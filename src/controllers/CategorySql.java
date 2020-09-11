@@ -17,6 +17,7 @@ public class CategorySql extends BaseSql {
             request.executeUpdate(String.format(
                     "INSERT INTO `categorie`(`id_categorie`, `titre`, `visuel`) VALUES (%s, \"%s\", \"%s\")", c.getId(),
                     c.getTitle(), c.getVisuel()));
+            myConnection.close();
         } catch (SQLException sqle) {
             System.out.println("Error executeUpdate " + sqle.getMessage());
         }
@@ -29,6 +30,7 @@ public class CategorySql extends BaseSql {
             request.executeUpdate(
                     String.format("UPDATE `categorie` SET `titre`= \"%s\",`visuel`= \"%s\" WHERE id_categorie = %s",
                             title, visuel, id));
+            myConnection.close();
         } catch (SQLException sqle) {
             System.out.println("Error executeUpdate " + sqle.getMessage());
         }
@@ -43,6 +45,7 @@ public class CategorySql extends BaseSql {
             Connection myConnection = startConnection();
             Statement request = myConnection.createStatement();
             request.executeUpdate(String.format("DELETE FROM `categorie` WHERE id_categorie = %s", id));
+            myConnection.close();
         } catch (SQLException sqle) {
             System.out.println("Error executeUpdate " + sqle.getMessage());
         }
@@ -53,6 +56,7 @@ public class CategorySql extends BaseSql {
             Connection myConnection = startConnection();
             Statement request = myConnection.createStatement();
             ResultSet res = request.executeQuery("SELECT * FROM `categorie`");
+            myConnection.close();
             var categories = new ArrayList<Category>();
 
             while (res.next()) {

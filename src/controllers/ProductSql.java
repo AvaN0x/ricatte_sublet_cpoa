@@ -13,10 +13,12 @@ public class ProductSql extends BaseSql {
 
     public static void addObject(Product p) {
         try {
-            Statement request = startConnection().createStatement();
+            Connection myConnection = startConnection();
+            Statement request = myConnection.createStatement();
             request.executeUpdate(String.format(
                     "INSERT INTO `produit`(`id_produit`, `nom`, `description`, `tarif`, `visuel`, `id_categorie`) VALUES (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",
                     p.getId(), p.getNom(), p.getDescription(), p.getTarif(), p.getVisuel(), p.getCategorie().getId()));
+            myConnection.close();
         } catch (SQLException sqle) {
             System.out.println("Error executeUpdate " + sqle.getMessage());
         }
@@ -25,10 +27,12 @@ public class ProductSql extends BaseSql {
     public static void updateObject(int id, String nom, String description, float tarif, String visuel,
             Category categorie) {
         try {
-            Statement request = startConnection().createStatement();
+            Connection myConnection = startConnection();
+            Statement request = myConnection.createStatement();
             request.executeUpdate(String.format(
                     "UPDATE `produit` SET `nom`=\"%s\",`description`=\"%s\",`tarif`=\"%s\",`visuel`=\"%s\",`id_categorie`=\"%s\" WHERE \"%s\" WHERE id_produit = %s",
                     nom, description, tarif, visuel, categorie.getId(), id));
+            myConnection.close();
         } catch (SQLException sqle) {
             System.out.println("Error executeUpdate " + sqle.getMessage());
         }
@@ -40,8 +44,10 @@ public class ProductSql extends BaseSql {
 
     public static void remObject(int id) {
         try {
-            Statement request = startConnection().createStatement();
+            Connection myConnection = startConnection();
+            Statement request = myConnection.createStatement();
             request.executeUpdate(String.format("DELETE FROM `produit` WHERE id_produit = %s", id));
+            myConnection.close();
         } catch (SQLException sqle) {
             System.out.println("Error executeUpdate " + sqle.getMessage());
         }
@@ -53,6 +59,7 @@ public class ProductSql extends BaseSql {
             Statement request = myConnection.createStatement();
             ResultSet res = request.executeQuery(
                     "SELECT id_produit, nom, description, tarif, produit.visuel AS pvisuel, id_categorie, titre, categorie.visuel AS cvisuel FROM `produit` JOIN `categorie` USING(id_categorie)");
+            myConnection.close();
             var produits = new ArrayList<Product>();
 
             while (res.next()) {

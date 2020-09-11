@@ -85,7 +85,6 @@ public class Sql {
                 String title = res.getString("titre");
                 String visuel = res.getString("visuel");
                 categories.add(new Category(id, title, visuel));
-                System.out.println(id + " " + title + " " + visuel);
             }
             return categories;
         } catch (SQLException sqle) {

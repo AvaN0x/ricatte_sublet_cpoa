@@ -2,7 +2,7 @@
 desktop.ini
 
 # Java debug files
-.classpath
+lib/
 .settings
 
 #VS Code files

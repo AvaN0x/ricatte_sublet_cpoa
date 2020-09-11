@@ -2,7 +2,7 @@ package models;
 
 import java.util.Objects;
 
-public class Product {
+public class Product implements IBaseModel {
     private int id;
     private String nom;
     private String description;
@@ -105,7 +105,9 @@ public class Product {
             return false;
         }
         Product product = (Product) o;
-        return id == product.id && Objects.equals(nom, product.nom) && Objects.equals(description, product.description) && tarif == product.tarif && Objects.equals(visuel, product.visuel) && Objects.equals(categorie, product.categorie);
+        return id == product.id && Objects.equals(nom, product.nom) && Objects.equals(description, product.description)
+                && tarif == product.tarif && Objects.equals(visuel, product.visuel)
+                && Objects.equals(categorie, product.categorie);
     }
 
     @Override

@@ -2,11 +2,11 @@ package models;
 
 import java.util.Objects;
 
-public class Client {
+public class Client implements IBaseModel {
     private int id;
     private String nom;
     private String prenom;
-    
+
     public Client(int id, String nom, String prenom) {
         this.id = id;
         this.nom = nom;
@@ -70,11 +70,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", nom='" + getNom() + "'" +
-            ", prenom='" + getPrenom() + "'" +
-            "}";
+        return "{" + " id='" + getId() + "'" + ", nom='" + getNom() + "'" + ", prenom='" + getPrenom() + "'" + "}";
     }
 
 }

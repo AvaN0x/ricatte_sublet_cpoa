@@ -43,7 +43,7 @@ public class CategoryView {
     }
 
     public static void printCategories() {
-        var categories = categController.getCategories();
+        var categories = categController.getObjects();
         for (var c : categories) {
             System.out.println(c.getId() + " : " + c.getTitle() + " - " + c.getVisuel());
         }
@@ -97,7 +97,7 @@ public class CategoryView {
         try {
             var id = Integer.parseInt(idString.trim());
 
-            categController.removeCategory(id);
+            categController.removeObject(id);
             openCategoryMenu();
         } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());

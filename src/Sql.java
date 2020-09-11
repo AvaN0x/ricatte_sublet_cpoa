@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import models.Category;
 
@@ -12,9 +13,8 @@ import models.Category;
 public class Sql {
 
     public static Connection startConnection() {
-        String url =
-        "jdbc:mysql://localhost/iut_cpoa";
-        url += "?serverTimezone=UTC";
+        String url = "jdbc:mysql://localhost/iut_cpoa";
+            url += "?serverTimezone=UTC";
         String login = "root";
         String pwd = "root";
         Connection myConnection = null;
@@ -31,9 +31,11 @@ public class Sql {
         remCategory(7);
         var c = new Category(6, "Pantalon", "pantalon.png");
         addCategory(c);
-        remCategory(c.id);
         addCategory(new Category(7, "Testing", "Things"));
+        getCategories();
         updateCategory(7, "Testing", "Nothing");
+        remCategory(c.id);
+        getCategories();
     }
     
     public static void addCategory(Category c) {
@@ -69,6 +71,25 @@ public class Sql {
         }
     }
 
+    public static ArrayList<Category> getCategories() {
+        try {
+            Connection myConnection = startConnection();
+            Statement request = myConnection.createStatement();
+            ResultSet res = request.executeQuery("SELECT * FROM `categorie`");
+            var categories = new ArrayList<Category>();
 
+            while (res.next()) {
+                int id = res.getInt(1);
+                String title = res.getString("titre");
+                String visuel = res.getString("visuel");
+                categories.add(new Category(id, title, visuel));
+                System.out.println(id + " " + title + " " + visuel);
+            }
+            return categories;
+        } catch (SQLException sqle) {
+            System.out.println("Error executeQuery " + sqle.getMessage());
+            return null;
+        } 
+    }
 
 }

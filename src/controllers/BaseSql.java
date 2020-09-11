@@ -2,9 +2,7 @@ package controllers;
 
 import java.sql.*;
 
-import models.IBaseModel;
-
-public abstract class BaseSql<T extends IBaseModel> {
+public abstract class BaseSql {
     public static Connection startConnection() {
         String url = "jdbc:mysql://localhost/iut_cpoa?serverTimezone=UTC";
         String login = "root";

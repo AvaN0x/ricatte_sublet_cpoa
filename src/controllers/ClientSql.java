@@ -1,10 +1,6 @@
 package controllers;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 import models.Client;
@@ -12,21 +8,7 @@ import models.Client;
 /**
  * ClientSql class
  */
-public class ClientSql {
-
-    public static Connection startConnection() {
-        String url = "jdbc:mysql://localhost/iut_cpoa";
-        url += "?serverTimezone=UTC";
-        String login = "root";
-        String pwd = "root";
-        Connection myConnection = null;
-        try {
-            myConnection = DriverManager.getConnection(url, login, pwd);
-        } catch (SQLException sqle) {
-            System.out.println("Erreur connexion " + sqle.getMessage());
-        }
-        return myConnection;
-    }
+public class ClientSql extends BaseSql {
 
     // public static void addClient(Client c) {
     // try {

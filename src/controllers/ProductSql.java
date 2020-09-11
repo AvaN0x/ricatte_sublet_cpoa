@@ -9,21 +9,7 @@ import models.Category;
 /**
  * ProductSql class
  */
-public class ProductSql extends BaseSql<Product> {
-
-    /*public static Connection startConnection() {
-        String url = "jdbc:mysql://localhost/iut_cpoa";
-        url += "?serverTimezone=UTC";
-        String login = "root";
-        String pwd = "root";
-        Connection myConnection = null;
-        try {
-            myConnection = DriverManager.getConnection(url, login, pwd);
-        } catch (SQLException sqle) {
-            System.out.println("Erreur connexion " + sqle.getMessage());
-        }
-        return myConnection;
-    }*/
+public class ProductSql extends BaseSql {
 
     public static void addObject(Product p) {
         try {

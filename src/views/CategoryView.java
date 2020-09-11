@@ -5,18 +5,15 @@ import controllers.*;
 
 public class CategoryView {
     private static CategoryController categController;
-    public static void main(String[] args) {
-        categController = new CategoryController();
-        openCategoryMenu();
-    }
 
     public static void openCategoryMenu() {
         System.out.println("\n" + 
             "-- Category menu --" + "\n" + 
+            "0/ Back to main menu" + "\n" +
             "1/ SELECT" + "\n" + 
             "2/ INSERT" + "\n" + 
             "3/ UPDATE" + "\n" + 
-            "4/ DELETE" + "\n" 
+            "4/ DELETE" + "\n"
         );
         System.out.print("Choice : ");
 
@@ -25,6 +22,9 @@ public class CategoryView {
 	    try {
             int submenu = Integer.parseInt(prompted.trim());
             switch (submenu) {
+                case 0 : 
+                    MainView.openMainMenu();
+                    break;
                 case 1 : 
                     printCategories();
                     break;

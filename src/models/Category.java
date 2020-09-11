@@ -2,7 +2,7 @@ package models;
 
 import java.util.Objects;
 
-public class Category {
+public class Category implements IBaseModel {
     private int id;
     private String title;
     private String visuel;

@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Sql class
@@ -23,7 +25,17 @@ public class Sql {
     }
 
     public static void main(String[] args) {
-        var connection = startConnection();
+        // var connection = startConnection();
+    }
+    
+    public void addCategory(Category c) {
+        try {
+            Connection myConnection = startConnection();
+            Statement request = myConnection.createStatement();
+            ResultSet res = request.executeQuery(String.format("INSERT INTO `categorie`(`id_categorie`, `titre`, `visuel`) VALUES (%s, %s, %s)"), c.id_categorie, c.titre, c.visuel); 
+        } catch (SQLException sqle) {
+            System.out.println("Pb select" + sqle.getMessage());
+        }
     }
 
 }

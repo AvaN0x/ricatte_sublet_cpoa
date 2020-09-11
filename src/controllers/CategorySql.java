@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import models.Category;
 
 /**
- * Sql class
+ * CategorySql class
  */
 public class CategorySql {
 

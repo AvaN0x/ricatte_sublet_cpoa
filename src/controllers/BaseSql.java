@@ -49,7 +49,7 @@ public abstract class BaseSql {
     }
 
     public static Connection startConnection() {
-        String url = String.format("jdbc:mysql://%s/%s?serverTimezone=UTC", server, database);
+        String url = String.format("jdbc:mysql://%s:%s/%s?serverTimezone=UTC", server, port, database);
         try {
             return DriverManager.getConnection(url, username, password);
         } catch (SQLException sqle) {

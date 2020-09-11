@@ -101,7 +101,7 @@ public class CategoryView {
             openCategoryMenu();
         } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());
-            updateCategory();
+            deleteCategory();
         }
 
         scan.close();

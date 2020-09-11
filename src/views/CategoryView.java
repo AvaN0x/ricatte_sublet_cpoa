@@ -1,15 +1,17 @@
 package views;
 
 import java.util.Scanner;
-import controllers.Sql;
+import controllers.*;
 
 public class CategoryView {
+    private static CategoryController categController;
     public static void main(String[] args) {
+        categController = new CategoryController();
         openCategoryMenu();
     }
 
     public static void openCategoryMenu() {
-        System.out.println(
+        System.out.println("\n" + 
             "-- Category menu --" + "\n" + 
             "1/ SELECT" + "\n" + 
             "2/ INSERT" + "\n" + 
@@ -39,6 +41,10 @@ public class CategoryView {
     }
 
     public static void printCategories() {
-        Sql.getCategories();
+        var categories = categController.getCategories();
+        for (var c : categories) {
+            System.out.println(c.getId() + " : " + c.getTitle() + " - " + c.getVisuel());
+        }
+        openCategoryMenu();
     }
 }

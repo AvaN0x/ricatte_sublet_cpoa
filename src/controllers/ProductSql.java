@@ -59,7 +59,6 @@ public class ProductSql extends BaseSql {
             Statement request = myConnection.createStatement();
             ResultSet res = request.executeQuery(
                     "SELECT id_produit, nom, description, tarif, produit.visuel AS pvisuel, id_categorie, titre, categorie.visuel AS cvisuel FROM `produit` JOIN `categorie` USING(id_categorie)");
-            myConnection.close();
             var produits = new ArrayList<Product>();
 
             while (res.next()) {
@@ -75,6 +74,7 @@ public class ProductSql extends BaseSql {
                 produits.add(new Product(id_produit, nom, description, tarif, pvisuel,
                         new Category(id_categorie, titre, cvisuel)));
             }
+            myConnection.close();
             return produits;
         } catch (SQLException sqle) {
             System.out.println("Error executeQuery " + sqle.getMessage());

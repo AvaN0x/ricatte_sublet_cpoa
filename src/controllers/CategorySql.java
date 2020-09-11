@@ -56,7 +56,6 @@ public class CategorySql extends BaseSql {
             Connection myConnection = startConnection();
             Statement request = myConnection.createStatement();
             ResultSet res = request.executeQuery("SELECT * FROM `categorie`");
-            myConnection.close();
             var categories = new ArrayList<Category>();
 
             while (res.next()) {
@@ -65,6 +64,7 @@ public class CategorySql extends BaseSql {
                 String visuel = res.getString("visuel");
                 categories.add(new Category(id, title, visuel));
             }
+            myConnection.close();
             return categories;
         } catch (SQLException sqle) {
             System.out.println("Error executeQuery " + sqle.getMessage());

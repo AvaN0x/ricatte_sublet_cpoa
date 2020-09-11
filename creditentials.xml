@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<class>
+    <sql>
+        <server>127.0.0.1</server>
+        <port>3307</port>
+        <database>dut_cpoa</database>
+        <username>dut</username>
+        <password>k2wATSNHNvFWc9ec</password>
+    </sql>
+</class>

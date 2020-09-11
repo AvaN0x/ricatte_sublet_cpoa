@@ -4,7 +4,7 @@ import java.util.Scanner;
 import controllers.*;
 
 public class ProductView {
-    private static ProductController prodController;
+    private static ProductController prodController = new ProductController();
 
     public static void openProductMenu() {
         System.out.println("\n" + "-- Product menu --" + "\n" + "0/ Back to main menu" + "\n" + "1/ SELECT" + "\n"

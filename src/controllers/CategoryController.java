@@ -25,7 +25,7 @@ public class CategoryController {
         if(categ.getId() < lastId)
             categ.setId(lastId + 1);
         categories.add(categ);
-        //TODO: SQL Insert
+        Sql.addCategory(categ);
     }
     
     public void editCategory(Category categ, String newTitle, String newVisuel) {
@@ -36,12 +36,16 @@ public class CategoryController {
         //TODO: Preconditions => if newTitle + newVisuel is null
         for (Category category : categories)
             if(category.getId() == id){
-                if(newTitle != null)
-                    category.setTitle(newTitle);
-                if(newVisuel != null)
-                    category.setVisuel(newVisuel);
+                if(newTitle == null)
+                    newTitle = category.getTitle();
+                    if(newVisuel == null)
+                    newVisuel = category.getVisuel();
+
+                category.setTitle(newTitle);
+                category.setVisuel(newVisuel);
+                Sql.updateCategory(id, newTitle, newVisuel);
             }
-        //TODO: SQL Update
+        //TODO: throw new CategoryNotFound
     }
 
     public void removeCategory(Category categ) {
@@ -50,13 +54,13 @@ public class CategoryController {
 
     public void removeCategory(int id) {
         categories.removeIf(categ -> categ.getId() == id);
-        //TODO: SQL Delete
+        Sql.remCategory(id);
     }
 
     public ArrayList<Category> getCategories(){
-        categories = new ArrayList<Category>();
-        //TODO: SQL Select
-        //TODO: SQL get all items and set it in categories
+        categories = Sql.getCategories();
+        if(categories == null)
+            categories = new ArrayList<Category>();
         return categories;
     }
 

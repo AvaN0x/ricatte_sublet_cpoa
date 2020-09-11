@@ -8,7 +8,7 @@ public class CategoryController {
     private ArrayList<Category> categories = new ArrayList<Category>();
 
     public CategoryController() {
-        getCategories();
+        getDistantCategories();
     }
 
     /**
@@ -51,9 +51,9 @@ public class CategoryController {
 
     /**
      * Edit a category in the list. The new title and visual can be null but not at the same time.
-     * @param id
-     * @param newTitle The new title of the category.
-     * @param newVisuel The new path to the image of the Category.
+     * @param id The id of the category to edit.
+     * @param newTitle The new title of the category. Can be null.
+     * @param newVisuel The new path to the image of the Category. Can be null.
      * @return If the editing is successfull or not.
      * @throws IllegalArgumentException If the new title and visual are null.
      */
@@ -78,7 +78,7 @@ public class CategoryController {
 
     /**
      * Remove a category in the list.
-     * @param categ The category to edit.
+     * @param categ The category to remove.
      * @return If the removing is sucessfull or not.
      */
     public boolean removeCategory(Category categ) {

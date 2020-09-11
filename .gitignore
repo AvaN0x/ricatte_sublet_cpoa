@@ -1,0 +1,7 @@
+# Java debug files
+.classpath
+.settings
+
+#VS Code files
+.vscode
+vscode.code-workspace

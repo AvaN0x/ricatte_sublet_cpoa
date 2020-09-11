@@ -29,7 +29,7 @@ public class CategoryController extends BaseController<Category> {
         if (categ.getId() < lastId)
             categ.setId(lastId + 1);
         objects.add(categ);
-        CategorySql.addCategory(categ);
+        CategorySql.addObject(categ);
     }
 
     /**
@@ -69,7 +69,7 @@ public class CategoryController extends BaseController<Category> {
 
                 category.setTitle(newTitle);
                 category.setVisuel(newVisuel);
-                CategorySql.updateCategory(id, newTitle, newVisuel);
+                CategorySql.updateObject(id, newTitle, newVisuel);
                 return true;
             }
         return false;
@@ -77,12 +77,12 @@ public class CategoryController extends BaseController<Category> {
 
     public boolean removeObject(int id) {
         var res = objects.removeIf(categ -> categ.getId() == id);
-        CategorySql.remCategory(id);
+        CategorySql.remObject(id);
         return res;
     }
 
     public ArrayList<Category> getDistantObjects() {
-        objects = CategorySql.getCategories();
+        objects = CategorySql.getObject();
         return getObjects();
     }
 }

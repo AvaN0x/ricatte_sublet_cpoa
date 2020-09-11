@@ -10,7 +10,7 @@ import models.Category;
  */
 public class CategorySql extends BaseSql {
 
-    public static void addCategory(Category c) {
+    public static void addObject(Category c) {
         try {
             Connection myConnection = startConnection();
             Statement request = myConnection.createStatement();
@@ -23,7 +23,7 @@ public class CategorySql extends BaseSql {
         }
     }
 
-    public static void updateCategory(int id, String title, String visuel) {
+    public static void updateObject(int id, String title, String visuel) {
         try {
             Connection myConnection = startConnection();
             Statement request = myConnection.createStatement();
@@ -36,11 +36,11 @@ public class CategorySql extends BaseSql {
         }
     }
 
-    public static void remCategory(Category c) {
-        remCategory(c.getId());
+    public static void remObject(Category c) {
+        remObject(c.getId());
     }
 
-    public static void remCategory(int id) {
+    public static void remObject(int id) {
         try {
             Connection myConnection = startConnection();
             Statement request = myConnection.createStatement();
@@ -51,7 +51,7 @@ public class CategorySql extends BaseSql {
         }
     }
 
-    public static ArrayList<Category> getCategories() {
+    public static ArrayList<Category> getObject() {
         try {
             Connection myConnection = startConnection();
             Statement request = myConnection.createStatement();

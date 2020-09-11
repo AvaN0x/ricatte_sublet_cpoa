@@ -35,7 +35,7 @@ public class CategoryController /*extends Controller*/ {
         if (categ.getId() < lastId)
             categ.setId(lastId + 1);
         categories.add(categ);
-        Sql.addCategory(categ);
+        CategorySql.addCategory(categ);
     }
 
     /**
@@ -71,7 +71,7 @@ public class CategoryController /*extends Controller*/ {
 
                 category.setTitle(newTitle);
                 category.setVisuel(newVisuel);
-                Sql.updateCategory(id, newTitle, newVisuel);
+                CategorySql.updateCategory(id, newTitle, newVisuel);
                 return true;
             }
         return false;
@@ -95,7 +95,7 @@ public class CategoryController /*extends Controller*/ {
      */
     public boolean removeCategory(int id) {
         var res = categories.removeIf(categ -> categ.getId() == id);
-        Sql.remCategory(id);
+        CategorySql.remCategory(id);
         return res;
     }
 
@@ -104,7 +104,7 @@ public class CategoryController /*extends Controller*/ {
      * @return The ArrayList containing the categories.
      */
     public ArrayList<Category> getDistantCategories() {
-        categories = Sql.getCategories();
+        categories = CategorySql.getCategories();
         return getCategories();
     }
 

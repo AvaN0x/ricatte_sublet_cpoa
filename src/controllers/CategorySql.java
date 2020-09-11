@@ -12,7 +12,7 @@ import models.Category;
 /**
  * Sql class
  */
-public class Sql {
+public class CategorySql {
 
     public static Connection startConnection() {
         String url = "jdbc:mysql://localhost/iut_cpoa";
@@ -28,18 +28,6 @@ public class Sql {
         return myConnection;
     }
 
-    public static void main(String[] args) {
-        // var connection = startConnection();
-        remCategory(7);
-        var c = new Category(6, "Pantalon", "pantalon.png");
-        addCategory(c);
-        addCategory(new Category(7, "Testing", "Things"));
-        getCategories();
-        updateCategory(7, "Testing", "Nothing");
-        remCategory(c.getId());
-        getCategories();
-    }
-    
     public static void addCategory(Category c) {
         try {
             Connection myConnection = startConnection();

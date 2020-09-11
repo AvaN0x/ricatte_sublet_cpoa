@@ -43,7 +43,7 @@ public class ProductView {
     }
 
     public static void printProducts() {
-        var Products = prodController.getProducts();
+        var Products = prodController.getObjects();
         for (var p : Products) {
             System.out.println(p.getId() + " : " + p.getNom() + " - " + p.getDescription() + " - " + p.getTarif()
                     + " - " + p.getVisuel() + " - " + p.getCategorie().getId());
@@ -118,7 +118,7 @@ public class ProductView {
         try {
             int id = Integer.parseInt(idString);
 
-            prodController.removeProduct(id);
+            prodController.removeObject(id);
             openProductMenu();
         } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());

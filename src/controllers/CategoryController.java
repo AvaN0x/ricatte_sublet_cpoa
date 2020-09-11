@@ -85,5 +85,4 @@ public class CategoryController extends BaseController<Category> {
         objects = CategorySql.getCategories();
         return getObjects();
     }
-
 }

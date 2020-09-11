@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import models.Client;
 
 public class ClientController extends BaseController<Client> {
-
     public ClientController() {
         // getDistantClients();
     }

@@ -78,7 +78,7 @@ public class CategoryView {
             System.out.print("New visuel : ");
             String newVisuel = scan.nextLine().trim();
 
-            categController.editCategory(id, newTitle, newVisuel);
+            categController.editObject(id, newTitle, newVisuel);
             openCategoryMenu();
         } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());

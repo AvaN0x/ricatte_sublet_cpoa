@@ -4,37 +4,30 @@ import java.util.ArrayList;
 
 import models.Category;
 
-public class CategoryController /*extends Controller*/ {
-    private ArrayList<Category> categories = new ArrayList<Category>();
-
+public class CategoryController extends BaseController<Category> {
     public CategoryController() {
-        getDistantCategories();
+        getDistantObjects();
     }
-
     /**
      * Add a new category to the list. The id is automaticly generated.
      * @param title The title of the category.
      * @param visuel The path of the image of the category.
      */
-    public void addCategory(String title, String visuel) {
+
+    public void addObject(String title, String visuel) {
         int id;
-        if (categories.size() == 0)
+        if (objects.size() == 0)
             id = 1;
         else
-            id = categories.get(categories.size() - 1).getId() + 1;
-        addCategory(new Category(id, title, visuel));
+            id = objects.get(objects.size() - 1).getId() + 1;
+        addObject(new Category(id, title, visuel));
     }
 
-    //TODO: Abstract
-    /**
-     *  Add a new category to the list. The id is automaticly generated.
-     * @param categ The category to add.
-     */
-    public void addCategory(Category categ) {
-        int lastId = categories.get(categories.size() - 1).getId();
+    public void addObject(Category categ) {
+        int lastId = objects.get(objects.size() - 1).getId();
         if (categ.getId() < lastId)
             categ.setId(lastId + 1);
-        categories.add(categ);
+        objects.add(categ);
         CategorySql.addCategory(categ);
     }
 
@@ -62,7 +55,7 @@ public class CategoryController /*extends Controller*/ {
         if (newTitle == null && newVisuel == null)
             throw new IllegalArgumentException();
 
-        for (Category category : categories)
+        for (Category category : objects)
             if (category.getId() == id) {
                 if (newTitle == null)
                     newTitle = category.getTitle();
@@ -77,46 +70,15 @@ public class CategoryController /*extends Controller*/ {
         return false;
     }
 
-    //TODO: Factorize
-    /**
-     * Remove a category in the list.
-     * @param categ The category to remove.
-     * @return If the removing is sucessfull or not.
-     */
-    public boolean removeCategory(Category categ) {
-        return removeCategory(categ.getId());
-    }
-
-    //TODO: Abstract
-    /**
-     * Remove a category in the list.
-     * @param id The id of the category
-     * @return If the removing is sucessfull or not.
-     */
     public boolean removeCategory(int id) {
-        var res = categories.removeIf(categ -> categ.getId() == id);
+        var res = objects.removeIf(categ -> categ.getId() == id);
         CategorySql.remCategory(id);
         return res;
     }
 
-    /**
-     * Get all the distant categories.
-     * @return The ArrayList containing the categories.
-     */
-    public ArrayList<Category> getDistantCategories() {
-        categories = CategorySql.getCategories();
-        return getCategories();
-    }
-
-    //TODO: Factorize
-    /**
-     * Get all the categories.
-     * @return The ArrayList containing the categories.
-     */
-    public ArrayList<Category> getCategories(){
-        if (categories == null)
-            categories = new ArrayList<Category>();
-        return categories;
+    public ArrayList<Category> getDistantObjects() {
+        objects = CategorySql.getCategories();
+        return getObjects();
     }
 
 }

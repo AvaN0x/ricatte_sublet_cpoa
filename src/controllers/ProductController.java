@@ -2,13 +2,13 @@ package controllers;
 
 import java.util.ArrayList;
 
-import models.Produit;
+import models.Product;
 import models.Category;
 
-public class ProduitController /*extends Controller*/ {
-    private ArrayList<Produit> products = new ArrayList<Produit>();
+public class ProductController /*extends Controller*/ {
+    private ArrayList<Product> products = new ArrayList<Product>();
 
-    public ProduitController() {
+    public ProductController() {
         getDistantProducts();
     }
 
@@ -20,13 +20,13 @@ public class ProduitController /*extends Controller*/ {
      * @param visuel The path to the image of the product.
      * @param categorie The category of the product.
      */
-    public void addProduit(String nom, String description, float tarif, String visuel, Category categorie) {
+    public void addProduct(String nom, String description, float tarif, String visuel, Category categorie) {
         int id;
         if (products.size() == 0)
             id = 1;
         else
             id = products.get(products.size() - 1).getId() + 1;
-        addProduit(new Produit(id, nom, description, tarif, visuel, categorie));
+        addProduct(new Product(id, nom, description, tarif, visuel, categorie));
     }
 
     //TODO: Abstract
@@ -34,12 +34,12 @@ public class ProduitController /*extends Controller*/ {
      *  Add a new product to the list. The id is automaticly generated.
      * @param prod The product to add.
      */
-    public void addProduit(Produit prod) {
+    public void addProduct(Product prod) {
         int lastId = products.get(products.size() - 1).getId();
         if (prod.getId() < lastId)
             prod.setId(lastId + 1);
         products.add(prod);
-        //TODO: Sql.addProduit(prod);
+        //TODO: Sql.addProduct(prod);
     }
 
     /**
@@ -53,8 +53,8 @@ public class ProduitController /*extends Controller*/ {
      * @return If the editing is successfull or not.
      * @throws IllegalArgumentException If all of the optional parameters are null.
      */
-    public boolean editProduit(Produit prod, String newNom, String newDescription, float newTarif, String newVisuel, Category newCategorie) throws IllegalArgumentException {
-        return editProduit(prod.getId(), newNom, newDescription, newTarif, newVisuel, newCategorie);
+    public boolean editProduct(Product prod, String newNom, String newDescription, float newTarif, String newVisuel, Category newCategorie) throws IllegalArgumentException {
+        return editProduct(prod.getId(), newNom, newDescription, newTarif, newVisuel, newCategorie);
     }
 
     /**
@@ -68,11 +68,11 @@ public class ProduitController /*extends Controller*/ {
      * @return If the editing is successfull or not.
      * @throws IllegalArgumentException If the new name and first name are null.
      */
-    public boolean editProduit(int id, String newNom, String newDescription, float newTarif, String newVisuel, Category newCategorie) throws IllegalArgumentException {
+    public boolean editProduct(int id, String newNom, String newDescription, float newTarif, String newVisuel, Category newCategorie) throws IllegalArgumentException {
         if (newNom == null && newDescription == null && newVisuel == null && newCategorie == null)
             throw new IllegalArgumentException();
 
-        for (Produit product : products)
+        for (Product product : products)
             if (product.getId() == id) {
                 if (newNom == null)
                     newNom = product.getNom();
@@ -88,7 +88,7 @@ public class ProduitController /*extends Controller*/ {
                 product.setTarif(newTarif);
                 product.setVisuel(newVisuel);
                 product.setCategorie(newCategorie);
-                //TODO: Sql.updateProduit(id, newNom, newPrenom);
+                //TODO: Sql.updateProduct(id, newNom, newPrenom);
                 return true;
             }
         return false;
@@ -100,8 +100,8 @@ public class ProduitController /*extends Controller*/ {
      * @param prod The product to remove.
      * @return If the removing is sucessfull or not.
      */
-    public boolean removeProduit(Produit prod) {
-        return removeProduit(prod.getId());
+    public boolean removeProduct(Product prod) {
+        return removeProduct(prod.getId());
     }
 
     //TODO: Abstract
@@ -110,9 +110,9 @@ public class ProduitController /*extends Controller*/ {
      * @param id The id of the product
      * @return If the removing is sucessfull or not.
      */
-    public boolean removeProduit(int id) {
+    public boolean removeProduct(int id) {
         var res = products.removeIf(prod -> prod.getId() == id);
-        //TODO: Sql.remProduit(id);
+        //TODO: Sql.remProduct(id);
         return res;
     }
 
@@ -120,7 +120,7 @@ public class ProduitController /*extends Controller*/ {
      * Get all the distant cliories.
      * @return The ArrayList containing the cliories.
      */
-    public ArrayList<Produit> getDistantProducts() {
+    public ArrayList<Product> getDistantProducts() {
         //TODO: clients = Sql.getCategories();
         return getProducts();
     }
@@ -130,9 +130,9 @@ public class ProduitController /*extends Controller*/ {
      * Get all the cliories.
      * @return The ArrayList containing the cliories.
      */
-    public ArrayList<Produit> getProducts(){
+    public ArrayList<Product> getProducts(){
         if (products == null)
-            products = new ArrayList<Produit>();
+            products = new ArrayList<Product>();
         return products;
     }
 }

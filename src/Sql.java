@@ -34,7 +34,7 @@ public class Sql {
         addCategory(new Category(7, "Testing", "Things"));
         getCategories();
         updateCategory(7, "Testing", "Nothing");
-        remCategory(c.id);
+        remCategory(c.getId());
         getCategories();
     }
     
@@ -42,7 +42,7 @@ public class Sql {
         try {
             Connection myConnection = startConnection();
             Statement request = myConnection.createStatement();
-            var res = request.executeUpdate(String.format("INSERT INTO `categorie`(`id_categorie`, `titre`, `visuel`) VALUES (%s, \"%s\", \"%s\")", c.id, c.title, c.visuel)); 
+            var res = request.executeUpdate(String.format("INSERT INTO `categorie`(`id_categorie`, `titre`, `visuel`) VALUES (%s, \"%s\", \"%s\")", c.getId(), c.getTitle(), c.getVisuel())); 
         } catch (SQLException sqle) {
             System.out.println("Error executeUpdate " + sqle.getMessage());
         }
@@ -59,7 +59,7 @@ public class Sql {
     }
 
     public static void remCategory(Category c) {
-        remCategory(c.id);
+        remCategory(c.getId());
     }
     public static void remCategory(int id) {
         try {

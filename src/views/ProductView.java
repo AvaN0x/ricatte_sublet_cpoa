@@ -4,7 +4,15 @@ import java.util.Scanner;
 import controllers.*;
 
 public class ProductView {
-    private static ProductController prodController = new ProductController();
+    private static ProductController prodController;
+    private static CategoryController categController;
+
+    public static void openProductMenu(CategoryController cController, ProductController pController) {
+        categController = cController;
+        prodController = pController;
+        openProductMenu();
+
+    }
 
     public static void openProductMenu() {
         System.out.println("\n" + "-- Product menu --" + "\n" + "0/ Back to main menu" + "\n" + "1/ SELECT" + "\n"
@@ -26,10 +34,10 @@ public class ProductView {
                     insertProduct();
                     break;
                 case 3:
-                    // updateProduct();
+                    updateProduct();
                     break;
                 case 4:
-                    // deleteProduct();
+                    deleteProduct();
                     break;
                 default:
                     openProductMenu();
@@ -70,7 +78,7 @@ public class ProductView {
             String id_categoryString = scan.nextLine().trim();
             var id_category = Integer.parseInt(id_categoryString);
 
-            // prodController.addProduct(nom, description, tarif, visuel, id_category);
+            prodController.addObject(nom, description, tarif, visuel, categController.getObject(id_category));
             openProductMenu();
         } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());
@@ -98,8 +106,7 @@ public class ProductView {
             System.out.print("ID category : ");
             int id_category = Integer.parseInt(scan.nextLine().trim());
 
-            // prodController.updateProduct(id, nom, description, tarif, visuel,
-            // id_category);
+            prodController.editObject(id, nom, description, tarif, visuel, categController.getObject(id_category));
             openProductMenu();
         } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());

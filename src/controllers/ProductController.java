@@ -34,7 +34,7 @@ public class ProductController extends BaseController<Product> {
         if (prod.getId() < lastId)
             prod.setId(lastId + 1);
         objects.add(prod);
-        // TODO: Sql.addProduct(prod);
+        ProductSql.addObject(prod);
     }
 
     /**
@@ -50,9 +50,9 @@ public class ProductController extends BaseController<Product> {
      * @return If the editing is successfull or not.
      * @throws IllegalArgumentException If all of the optional parameters are null.
      */
-    public boolean editProduct(Product prod, String newNom, String newDescription, float newTarif, String newVisuel,
+    public boolean editObject(Product prod, String newNom, String newDescription, float newTarif, String newVisuel,
             Category newCategorie) throws IllegalArgumentException {
-        return editProduct(prod.getId(), newNom, newDescription, newTarif, newVisuel, newCategorie);
+        return editObject(prod.getId(), newNom, newDescription, newTarif, newVisuel, newCategorie);
     }
 
     /**
@@ -68,7 +68,7 @@ public class ProductController extends BaseController<Product> {
      * @return If the editing is successfull or not.
      * @throws IllegalArgumentException If the new name and first name are null.
      */
-    public boolean editProduct(int id, String newNom, String newDescription, float newTarif, String newVisuel,
+    public boolean editObject(int id, String newNom, String newDescription, float newTarif, String newVisuel,
             Category newCategorie) throws IllegalArgumentException {
         if (newNom == null && newDescription == null && newVisuel == null && newCategorie == null)
             throw new IllegalArgumentException();
@@ -89,7 +89,8 @@ public class ProductController extends BaseController<Product> {
                 product.setTarif(newTarif);
                 product.setVisuel(newVisuel);
                 product.setCategorie(newCategorie);
-                // TODO: Sql.updateProduct(id, newNom, newPrenom);
+                ProductSql.updateObject(product.getId(), product.getNom(), product.getDescription(), product.getTarif(),
+                        product.getVisuel(), product.getCategorie());
                 return true;
             }
         return false;
@@ -103,7 +104,7 @@ public class ProductController extends BaseController<Product> {
      */
     public boolean removeObject(int id) {
         var res = objects.removeIf(prod -> prod.getId() == id);
-        // TODO: Sql.remProduct(id);
+        ProductSql.remObject(id);
         return res;
     }
 

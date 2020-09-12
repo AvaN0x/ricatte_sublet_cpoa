@@ -30,7 +30,7 @@ public class ProductSql extends BaseSql {
             Connection myConnection = startConnection();
             Statement request = myConnection.createStatement();
             request.executeUpdate(String.format(
-                    "UPDATE `produit` SET `nom`=\"%s\",`description`=\"%s\",`tarif`=\"%s\",`visuel`=\"%s\",`id_categorie`=\"%s\" WHERE \"%s\" WHERE id_produit = %s",
+                    "UPDATE `produit` SET `nom`=\"%s\",`description`=\"%s\",`tarif`=\"%s\",`visuel`=\"%s\",`id_categorie`=\"%s\" WHERE id_produit = %s",
                     nom, description, tarif, visuel, categorie.getId(), id));
             myConnection.close();
         } catch (SQLException sqle) {

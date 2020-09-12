@@ -2,9 +2,18 @@ package views;
 
 import java.util.Scanner;
 
+import controllers.*;
+
 public class MainView {
+    private static CategoryController categController;
+    private static ProductController prodController;
+
     public static void main(String[] args) {
         controllers.BaseSql.initConnection();
+
+        categController = new CategoryController();
+        prodController = new ProductController();
+
         openMainMenu();
     }
 
@@ -21,10 +30,10 @@ public class MainView {
                 case 0:
                     break;
                 case 1:
-                    CategoryView.openCategoryMenu();
+                    CategoryView.openCategoryMenu(categController);
                     break;
                 case 2:
-                    ProductView.openProductMenu();
+                    ProductView.openProductMenu(categController, prodController);
                     break;
                 default:
                     openMainMenu();

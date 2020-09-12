@@ -4,7 +4,12 @@ import java.util.Scanner;
 import controllers.*;
 
 public class CategoryView {
-    private static CategoryController categController = new CategoryController();
+    private static CategoryController categController;
+
+    public static void openCategoryMenu(CategoryController cController) {
+        categController = cController;
+        openCategoryMenu();
+    }
 
     public static void openCategoryMenu() {
         System.out.println("\n" + "-- Category menu --" + "\n" + "0/ Back to main menu" + "\n" + "1/ SELECT" + "\n"

@@ -85,4 +85,12 @@ public class CategoryController extends BaseController<Category> {
         objects = CategorySql.getObjects();
         return getObjects();
     }
+
+    public Category getObject(int id) {
+        for (Category category : objects)
+            if (category.getId() == id) {
+                return category;
+            }
+        return null;
+    }
 }

@@ -84,6 +84,8 @@ public class ProductView {
             } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException | SecurityException e) {
                 System.out.println("Error when adding the object: " + e.getMessage());
+            } catch (NullPointerException e) {
+                System.out.println("Error when adding the object: The category id is probably null");
             }
             openProductMenu();
         } catch (NumberFormatException nfe) {
@@ -117,6 +119,8 @@ public class ProductView {
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException
                     | SecurityException e) {
                 System.out.println("Error when editing the object: " + e.getMessage());
+            } catch (NullPointerException e) {
+                System.out.println("Error when adding the object: The category id is probably null");
             }
             openProductMenu();
         } catch (NumberFormatException nfe) {

@@ -82,7 +82,7 @@ public class CategoryController extends BaseController<Category> {
     }
 
     public ArrayList<Category> getDistantObjects() {
-        objects = CategorySql.getObject();
+        objects = CategorySql.getObjects();
         return getObjects();
     }
 }

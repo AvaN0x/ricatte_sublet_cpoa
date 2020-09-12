@@ -43,8 +43,8 @@ public class ProductView {
     }
 
     public static void printProducts() {
-        var Products = prodController.getObjects();
-        for (var p : Products) {
+        var products = prodController.getObjects();
+        for (var p : products) {
             System.out.println(p.getId() + " : " + p.getNom() + " - " + p.getDescription() + " - " + p.getTarif()
                     + " - " + p.getVisuel() + " - " + p.getCategorie().getId());
         }

@@ -113,7 +113,7 @@ public class ProductController extends BaseController<Product> {
      * @return The ArrayList containing the cliories.
      */
     public ArrayList<Product> getDistantObjects() {
-        // TODO: clients = Sql.getCategories();
+        objects = ProductSql.getObjects();
         return getObjects();
     }
 }

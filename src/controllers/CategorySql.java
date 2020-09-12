@@ -51,7 +51,7 @@ public class CategorySql extends BaseSql {
         }
     }
 
-    public static ArrayList<Category> getObject() {
+    public static ArrayList<Category> getObjects() {
         try {
             Connection myConnection = startConnection();
             Statement request = myConnection.createStatement();

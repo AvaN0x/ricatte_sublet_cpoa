@@ -5,7 +5,7 @@ desktop.ini
 creditentials.xml
 
 # Java debug files
-lib/
+lib/*.jar
 .settings
 
 #VS Code files

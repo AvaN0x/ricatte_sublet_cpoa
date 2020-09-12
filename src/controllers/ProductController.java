@@ -20,7 +20,6 @@ public class ProductController extends BaseController<Product> {
      * @param categorie   The category of the product.
      */
     public void addObject(String nom, String description, float tarif, String visuel, Category categorie) {
-        // TODO category as an int (id_categorie)
         int id;
         if (objects.size() == 0)
             id = 1;

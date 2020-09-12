@@ -1,5 +1,6 @@
 package views;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 import controllers.*;
 
@@ -65,7 +66,12 @@ public class ClientView {
         String nom = scan.nextLine().trim();
         System.out.print("Firstname : ");
         String prenom = scan.nextLine().trim();
-        cliController.addObject(nom, prenom);
+        try {
+            cliController.addObject(nom, prenom);
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+                | SecurityException e) {
+            System.out.println("Error when adding the object: " + e.getMessage());
+        }
         openClientMenu();
         scan.close();
     }
@@ -83,7 +89,12 @@ public class ClientView {
             System.out.print("Firstname : ");
             String prenom = scan.nextLine().trim();
 
-            cliController.editObject(id, nom, prenom);
+            try {
+                cliController.editObject(id, nom, prenom);
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException
+                    | SecurityException e) {
+                System.out.println("Error when editing the object: " + e.getMessage());
+            }
             openClientMenu();
         } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());

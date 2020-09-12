@@ -1,5 +1,6 @@
 package views;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 import controllers.*;
 
@@ -64,7 +65,12 @@ public class CategoryView {
         System.out.print("Visuel : ");
         String visuel = scan.nextLine().trim();
 
-        categController.addObject(title, visuel);
+        try {
+            categController.addObject(title, visuel);
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+                | SecurityException e) {
+            System.out.println("Error when adding the object: " + e.getMessage());
+        }
         openCategoryMenu();
         scan.close();
     }
@@ -83,7 +89,12 @@ public class CategoryView {
             System.out.print("New visuel : ");
             String newVisuel = scan.nextLine().trim();
 
-            categController.editObject(id, newTitle, newVisuel);
+            try {
+                categController.editObject(id, newTitle, newVisuel);
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException
+                    | SecurityException e) {
+                System.out.println("Error when editing the object: " + e.getMessage());
+            }
             openCategoryMenu();
         } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());

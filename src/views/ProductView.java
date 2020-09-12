@@ -1,5 +1,6 @@
 package views;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 import controllers.*;
 
@@ -78,7 +79,12 @@ public class ProductView {
             String id_categoryString = scan.nextLine().trim();
             var id_category = Integer.parseInt(id_categoryString);
 
-            prodController.addObject(nom, description, tarif, visuel, categController.getObject(id_category));
+            try {
+                prodController.addObject(nom, description, tarif, visuel, categController.getObject(id_category));
+            } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+                    | InvocationTargetException | SecurityException e) {
+                System.out.println("Error when adding the object: " + e.getMessage());
+            }
             openProductMenu();
         } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());
@@ -106,7 +112,12 @@ public class ProductView {
             System.out.print("ID category : ");
             int id_category = Integer.parseInt(scan.nextLine().trim());
 
-            prodController.editObject(id, nom, description, tarif, visuel, categController.getObject(id_category));
+            try {
+                prodController.editObject(id, nom, description, tarif, visuel, categController.getObject(id_category));
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException
+                    | SecurityException e) {
+                System.out.println("Error when editing the object: " + e.getMessage());
+            }
             openProductMenu();
         } catch (NumberFormatException nfe) {
             System.out.println("NumberFormatException: " + nfe.getMessage());

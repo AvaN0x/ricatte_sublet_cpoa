@@ -6,9 +6,6 @@ import models.Product;
 import models.Category;
 
 public class ProductController extends BaseController<Product> {
-    public ProductController() {
-        super(Product.class);
-    }
 
     public void addObject(Product prod) {
         super.addObject(prod);

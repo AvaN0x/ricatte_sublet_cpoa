@@ -1,6 +1,7 @@
 package controllers;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,8 +12,8 @@ public abstract class BaseController<T extends IBaseModel> {
 
     private final Class<T> type;
 
-    public BaseController(Class<T> type) {
-        this.type = type;
+    public BaseController() {
+        this.type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         getDistantObjects();
     }
 

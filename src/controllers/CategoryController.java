@@ -6,10 +6,6 @@ import models.Category;
 
 public class CategoryController extends BaseController<Category> {
 
-    public CategoryController() {
-        super(Category.class);
-    }
-
     public void addObject(Category categ) {
         super.addObject(categ);
         CategorySql.addObject(categ);

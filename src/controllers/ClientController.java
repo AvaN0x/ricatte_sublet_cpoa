@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import models.Client;
 
 public class ClientController extends BaseController<Client> {
-    public ClientController() {
-        super(Client.class);
-    }
 
     public void addObject(Client cli) {
         super.addObject(cli);

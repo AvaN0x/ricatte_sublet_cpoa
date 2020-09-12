@@ -57,7 +57,7 @@ public class ProductController extends BaseController<Product> {
     }
 
     public ArrayList<Product> getDistantObjects() {
-        objects = ProductSql.getObjects();
+        _objects = ProductSql.getObjects();
         return getObjects();
     }
 }

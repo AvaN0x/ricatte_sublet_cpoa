@@ -3,52 +3,52 @@ package models;
 import java.util.Objects;
 
 public class Client implements IBaseModel {
-    private int id;
-    private String nom;
-    private String prenom;
+    private int _id;
+    private String _nom;
+    private String _prenom;
 
     public Client(int id, String nom, String prenom) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
+        this._id = id;
+        this._nom = nom;
+        this._prenom = prenom;
     }
 
     public int getId() {
-        return this.id;
+        return this._id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this._id = id;
     }
 
     public String getNom() {
-        return this.nom;
+        return this._nom;
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this._nom = nom;
     }
 
     public String getPrenom() {
-        return this.prenom;
+        return this._prenom;
     }
 
     public void setPrenom(String prenom) {
-        this.prenom = prenom;
+        this._prenom = prenom;
     }
 
     public Client id(int id) {
-        this.id = id;
+        this._id = id;
         return this;
     }
 
     public Client nom(String nom) {
-        this.nom = nom;
+        this._nom = nom;
         return this;
     }
 
     public Client prenom(String prenom) {
-        this.prenom = prenom;
+        this._prenom = prenom;
         return this;
     }
 
@@ -60,12 +60,12 @@ public class Client implements IBaseModel {
             return false;
         }
         Client client = (Client) o;
-        return id == client.id && Objects.equals(nom, client.nom) && Objects.equals(prenom, client.prenom);
+        return _id == client._id && Objects.equals(_nom, client._nom) && Objects.equals(_prenom, client._prenom);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nom, prenom);
+        return Objects.hash(_id, _nom, _prenom);
     }
 
     @Override

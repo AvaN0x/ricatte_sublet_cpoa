@@ -59,7 +59,7 @@ public class ClientController extends BaseController<Client> {
      * @return The ArrayList containing the cliories.
      */
     public ArrayList<Client> getDistantObjects() {
-        objects = ClientSql.getObjects();
+        _objects = ClientSql.getObjects();
         return getObjects();
     }
 }

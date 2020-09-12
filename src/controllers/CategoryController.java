@@ -51,12 +51,12 @@ public class CategoryController extends BaseController<Category> {
     }
 
     public ArrayList<Category> getDistantObjects() {
-        objects = CategorySql.getObjects();
+        _objects = CategorySql.getObjects();
         return getObjects();
     }
 
     public Category getObject(int id) {
-        for (Category category : objects)
+        for (Category category : _objects)
             if (category.getId() == id) {
                 return category;
             }

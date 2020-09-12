@@ -11,7 +11,6 @@ import models.Category;
 public class CategorySql extends BaseSql {
 
     public static void addObject(Object obj) {
-        System.out.println("FK YEAH");
         try {
             Category c = (Category) obj;
             Connection myConnection = startConnection();

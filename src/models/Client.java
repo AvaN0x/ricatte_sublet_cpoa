@@ -7,6 +7,9 @@ public class Client implements IBaseModel {
     private String nom;
     private String prenom;
 
+    public Client() {
+    }
+
     public Client(int id, String nom, String prenom) {
         this.id = id;
         this.nom = nom;

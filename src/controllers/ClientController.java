@@ -6,14 +6,14 @@ import models.Client;
 
 public class ClientController extends BaseController<Client> {
     public ClientController() {
-        // getDistantClients();
+        // getDistantObjects();
     }
 
     /**
      * Add a new client to the list. The id is automaticly generated.
      * 
      * @param nom    The name of the client.
-     * @param prenom The first name of the client.
+     * @param prenom The first name of the client. ...
      */
     public void addObject(String nom, String prenom) {
         int id;
@@ -29,7 +29,7 @@ public class ClientController extends BaseController<Client> {
         if (cli.getId() < lastId)
             cli.setId(lastId + 1);
         objects.add(cli);
-        // TODO: Sql.addClient(cli);
+        ClientSql.addObject(cli);
     }
 
     /**
@@ -69,20 +69,31 @@ public class ClientController extends BaseController<Client> {
 
                 client.setNom(newNom);
                 client.setPrenom(newPrenom);
-                // TODO: Sql.updateClient(id, newNom, newPrenom);
+                ClientSql.updateObject(id, newNom, newPrenom);
                 return true;
             }
         return false;
     }
 
+    /**
+     * Remove a product in the list.
+     * 
+     * @param id The id of the product
+     * @return If the removing is sucessfull or not.
+     */
     public boolean removeObject(int id) {
         var res = objects.removeIf(cli -> cli.getId() == id);
-        // TODO: Sql.remClient(id);
+        ClientSql.remObject(id);
         return res;
     }
 
+    /**
+     * Get all the distant cliories.
+     * 
+     * @return The ArrayList containing the cliories.
+     */
     public ArrayList<Client> getDistantObjects() {
-        // TODO: clients = Sql.getCategories();
+        objects = ClientSql.getObjects();
         return getObjects();
     }
 }

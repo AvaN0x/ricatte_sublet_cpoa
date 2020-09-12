@@ -75,7 +75,7 @@ public class ProductView {
 
             System.out.print("Visuel : ");
             String visuel = scan.nextLine().trim();
-            System.out.print("ID category : ");
+            System.out.print("ID categorie : ");
             String id_categoryString = scan.nextLine().trim();
             var id_category = Integer.parseInt(id_categoryString);
 
@@ -97,7 +97,7 @@ public class ProductView {
         System.out.println();
 
         Scanner scan = new Scanner(System.in);
-        System.out.print("Id : ");
+        System.out.print("ID : ");
         String idString = scan.nextLine().trim();
         try {
             int id = Integer.parseInt(idString);
@@ -109,7 +109,7 @@ public class ProductView {
             float tarif = Float.parseFloat(scan.nextLine().trim());
             System.out.print("Visuel : ");
             String visuel = scan.nextLine().trim();
-            System.out.print("ID category : ");
+            System.out.print("ID categorie : ");
             int id_category = Integer.parseInt(scan.nextLine().trim());
 
             try {
@@ -131,7 +131,7 @@ public class ProductView {
         System.out.println();
 
         Scanner scan = new Scanner(System.in);
-        System.out.print("Id : ");
+        System.out.print("ID : ");
         String idString = scan.nextLine().trim();
         try {
             int id = Integer.parseInt(idString);

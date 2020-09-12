@@ -62,9 +62,9 @@ public class ClientView {
         System.out.println();
 
         Scanner scan = new Scanner(System.in);
-        System.out.print("Name : ");
+        System.out.print("Nom : ");
         String nom = scan.nextLine().trim();
-        System.out.print("Firstname : ");
+        System.out.print("Prenom : ");
         String prenom = scan.nextLine().trim();
         try {
             cliController.addObject(nom, prenom);
@@ -80,13 +80,13 @@ public class ClientView {
         System.out.println();
 
         Scanner scan = new Scanner(System.in);
-        System.out.print("Id : ");
+        System.out.print("ID : ");
         String idString = scan.nextLine().trim();
         try {
             int id = Integer.parseInt(idString);
-            System.out.print("Name : ");
+            System.out.print("Nom : ");
             String nom = scan.nextLine().trim();
-            System.out.print("Firstname : ");
+            System.out.print("Prenom : ");
             String prenom = scan.nextLine().trim();
 
             try {
@@ -108,7 +108,7 @@ public class ClientView {
         System.out.println();
 
         Scanner scan = new Scanner(System.in);
-        System.out.print("Id : ");
+        System.out.print("ID : ");
         String idString = scan.nextLine().trim();
         try {
             int id = Integer.parseInt(idString);

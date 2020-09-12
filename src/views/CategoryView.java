@@ -60,7 +60,7 @@ public class CategoryView {
         System.out.println();
 
         Scanner scan = new Scanner(System.in);
-        System.out.print("Title : ");
+        System.out.print("Titre : ");
         String title = scan.nextLine().trim();
         System.out.print("Visuel : ");
         String visuel = scan.nextLine().trim();
@@ -79,14 +79,14 @@ public class CategoryView {
         System.out.println();
 
         Scanner scan = new Scanner(System.in);
-        System.out.print("Id : ");
+        System.out.print("ID : ");
         String idString = scan.nextLine();
         try {
             var id = Integer.parseInt(idString.trim());
 
-            System.out.print("New title : ");
+            System.out.print("Titre : ");
             String newTitle = scan.nextLine().trim();
-            System.out.print("New visuel : ");
+            System.out.print("Visuel : ");
             String newVisuel = scan.nextLine().trim();
 
             try {
@@ -108,7 +108,7 @@ public class CategoryView {
         System.out.println();
 
         Scanner scan = new Scanner(System.in);
-        System.out.print("Id : ");
+        System.out.print("ID : ");
         String idString = scan.nextLine();
         try {
             var id = Integer.parseInt(idString.trim());

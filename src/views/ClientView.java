@@ -50,7 +50,7 @@ public class ClientView {
     }
 
     public static void printClients() {
-        var Clients = cliController.getObjects();
+        var Clients = cliController.getDistantObjects();
         for (var c : Clients) {
             System.out.println(c.getId() + " : " + c.getNom() + " - " + c.getPrenom());
 

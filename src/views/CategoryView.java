@@ -49,7 +49,7 @@ public class CategoryView {
     }
 
     public static void printCategories() {
-        var categories = categController.getObjects();
+        var categories = categController.getDistantObjects();
         for (var c : categories) {
             System.out.println(c.getId() + " : " + c.getTitle() + " - " + c.getVisuel());
         }

@@ -52,7 +52,7 @@ public class ProductView {
     }
 
     public static void printProducts() {
-        var products = prodController.getObjects();
+        var products = prodController.getDistantObjects();
         for (var p : products) {
             System.out.println(p.getId() + " : " + p.getNom() + " - " + p.getDescription() + " - " + p.getTarif()
                     + " - " + p.getVisuel() + " - " + p.getCategorie().getId());

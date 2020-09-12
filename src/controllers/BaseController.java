@@ -34,7 +34,7 @@ public abstract class BaseController<T extends IBaseModel> {
      * 
      * @param obj The object to add.
      */
-    public void addObject(T obj) {
+    protected void addObject(T obj) {
         int lastId = objects.get(objects.size() - 1).getId();
         if (obj.getId() < lastId)
             obj.setId(lastId + 1);

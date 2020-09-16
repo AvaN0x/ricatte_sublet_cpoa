@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<class>
+    <sql>
+        <server>127.0.0.1</server>
+        <port>3306</port>
+        <database>mabase</database>
+        <username>loginu</username>
+        <password>monpotdepasse</password>
+    </sql>
+</class>

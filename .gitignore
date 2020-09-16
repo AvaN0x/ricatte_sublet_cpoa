@@ -1,9 +1,6 @@
 # Avan0x icons
 desktop.ini
 
-# Security duh
-creditentials.xml
-
 # Java debug files
 lib/*.jar
 .settings

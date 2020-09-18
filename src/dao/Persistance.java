@@ -1,5 +1,5 @@
 package dao;
 
 public enum Persistance {
-    MySQL, ListeMemoire
+    MYSQL, LISTE_MEMOIRE
 }

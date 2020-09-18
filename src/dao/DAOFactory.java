@@ -4,15 +4,15 @@ public abstract class DAOFactory {
     public static DAOFactory getDAOFactory(Persistance target) {
         DAOFactory daoF = null;
         switch (target) {
-            case MySQL:
+            case MYSQL:
                 daoF = new MySQLDAOFactory();
                 break;
-            case ListeMemoire:
+            case LISTE_MEMOIRE:
                 // daoF = new ListeMemoireDAOFactory();
                 break;
         }
         return daoF;
     }
 
-    public abstract CategoryDAO getCategoryDAO();
+    public abstract CategoryDAO getCategoryDAO() throws Exception;
 }

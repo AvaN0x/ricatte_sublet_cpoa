@@ -2,7 +2,7 @@
 desktop.ini
 
 # Security duh
-creditentials.xml
+config/creditentials.properties
 
 # Java debug files
 lib/

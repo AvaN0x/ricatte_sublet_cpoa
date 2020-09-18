@@ -1,13 +1,7 @@
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.*;
+import java.util.Properties;
 
 public class BaseSQL {
     private static String _server;
@@ -16,26 +10,16 @@ public class BaseSQL {
     private static String _username;
     private static String _password;
 
-    public static void initConnection() throws ParserConfigurationException, SAXException, IOException {
-        File file = new File("creditentials.xml");
+    public static void initConnection() throws IOException {
+        Properties credits = new Properties();
+        File fBdd = new File("config/creditentials.properties");
+        FileInputStream source = new FileInputStream(fBdd);
+        credits.loadFromXML(source);
 
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        Document doc = db.parse(file);
-        doc.getDocumentElement().normalize();
-
-        NodeList nodeList = doc.getElementsByTagName("sql");
-
-        for (int itr = 0; itr < nodeList.getLength(); itr++) {
-            Node node = nodeList.item(itr);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) node;
-                _server = eElement.getElementsByTagName("server").item(0).getTextContent();
-                _port = eElement.getElementsByTagName("port").item(0).getTextContent();
-                _database = eElement.getElementsByTagName("database").item(0).getTextContent();
-                _username = eElement.getElementsByTagName("username").item(0).getTextContent();
-                _password = eElement.getElementsByTagName("password").item(0).getTextContent();
-            }
-        }
+        _server = credits.getProperty("server");
+        _port = credits.getProperty("port");
+        _database = credits.getProperty("database");
+        _username = credits.getProperty("username");
+        _password = credits.getProperty("password");
     }
 }

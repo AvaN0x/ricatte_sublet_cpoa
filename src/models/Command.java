@@ -8,12 +8,13 @@ public class Command {
     private int _id;
     private LocalDate _date_command;
     private Client _client;
-    private HashMap<Integer, CommandLine> _commandLines;
+    private HashMap<Integer, CommandLine> _commandLines; // HashMap<id_produit, commandLine>
 
     public Command(int id, LocalDate date_command, Client client, HashMap<Integer, CommandLine> commandLines) {
         this._id = id;
         this._date_command = date_command;
         this._client = client;
+        // todo init commandLines
         this._commandLines = commandLines;
     }
 

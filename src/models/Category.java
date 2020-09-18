@@ -1,41 +1,40 @@
 package models;
 
 import java.util.Objects;
-import java.util.ArrayList;
 
 public class Category {
     private int _id;
     private String _title;
     private String _visuel;
 
-    public Category(int _id, String _title, String _visuel) {
-        this._id = _id;
-        this._title = _title;
-        this._visuel = _visuel;
+    public Category(int id, String title, String visuel) {
+        this._id = id;
+        this._title = title;
+        this._visuel = visuel;
     }
 
-    public int get_id() {
+    public int getId() {
         return this._id;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
+    public void setId(int id) {
+        this._id = id;
     }
 
-    public String get_title() {
+    public String getTitle() {
         return this._title;
     }
 
-    public void set_title(String _title) {
-        this._title = _title;
+    public void setTitle(String title) {
+        this._title = title;
     }
 
-    public String get_visuel() {
+    public String getVisuel() {
         return this._visuel;
     }
 
-    public void set_visuel(String _visuel) {
-        this._visuel = _visuel;
+    public void setVisuel(String visuel) {
+        this._visuel = visuel;
     }
 
     @Override
@@ -57,7 +56,7 @@ public class Category {
 
     @Override
     public String toString() {
-        return "{" + " _id='" + get_id() + "'" + ", _title='" + get_title() + "'" + ", _visuel='" + get_visuel() + "'"
+        return "{" + " _id='" + getId() + "'" + ", _title='" + getTitle() + "'" + ", _visuel='" + getVisuel() + "'"
                 + "}";
     }
 

@@ -10,61 +10,61 @@ public class Product {
     private String _visuel;
     private Category _category;
 
-    public Product(int _id, String _nom, String _description, float _tarif, String _visuel, Category _category) {
-        this._id = _id;
-        this._nom = _nom;
-        this._description = _description;
-        this._tarif = _tarif;
-        this._visuel = _visuel;
-        this._category = _category;
+    public Product(int id, String nom, String description, float tarif, String visuel, Category category) {
+        this._id = id;
+        this._nom = nom;
+        this._description = description;
+        this._tarif = tarif;
+        this._visuel = visuel;
+        this._category = category;
     }
 
-    public int get_id() {
+    public int getId() {
         return this._id;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
+    public void setId(int id) {
+        this._id = id;
     }
 
-    public String get_nom() {
+    public String getNom() {
         return this._nom;
     }
 
-    public void set_nom(String _nom) {
-        this._nom = _nom;
+    public void setNom(String nom) {
+        this._nom = nom;
     }
 
-    public String get_description() {
+    public String getDescription() {
         return this._description;
     }
 
-    public void set_description(String _description) {
-        this._description = _description;
+    public void setDescription(String description) {
+        this._description = description;
     }
 
-    public float get_tarif() {
+    public float getTarif() {
         return this._tarif;
     }
 
-    public void set_tarif(float _tarif) {
-        this._tarif = _tarif;
+    public void setTarif(float tarif) {
+        this._tarif = tarif;
     }
 
-    public String get_visuel() {
+    public String getVisuel() {
         return this._visuel;
     }
 
-    public void set_visuel(String _visuel) {
-        this._visuel = _visuel;
+    public void setVisuel(String visuel) {
+        this._visuel = visuel;
     }
 
-    public Category get_category() {
+    public Category getCategory() {
         return this._category;
     }
 
-    public void set_category(Category _category) {
-        this._category = _category;
+    public void setCategory(Category category) {
+        this._category = category;
     }
 
     @Override
@@ -87,9 +87,9 @@ public class Product {
 
     @Override
     public String toString() {
-        return "{" + " _id='" + get_id() + "'" + ", _nom='" + get_nom() + "'" + ", _description='" + get_description()
-                + "'" + ", _tarif='" + get_tarif() + "'" + ", _visuel='" + get_visuel() + "'" + ", _category='"
-                + get_category() + "'" + "}";
+        return "{" + " _id='" + getId() + "'" + ", _nom='" + getNom() + "'" + ", _description='" + getDescription()
+                + "'" + ", _tarif='" + getTarif() + "'" + ", _visuel='" + getVisuel() + "'" + ", _category='"
+                + getCategory() + "'" + "}";
     }
 
 }

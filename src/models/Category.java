@@ -7,13 +7,11 @@ public class Category {
     private int _id;
     private String _title;
     private String _visuel;
-    private ArrayList<Product> _products;
 
-    public Category(int _id, String _title, String _visuel, ArrayList<Product> _products) {
+    public Category(int _id, String _title, String _visuel) {
         this._id = _id;
         this._title = _title;
         this._visuel = _visuel;
-        this._products = _products;
     }
 
     public int get_id() {
@@ -40,14 +38,6 @@ public class Category {
         this._visuel = _visuel;
     }
 
-    public ArrayList<Product> get_products() {
-        return this._products;
-    }
-
-    public void set_products(ArrayList<Product> _products) {
-        this._products = _products;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -57,18 +47,18 @@ public class Category {
         }
         Category category = (Category) o;
         return _id == category._id && Objects.equals(_title, category._title)
-                && Objects.equals(_visuel, category._visuel) && Objects.equals(_products, category._products);
+                && Objects.equals(_visuel, category._visuel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _title, _visuel, _products);
+        return Objects.hash(_id, _title, _visuel);
     }
 
     @Override
     public String toString() {
         return "{" + " _id='" + get_id() + "'" + ", _title='" + get_title() + "'" + ", _visuel='" + get_visuel() + "'"
-                + ", _products='" + get_products() + "'" + "}";
+                + "}";
     }
 
 }

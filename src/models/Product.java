@@ -8,13 +8,15 @@ public class Product {
     private String _description;
     private float _tarif;
     private String _visuel;
+    private Category _category;
 
-    public Product(int _id, String _nom, String _description, float _tarif, String _visuel) {
+    public Product(int _id, String _nom, String _description, float _tarif, String _visuel, Category _category) {
         this._id = _id;
         this._nom = _nom;
         this._description = _description;
         this._tarif = _tarif;
         this._visuel = _visuel;
+        this._category = _category;
     }
 
     public int get_id() {
@@ -57,6 +59,14 @@ public class Product {
         this._visuel = _visuel;
     }
 
+    public Category get_category() {
+        return this._category;
+    }
+
+    public void set_category(Category _category) {
+        this._category = _category;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -67,18 +77,19 @@ public class Product {
         Product product = (Product) o;
         return _id == product._id && Objects.equals(_nom, product._nom)
                 && Objects.equals(_description, product._description) && _tarif == product._tarif
-                && Objects.equals(_visuel, product._visuel);
+                && Objects.equals(_visuel, product._visuel) && Objects.equals(_category, product._category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _nom, _description, _tarif, _visuel);
+        return Objects.hash(_id, _nom, _description, _tarif, _visuel, _category);
     }
 
     @Override
     public String toString() {
         return "{" + " _id='" + get_id() + "'" + ", _nom='" + get_nom() + "'" + ", _description='" + get_description()
-                + "'" + ", _tarif='" + get_tarif() + "'" + ", _visuel='" + get_visuel() + "'" + "}";
+                + "'" + ", _tarif='" + get_tarif() + "'" + ", _visuel='" + get_visuel() + "'" + ", _category='"
+                + get_category() + "'" + "}";
     }
 
 }

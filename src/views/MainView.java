@@ -15,8 +15,7 @@ public class MainView {
         Scanner scan = new Scanner(System.in);
         do {
 
-            System.out.println("\n" + "-- Main menu --" + "\n" + "0/ Quitter" + "\n" + "1/ Category" + "\n"
-                    + "2/ Product" + "\n" + "3/ Client" + "\n");
+            System.out.println("\n-- Main menu --\n0/ Quitter\n1/ Category\n2/ Product\n3/ Client\n");
             System.out.print("Choice : ");
 
             try {

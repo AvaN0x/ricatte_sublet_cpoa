@@ -7,105 +7,105 @@ public class Client {
     private String _nom;
     private String _prenom;
     private String _identifiant;
-    private String mot_de_passe;
-    private int _adr_numero;
-    private String _adr_voie;
-    private int _adr_code_postal;
-    private String _adr_ville;
-    private String _adr_pays;
+    private String _motDePasse;
+    private int _adrNumero;
+    private String _adrVoie;
+    private int _adrCodePostal;
+    private String _adrVille;
+    private String _adrPays;
 
-    public Client(int _id, String _nom, String _prenom, String _identifiant, String mot_de_passe, int _adr_numero,
-            String _adr_voie, int _adr_code_postal, String _adr_ville, String _adr_pays) {
+    public Client(int _id, String _nom, String _prenom, String _identifiant, String motDePasse, int _adrNumero,
+            String _adrVoie, int _adrCodePostal, String _adrVille, String _adrPays) {
         this._id = _id;
         this._nom = _nom;
         this._prenom = _prenom;
         this._identifiant = _identifiant;
-        this.mot_de_passe = mot_de_passe;
-        this._adr_numero = _adr_numero;
-        this._adr_voie = _adr_voie;
-        this._adr_code_postal = _adr_code_postal;
-        this._adr_ville = _adr_ville;
-        this._adr_pays = _adr_pays;
+        this._motDePasse = motDePasse;
+        this._adrNumero = _adrNumero;
+        this._adrVoie = _adrVoie;
+        this._adrCodePostal = _adrCodePostal;
+        this._adrVille = _adrVille;
+        this._adrPays = _adrPays;
     }
 
-    public int get_id() {
+    public int getId() {
         return this._id;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
+    public void setId(int id) {
+        this._id = id;
     }
 
-    public String get_nom() {
+    public String getNom() {
         return this._nom;
     }
 
-    public void set_nom(String _nom) {
-        this._nom = _nom;
+    public void setNom(String nom) {
+        this._nom = nom;
     }
 
-    public String get_prenom() {
+    public String getPrenom() {
         return this._prenom;
     }
 
-    public void set_prenom(String _prenom) {
-        this._prenom = _prenom;
+    public void setPrenom(String prenom) {
+        this._prenom = prenom;
     }
 
-    public String get_identifiant() {
+    public String getIdentifiant() {
         return this._identifiant;
     }
 
-    public void set_identifiant(String _identifiant) {
-        this._identifiant = _identifiant;
+    public void setIdentifiant(String identifiant) {
+        this._identifiant = identifiant;
     }
 
-    public String getMot_de_passe() {
-        return this.mot_de_passe;
+    public String getMotDePasse() {
+        return this._motDePasse;
     }
 
-    public void setMot_de_passe(String mot_de_passe) {
-        this.mot_de_passe = mot_de_passe;
+    public void setMoteDePasse(String motDePasse) {
+        this._motDePasse = motDePasse;
     }
 
-    public int get_adr_numero() {
-        return this._adr_numero;
+    public int getAdrNumero() {
+        return this._adrNumero;
     }
 
-    public void set_adr_numero(int _adr_numero) {
-        this._adr_numero = _adr_numero;
+    public void setAdrNumero(int adrNumero) {
+        this._adrNumero = adrNumero;
     }
 
-    public String get_adr_voie() {
-        return this._adr_voie;
+    public String getAdrVoie() {
+        return this._adrVoie;
     }
 
-    public void set_adr_voie(String _adr_voie) {
-        this._adr_voie = _adr_voie;
+    public void setAdrVoie(String adrVoie) {
+        this._adrVoie = adrVoie;
     }
 
-    public int get_adr_code_postal() {
-        return this._adr_code_postal;
+    public int getAdrCodePostal() {
+        return this._adrCodePostal;
     }
 
-    public void set_adr_code_postal(int _adr_code_postal) {
-        this._adr_code_postal = _adr_code_postal;
+    public void setAdrCodePostal(int adrCodePostal) {
+        this._adrCodePostal = adrCodePostal;
     }
 
-    public String get_adr_ville() {
-        return this._adr_ville;
+    public String getAdrVille() {
+        return this._adrVille;
     }
 
-    public void set_adr_ville(String _adr_ville) {
-        this._adr_ville = _adr_ville;
+    public void setAdrVille(String adrVille) {
+        this._adrVille = adrVille;
     }
 
-    public String get_adr_pays() {
-        return this._adr_pays;
+    public String getAdrPays() {
+        return this._adrPays;
     }
 
-    public void set_adr_pays(String _adr_pays) {
-        this._adr_pays = _adr_pays;
+    public void setAdrPays(String adrPays) {
+        this._adrPays = adrPays;
     }
 
     @Override
@@ -117,25 +117,25 @@ public class Client {
         }
         Client client = (Client) o;
         return _id == client._id && Objects.equals(_nom, client._nom) && Objects.equals(_prenom, client._prenom)
-                && Objects.equals(_identifiant, client._identifiant)
-                && Objects.equals(mot_de_passe, client.mot_de_passe) && _adr_numero == client._adr_numero
-                && Objects.equals(_adr_voie, client._adr_voie) && _adr_code_postal == client._adr_code_postal
-                && Objects.equals(_adr_ville, client._adr_ville) && Objects.equals(_adr_pays, client._adr_pays);
+                && Objects.equals(_identifiant, client._identifiant) && Objects.equals(_motDePasse, client._motDePasse)
+                && _adrNumero == client._adrNumero && Objects.equals(_adrVoie, client._adrVoie)
+                && _adrCodePostal == client._adrCodePostal && Objects.equals(_adrVille, client._adrVille)
+                && Objects.equals(_adrPays, client._adrPays);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _nom, _prenom, _identifiant, mot_de_passe, _adr_numero, _adr_voie, _adr_code_postal,
-                _adr_ville, _adr_pays);
+        return Objects.hash(_id, _nom, _prenom, _identifiant, _motDePasse, _adrNumero, _adrVoie, _adrCodePostal,
+                _adrVille, _adrPays);
     }
 
     @Override
     public String toString() {
-        return "{" + " _id='" + get_id() + "'" + ", _nom='" + get_nom() + "'" + ", _prenom='" + get_prenom() + "'"
-                + ", _identifiant='" + get_identifiant() + "'" + ", mot_de_passe='" + getMot_de_passe() + "'"
-                + ", _adr_numero='" + get_adr_numero() + "'" + ", _adr_voie='" + get_adr_voie() + "'"
-                + ", _adr_code_postal='" + get_adr_code_postal() + "'" + ", _adr_ville='" + get_adr_ville() + "'"
-                + ", _adr_pays='" + get_adr_pays() + "'" + "}";
+        return "{" + " _id='" + getId() + "'" + ", _nom='" + getNom() + "'" + ", _prenom='" + getPrenom() + "'"
+                + ", _identifiant='" + getIdentifiant() + "'" + ", motDePasse='" + getMotDePasse() + "'"
+                + ", _adrNumero='" + getAdrNumero() + "'" + ", _adrVoie='" + getAdrVoie() + "'" + ", _adrCodePostal='"
+                + getAdrCodePostal() + "'" + ", _adrVille='" + getAdrVille() + "'" + ", _adrPays='" + getAdrPays() + "'"
+                + "}";
     }
 
 }

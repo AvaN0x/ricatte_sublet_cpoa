@@ -13,6 +13,18 @@ public class Category {
         this._visuel = visuel;
     }
 
+    public Category(String title, String visuel) {
+        this._id = -1;
+        this._title = title;
+        this._visuel = visuel;
+    }
+
+    public Category(int id) {
+        this._id = id;
+        this._title = "";
+        this._visuel = "";
+    }
+
     public int getId() {
         return this._id;
     }
@@ -45,8 +57,7 @@ public class Category {
             return false;
         }
         Category category = (Category) o;
-        return _id == category._id && Objects.equals(_title, category._title)
-                && Objects.equals(_visuel, category._visuel);
+        return _id == category._id;
     }
 
     @Override

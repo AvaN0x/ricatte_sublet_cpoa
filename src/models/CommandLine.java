@@ -5,9 +5,9 @@ import java.util.Objects;
 public class CommandLine {
     private Product _produit;
     private int _quantite;
-    private int _tarif_unitaire;
+    private float _tarif_unitaire;
 
-    public CommandLine(Product produit, int quantite, int tarif_unitaire) {
+    public CommandLine(Product produit, int quantite, float tarif_unitaire) {
         this._produit = produit;
         this._quantite = quantite;
         this._tarif_unitaire = tarif_unitaire;
@@ -29,11 +29,11 @@ public class CommandLine {
         this._quantite = quantite;
     }
 
-    public int getTarifUnitaire() {
+    public float getTarifUnitaire() {
         return this._tarif_unitaire;
     }
 
-    public void setTarifUnitaire(int tarif_unitaire) {
+    public void setTarifUnitaire(float tarif_unitaire) {
         this._tarif_unitaire = tarif_unitaire;
     }
 

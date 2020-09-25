@@ -15,7 +15,7 @@ public class MySQLDAO {
     private static String _username;
     private static String _password;
 
-    public MySQLDAO() throws IOException {
+    protected MySQLDAO() throws IOException {
         Properties credits = new Properties();
         File fBdd = new File("config/creditentials.properties");
         FileInputStream source = new FileInputStream(fBdd);

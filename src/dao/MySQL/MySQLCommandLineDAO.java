@@ -13,7 +13,7 @@ import models.Product;
 
 public class MySQLCommandLineDAO extends MySQLDAO implements CommandLineDAO {
 
-    public MySQLCommandLineDAO() throws IOException {
+    private MySQLCommandLineDAO() throws IOException {
         super();
     }
 

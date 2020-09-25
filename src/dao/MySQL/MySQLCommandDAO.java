@@ -17,7 +17,7 @@ import models.Product;
 
 public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
 
-    public MySQLCommandDAO() throws IOException {
+    private MySQLCommandDAO() throws IOException {
         super();
     }
 

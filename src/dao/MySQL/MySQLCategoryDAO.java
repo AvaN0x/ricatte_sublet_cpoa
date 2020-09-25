@@ -11,7 +11,7 @@ import models.Category;
 
 public class MySQLCategoryDAO extends BaseMySQL implements CategoryDAO {
 
-    public MySQLCategoryDAO() throws IOException {
+    private MySQLCategoryDAO() throws IOException {
         super();
     }
 
@@ -24,9 +24,8 @@ public class MySQLCategoryDAO extends BaseMySQL implements CategoryDAO {
         ResultSet categRes = query.executeQuery();
 
         Category categ = null;
-        while (categRes.next()) {
+        while (categRes.next())
             categ = new Category(categRes.getInt(1), categRes.getString("titre"), categRes.getString("visuel"));
-        }
         con.close();
         return categ;
     }
@@ -68,17 +67,15 @@ public class MySQLCategoryDAO extends BaseMySQL implements CategoryDAO {
         ResultSet categRes = query.executeQuery();
 
         int categId = 0;
-        while (categRes.next()) {
+        while (categRes.next())
             categId = categRes.getInt(1);
-        }
         con.close();
         return getById(categId);
     }
 
     public static MySQLCategoryDAO getInstance() throws IOException {
-        if (instance == null) {
+        if (instance == null)
             instance = new MySQLCategoryDAO();
-        }
         return instance;
     }
 

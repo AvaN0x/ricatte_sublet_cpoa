@@ -71,9 +71,9 @@ public class ProductView {
     public static void displayProductMenu() {
         try {
 
-            var daos = DAOFactory.getDAOFactory(_persistance);
-            ArrayList<Product> products = daos.getProductDAO().getAll();
             do {
+                var daos = DAOFactory.getDAOFactory(_persistance);
+                ArrayList<Product> products = daos.getProductDAO().getAll();
                 System.out.println("\n-- Liste produits -- " + _persistance + " \n0/ Quitter");
                 for (int i = 0; i < products.size(); i++)
                     System.out.println(String.format("%s/ %s", i + 1, products.get(i).getNom()));

@@ -80,9 +80,9 @@ public class ClientView {
 
     public static void displayClientMenu() {
         try {
-            var daos = DAOFactory.getDAOFactory(_persistance);
-            ArrayList<Client> clients = daos.getClientDAO().getAll();
             do {
+                var daos = DAOFactory.getDAOFactory(_persistance);
+                ArrayList<Client> clients = daos.getClientDAO().getAll();
                 System.out.println("\n-- Liste clients -- " + _persistance + " \n0/ Quitter");
                 for (int i = 0; i < clients.size(); i++)
                     System.out.println(

@@ -62,37 +62,42 @@ public class ProductView {
             var daos = DAOFactory.getDAOFactory(_persistance);
             daos.getProductDAO().create(new Product(-1, nom, description, tarif, visuel, category));
 
-        } catch (SQLException | NumberFormatException | InputMismatchException e) {
+        } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
             _scan.nextLine();
         }
     }
 
     public static void displayProductMenu() {
-        var daos = DAOFactory.getDAOFactory(_persistance);
-        ArrayList<Product> products = daos.getProductDAO().getAll();
-        System.out.println("\n-- Liste produits -- " + _persistance + " \n0/ Quitter");
-        for (int i = 0; i < products.size(); i++)
-            System.out.println(String.format("\n%s/ %s", i + 1, products.get(i).getNom()));
-        System.out.print("Choix : ");
+        try {
 
-        do {
+            var daos = DAOFactory.getDAOFactory(_persistance);
+            ArrayList<Product> products = daos.getProductDAO().getAll();
+            System.out.println("\n-- Liste produits -- " + _persistance + " \n0/ Quitter");
+            for (int i = 0; i < products.size(); i++)
+                System.out.println(String.format("\n%s/ %s", i + 1, products.get(i).getNom()));
+            System.out.print("Choix : ");
 
-            try {
-                var submenu = _scan.nextInt();
-                _scan.nextLine();
-                if (submenu == 0)
-                    return;
-                else {
-                    var pr = products.get(submenu - 1);
-                    productSelectMenu(pr);
+            do {
+
+                try {
+                    var submenu = _scan.nextInt();
+                    _scan.nextLine();
+                    if (submenu == 0)
+                        return;
+                    else {
+                        var pr = products.get(submenu - 1);
+                        productSelectMenu(pr);
+                    }
+
+                } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
+                    System.out.println("Exception: " + e.getMessage());
+                    _scan.nextLine();
                 }
-
-            } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
-                System.out.println("Exception: " + e.getMessage());
-                _scan.nextLine();
-            }
-        } while (true);
+            } while (true);
+        } catch (Exception e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
     }
 
     private static void productSelectMenu(Product pr) {
@@ -119,7 +124,7 @@ public class ProductView {
                     default:
                         break;
                 }
-            } catch (NumberFormatException | InputMismatchException e) {
+            } catch (Exception e) {
                 System.out.println("Exception: " + e.getMessage());
                 _scan.nextLine();
             }
@@ -165,29 +170,33 @@ public class ProductView {
             var daos = DAOFactory.getDAOFactory(_persistance);
             daos.getProductDAO().update(pr);
 
-        } catch (NumberFormatException | InputMismatchException e) {
+        } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
             _scan.nextLine();
         }
     }
 
     private static Category SelectCategory() {
-        var daos = DAOFactory.getDAOFactory(_persistance);
-        ArrayList<Category> categories = daos.getCategoryDAO().getAll();
-        for (int i = 0; i < categories.size(); i++)
-            System.out.println(String.format("\n%s/ %s", i, categories.get(i).getTitle()));
-        System.out.print("Choix : ");
-        do {
-            try {
-                var submenu = _scan.nextInt();
-                _scan.nextLine();
-                var ca = categories.get(submenu - 1);
-                return ca;
-            } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
-                System.out.println("Exception: " + e.getMessage());
-                _scan.nextLine();
-            }
-        } while (true);
-
+        Category category = null;
+        try {
+            var daos = DAOFactory.getDAOFactory(_persistance);
+            ArrayList<Category> categories = daos.getCategoryDAO().getAll();
+            for (int i = 0; i < categories.size(); i++)
+                System.out.println(String.format("\n%s/ %s", i, categories.get(i).getTitle()));
+            System.out.print("Choix : ");
+            do {
+                try {
+                    var submenu = _scan.nextInt();
+                    _scan.nextLine();
+                    category = categories.get(submenu - 1);
+                } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
+                    System.out.println("Exception: " + e.getMessage());
+                    _scan.nextLine();
+                }
+            } while (true);
+        } catch (Exception e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+        return category;
     }
 }

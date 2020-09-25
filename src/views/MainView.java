@@ -6,25 +6,25 @@ import java.util.Scanner;
 import dao.Persistance;
 
 public class MainView {
-    private static Persistance persistance;
-    private static Scanner scan;
+    private static Persistance _persistance;
+    private static Scanner _scan;
 
     public static void main(String[] args) {
-        persistance = Persistance.MYSQL;
+        _persistance = Persistance.MYSQL;
         openMainMenu();
     }
 
     public static void openMainMenu() {
         var inMenu = true;
-        scan = new Scanner(System.in);
+        _scan = new Scanner(System.in);
         do {
 
-            System.out.println("\n-- Main menu -- " + persistance + " \n0/ Quitter\n1/ Settings\n2/ Client\n");
+            System.out.println("\n-- Main menu -- " + _persistance + " \n0/ Quitter\n1/ Settings\n2/ Client\n");
             System.out.print("Choix : ");
 
             try {
-                var submenu = scan.nextInt();
-                scan.nextLine();
+                var submenu = _scan.nextInt();
+                _scan.nextLine();
                 switch (submenu) {
                     case 0:
                         inMenu = false;
@@ -33,17 +33,17 @@ public class MainView {
                         openSettingsMenu();
                         break;
                     case 2:
-                        ClientView.openClientMenu(persistance, scan);
+                        ClientView.openClientMenu(_persistance, _scan);
                         break;
                     default:
                         break;
                 }
             } catch (NumberFormatException | InputMismatchException e) {
                 System.out.println("Exception: " + e.getMessage());
-                scan.nextLine();
+                _scan.nextLine();
             }
         } while (inMenu);
-        scan.close();
+        _scan.close();
     }
 
     public static void openSettingsMenu() {
@@ -54,18 +54,18 @@ public class MainView {
             System.out.print("Choix : ");
 
             try {
-                var submenu = scan.nextInt();
-                scan.nextLine();
+                var submenu = _scan.nextInt();
+                _scan.nextLine();
                 switch (submenu) {
                     case 0:
                         inMenu = false;
                         break;
                     case 1:
-                        persistance = Persistance.LISTE_MEMOIRE;
+                        _persistance = Persistance.LISTE_MEMOIRE;
                         inMenu = false;
                         break;
                     case 2:
-                        persistance = Persistance.MYSQL;
+                        _persistance = Persistance.MYSQL;
                         inMenu = false;
                         break;
                     default:
@@ -73,7 +73,7 @@ public class MainView {
                 }
             } catch (NumberFormatException | InputMismatchException e) {
                 System.out.println("Exception: " + e.getMessage());
-                scan.nextLine();
+                _scan.nextLine();
             }
         } while (inMenu);
     }

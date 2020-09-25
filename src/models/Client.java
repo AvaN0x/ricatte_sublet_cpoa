@@ -64,7 +64,7 @@ public class Client {
         return this._motDePasse;
     }
 
-    public void setMoteDePasse(String motDePasse) {
+    public void setMotDePasse(String motDePasse) {
         this._motDePasse = motDePasse;
     }
 

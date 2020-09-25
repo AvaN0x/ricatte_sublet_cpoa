@@ -13,6 +13,7 @@ import java.util.HashMap;
 import dao.CommandDAO;
 import models.Command;
 import models.CommandLine;
+import models.Product;
 
 public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
 
@@ -33,18 +34,20 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
 
         Command cmd = null;
         while (comRes.next()) {
-            // ? Override CommandLineDAO
+            cmd = new Command(comRes.getInt("id_commande"), comRes.getDate("date_commande").toLocalDate(),
+                    MySQLClientDAO.getInstance().getById(comRes.getInt("id_client")));
+
+            // ! Can't use MySQLCommandLineDAO => Stack Overflow
             query.setInt(1, comRes.getInt("id_commande"));
             ResultSet lineRes = query.executeQuery();
-            HashMap<Integer, CommandLine> lines = new HashMap<Integer, CommandLine>();
+            HashMap<Product, CommandLine> lines = new HashMap<Product, CommandLine>();
             while (lineRes.next()) { // multiple result
-                lines.put(comRes.getInt("id_produit"),
-                        new CommandLine(MySQLProductDAO.getInstance().getById(comRes.getInt("id_produit")),
-                                comRes.getInt("quantite"), comRes.getFloat("tarif_unitaire")));
+                lines.put(MySQLProductDAO.getInstance().getById(comRes.getInt("id_produit")),
+                        new CommandLine(cmd, comRes.getInt("quantite"), comRes.getFloat("tarif_unitaire")));
             }
 
-            cmd = new Command(comRes.getInt("id_commande"), comRes.getDate("date_commande").toLocalDate(),
-                    MySQLClientDAO.getInstance().getById(comRes.getInt("id_client")), lines);
+            cmd.setCommandLines(lines);
+
         }
 
         con.close();
@@ -96,18 +99,20 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
 
         ArrayList<Command> cmds = new ArrayList<Command>();
         while (comRes.next()) {
-            // ? Override CommandLineDAO
+            Command cmd = new Command(comRes.getInt("id_commande"), comRes.getDate("date_commande").toLocalDate(),
+                    MySQLClientDAO.getInstance().getById(comRes.getInt("id_client")));
+
+            // ! Can't use MySQLCommandLineDAO => Stack Overflow
             query.setInt(1, comRes.getInt("id_commande"));
             ResultSet lineRes = query.executeQuery();
-            HashMap<Integer, CommandLine> lines = new HashMap<Integer, CommandLine>();
+            HashMap<Product, CommandLine> lines = new HashMap<Product, CommandLine>();
             while (lineRes.next()) { // multiple result
-                lines.put(comRes.getInt("id_produit"),
-                        new CommandLine(MySQLProductDAO.getInstance().getById(comRes.getInt("id_produit")),
-                                comRes.getInt("quantite"), comRes.getFloat("tarif_unitaire")));
+                lines.put(MySQLProductDAO.getInstance().getById(comRes.getInt("id_produit")),
+                        new CommandLine(cmd, comRes.getInt("quantite"), comRes.getFloat("tarif_unitaire")));
             }
 
-            cmds.add(new Command(comRes.getInt("id_commande"), comRes.getDate("date_commande").toLocalDate(),
-                    MySQLClientDAO.getInstance().getById(comRes.getInt("id_client")), lines));
+            cmd.setCommandLines(lines);
+            cmds.add(cmd);
         }
 
         con.close();

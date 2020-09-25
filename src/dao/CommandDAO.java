@@ -1,7 +1,7 @@
 package dao;
 
-import models.CommandLine;
+import models.Command;
 
-public interface CommandDAO extends DAO<CommandLine> {
+public interface CommandDAO extends DAO<Command> {
 
 }

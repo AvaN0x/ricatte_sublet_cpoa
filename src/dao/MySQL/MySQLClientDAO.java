@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import dao.ClientDAO;
 import models.Client;
 
-public class MySQLClientDAO extends BaseMySQL implements ClientDAO {
+public class MySQLClientDAO extends MySQLDAO implements ClientDAO {
 
     private MySQLClientDAO() throws IOException {
         super();

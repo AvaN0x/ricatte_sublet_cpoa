@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import dao.CategoryDAO;
 import models.Category;
 
-public class MySQLCategoryDAO extends BaseMySQL implements CategoryDAO {
+public class MySQLCategoryDAO extends MySQLDAO implements CategoryDAO {
 
     private MySQLCategoryDAO() throws IOException {
         super();

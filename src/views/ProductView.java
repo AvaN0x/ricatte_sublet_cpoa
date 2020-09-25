@@ -119,6 +119,7 @@ public class ProductView {
                     case 2:
                         var daos = DAOFactory.getDAOFactory(_persistance);
                         daos.getProductDAO().delete(pr);
+                        System.out.println("Le produit a bien été supprimé");
                         return;
                     default:
                         break;
@@ -151,7 +152,7 @@ public class ProductView {
             }
             if (!description.isEmpty()) {
                 pr.setDescription(description);
-                System.out.println("La description a était modifié");
+                System.out.println("La description a était modifiée");
             }
             if (!tarif.isEmpty()) {
                 pr.setTarif(Float.parseFloat(tarif));
@@ -163,7 +164,7 @@ public class ProductView {
             }
             if (editCommand == "y") {
                 pr.setCategory(SelectCategory());
-                System.out.println("La catégorie a était modifié");
+                System.out.println("La catégorie a était modifiée");
             }
 
             var daos = DAOFactory.getDAOFactory(_persistance);

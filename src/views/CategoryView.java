@@ -54,6 +54,7 @@ public class CategoryView {
 
             var daos = DAOFactory.getDAOFactory(_persistance);
             daos.getCategoryDAO().create(new Category(-1, title, visuel));
+            System.out.println("La catégorie a bien été créée");
 
         } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
@@ -113,6 +114,7 @@ public class CategoryView {
                     case 2:
                         var daos = DAOFactory.getDAOFactory(_persistance);
                         daos.getCategoryDAO().delete(ca);
+                        System.out.println("La catégorie a bien été supprimée");
                         return;
                     default:
                         break;
@@ -130,12 +132,16 @@ public class CategoryView {
         try {
             System.out.print("Titre : ");
             String title = _scan.nextLine().trim();
-            if (!title.isEmpty())
-                ca.setTitle(title);
             System.out.print("Visuel : ");
             String visuel = _scan.nextLine().trim();
-            if (!visuel.isEmpty())
+            if (!title.isEmpty()) {
+                ca.setTitle(title);
+                System.out.println("Le titre a bien été modifié");
+            }
+            if (!visuel.isEmpty()) {
                 ca.setVisuel(visuel);
+                System.out.println("Le visuel a bien été modifié");
+            }
 
             var daos = DAOFactory.getDAOFactory(_persistance);
             daos.getCategoryDAO().update(ca);

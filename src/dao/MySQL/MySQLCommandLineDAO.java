@@ -90,9 +90,17 @@ public class MySQLCommandLineDAO extends MySQLDAO implements CommandLineDAO {
     }
 
     @Override
-    public ArrayList<CommandLine> getAll() throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+    public ArrayList<CommandLine> getAll() throws SQLException, IOException {
+        Connection con = startConnection();
+        PreparedStatement query = con.prepareStatement("SELECT * FROM ligne_commande");
+        ResultSet lineRes = query.executeQuery();
+
+        ArrayList<CommandLine> line = new ArrayList<CommandLine>();
+        while (lineRes.next())
+            line.add(new CommandLine(MySQLCommandDAO.getInstance().getById(lineRes.getInt("id_commande")),
+                    lineRes.getInt("quantite"), lineRes.getFloat("raif_unitaire")));
+        con.close();
+        return line;
     }
 
     public static MySQLCommandLineDAO getInstance() throws IOException {

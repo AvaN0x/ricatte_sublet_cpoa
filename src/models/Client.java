@@ -154,11 +154,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return "{" + " _id='" + getId() + "'" + ", _nom='" + getNom() + "'" + ", _prenom='" + getPrenom() + "'"
-                + ", _identifiant='" + getIdentifiant() + "'" + ", motDePasse='" + getMotDePasse() + "'"
-                + ", _adrNumero='" + getAdrNumero() + "'" + ", _adrVoie='" + getAdrVoie() + "'" + ", _adrCodePostal='"
-                + getAdrCodePostal() + "'" + ", _adrVille='" + getAdrVille() + "'" + ", _adrPays='" + getAdrPays() + "'"
-                + "}";
+        return getNom() + " " + getPrenom();
     }
 
 }

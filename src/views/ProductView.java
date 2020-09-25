@@ -182,7 +182,7 @@ public class ProductView {
             var daos = DAOFactory.getDAOFactory(_persistance);
             ArrayList<Category> categories = daos.getCategoryDAO().getAll();
             for (int i = 0; i < categories.size(); i++)
-                System.out.println(String.format("%s/ %s", i, categories.get(i).getTitle()));
+                System.out.println(String.format("%s/ %s", i, categories.get(i)));
             System.out.print("Choix : ");
             do {
                 try {

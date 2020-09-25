@@ -67,8 +67,7 @@ public class Category {
 
     @Override
     public String toString() {
-        return "{" + " _id='" + getId() + "'" + ", _title='" + getTitle() + "'" + ", _visuel='" + getVisuel() + "'"
-                + "}";
+        return getTitle();
     }
 
 }

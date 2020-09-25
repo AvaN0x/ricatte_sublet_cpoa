@@ -72,12 +72,11 @@ public class ProductView {
 
             var daos = DAOFactory.getDAOFactory(_persistance);
             ArrayList<Product> products = daos.getProductDAO().getAll();
-            System.out.println("\n-- Liste produits -- " + _persistance + " \n0/ Quitter");
-            for (int i = 0; i < products.size(); i++)
-                System.out.println(String.format("\n%s/ %s", i + 1, products.get(i).getNom()));
-            System.out.print("Choix : ");
-
             do {
+                System.out.println("\n-- Liste produits -- " + _persistance + " \n0/ Quitter");
+                for (int i = 0; i < products.size(); i++)
+                    System.out.println(String.format("\n%s/ %s", i + 1, products.get(i).getNom()));
+                System.out.print("Choix : ");
 
                 try {
                     var submenu = _scan.nextInt();

@@ -66,11 +66,11 @@ public class CategoryView {
 
             var daos = DAOFactory.getDAOFactory(_persistance);
             ArrayList<Category> categories = daos.getCategoryDAO().getAll();
-            System.out.println("\n-- Liste categories -- " + _persistance + " \n0/ Quitter");
-            for (int i = 0; i < categories.size(); i++)
-                System.out.println(String.format("\n%s/ %s", i + 1, categories.get(i).getTitle()));
-
             do {
+                System.out.println("\n-- Liste categories -- " + _persistance + " \n0/ Quitter");
+                for (int i = 0; i < categories.size(); i++)
+                    System.out.println(String.format("\n%s/ %s", i + 1, categories.get(i).getTitle()));
+
                 System.out.print("Choix : ");
                 try {
                     var submenu = _scan.nextInt();

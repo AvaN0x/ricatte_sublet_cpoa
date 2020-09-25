@@ -28,6 +28,33 @@ public class Client {
         this._adrPays = adrPays;
     }
 
+    public Client(String nom, String prenom, String identifiant, String motDePasse, int adrNumero, String adrVoie,
+            int adrCodePostal, String adrVille, String adrPays) {
+        this._id = -1;
+        this._nom = nom;
+        this._prenom = prenom;
+        this._identifiant = identifiant;
+        this._motDePasse = motDePasse;
+        this._adrNumero = adrNumero;
+        this._adrVoie = adrVoie;
+        this._adrCodePostal = adrCodePostal;
+        this._adrVille = adrVille;
+        this._adrPays = adrPays;
+    }
+
+    public Client(int id) {
+        this._id = id;
+        this._nom = "";
+        this._prenom = "";
+        this._identifiant = "";
+        this._motDePasse = "";
+        this._adrNumero = 0;
+        this._adrVoie = "";
+        this._adrCodePostal = 0;
+        this._adrVille = "";
+        this._adrPays = "";
+    }
+
     public int getId() {
         return this._id;
     }
@@ -116,11 +143,7 @@ public class Client {
             return false;
         }
         Client client = (Client) o;
-        return _id == client._id && Objects.equals(_nom, client._nom) && Objects.equals(_prenom, client._prenom)
-                && Objects.equals(_identifiant, client._identifiant) && Objects.equals(_motDePasse, client._motDePasse)
-                && _adrNumero == client._adrNumero && Objects.equals(_adrVoie, client._adrVoie)
-                && _adrCodePostal == client._adrCodePostal && Objects.equals(_adrVille, client._adrVille)
-                && Objects.equals(_adrPays, client._adrPays);
+        return _id == client._id;
     }
 
     @Override

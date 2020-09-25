@@ -19,7 +19,8 @@ public class MainView {
         _scan = new Scanner(System.in);
         do {
 
-            System.out.println("\n-- Main menu -- " + _persistance + " \n0/ Quitter\n1/ Settings\n2/ Client\n");
+            System.out.println("\n-- Main menu -- " + _persistance
+                    + " \n0/ Quitter\n1/ Settings\n2/ Client\n3/ Catégorie\n4/ Produit\n");
             System.out.print("Choix : ");
 
             try {
@@ -35,6 +36,13 @@ public class MainView {
                     case 2:
                         ClientView.openClientMenu(_persistance, _scan);
                         break;
+                    case 3:
+                        CategoryView.openCategoryMenu(_persistance, _scan);
+                        break;
+                    case 4:
+                        ProductView.openProductMenu(_persistance, _scan);
+                        break;
+
                     default:
                         break;
                 }

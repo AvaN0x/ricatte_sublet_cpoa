@@ -14,18 +14,18 @@ public class Client {
     private String _adrVille;
     private String _adrPays;
 
-    public Client(int _id, String _nom, String _prenom, String _identifiant, String motDePasse, int _adrNumero,
-            String _adrVoie, int _adrCodePostal, String _adrVille, String _adrPays) {
-        this._id = _id;
-        this._nom = _nom;
-        this._prenom = _prenom;
-        this._identifiant = _identifiant;
+    public Client(int id, String nom, String prenom, String identifiant, String motDePasse, int adrNumero,
+            String adrVoie, int adrCodePostal, String adrVille, String adrPays) {
+        this._id = id;
+        this._nom = nom;
+        this._prenom = prenom;
+        this._identifiant = identifiant;
         this._motDePasse = motDePasse;
-        this._adrNumero = _adrNumero;
-        this._adrVoie = _adrVoie;
-        this._adrCodePostal = _adrCodePostal;
-        this._adrVille = _adrVille;
-        this._adrPays = _adrPays;
+        this._adrNumero = adrNumero;
+        this._adrVoie = adrVoie;
+        this._adrCodePostal = adrCodePostal;
+        this._adrVille = adrVille;
+        this._adrPays = adrPays;
     }
 
     public int getId() {

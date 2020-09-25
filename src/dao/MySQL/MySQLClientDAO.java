@@ -39,7 +39,7 @@ public class MySQLClientDAO extends MySQLDAO implements ClientDAO {
     public boolean create(Client cli) throws SQLException {
         Connection con = startConnection();
         PreparedStatement update = con.prepareStatement(
-                "INSERT INTO client(nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                "INSERT INTO client(nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         update.setString(1, cli.getNom());
         update.setString(2, cli.getPrenom());
         update.setString(3, cli.getIdentifiant());

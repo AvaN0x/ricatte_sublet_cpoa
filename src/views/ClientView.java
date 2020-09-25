@@ -70,38 +70,42 @@ public class ClientView {
             daos.getClientDAO().create(new Client(-1, nom, prenom, identifiant, motDePasse, adrNumero, adrVoie,
                     adrCodePostal, adrVille, adrPays));
 
-        } catch (NumberFormatException | InputMismatchException e) {
+        } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
             _scan.nextLine();
         }
     }
 
     public static void displayClientMenu() {
-        var daos = DAOFactory.getDAOFactory(_persistance);
-        ArrayList<Client> clients = daos.getClientDAO().getAll();
-        System.out.println("\n-- Liste clients -- " + _persistance + " \n0/ Quitter");
-        for (int i = 0; i < clients.size(); i++)
-            System.out
-                    .println(String.format("\n%s/ %s %s", i + 1, clients.get(i).getNom(), clients.get(i).getPrenom()));
-        System.out.print("Choix : ");
+        try {
+            var daos = DAOFactory.getDAOFactory(_persistance);
+            ArrayList<Client> clients = daos.getClientDAO().getAll();
+            System.out.println("\n-- Liste clients -- " + _persistance + " \n0/ Quitter");
+            for (int i = 0; i < clients.size(); i++)
+                System.out.println(
+                        String.format("\n%s/ %s %s", i + 1, clients.get(i).getNom(), clients.get(i).getPrenom()));
+            System.out.print("Choix : ");
 
-        do {
+            do {
 
-            try {
-                var submenu = _scan.nextInt();
-                _scan.nextLine();
-                if (submenu == 0)
-                    return;
-                else {
-                    var cl = clients.get(submenu - 1);
-                    clientSelectMenu(cl);
+                try {
+                    var submenu = _scan.nextInt();
+                    _scan.nextLine();
+                    if (submenu == 0)
+                        return;
+                    else {
+                        var cl = clients.get(submenu - 1);
+                        clientSelectMenu(cl);
+                    }
+
+                } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
+                    System.out.println("Exception: " + e.getMessage());
+                    _scan.nextLine();
                 }
-
-            } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
-                System.out.println("Exception: " + e.getMessage());
-                _scan.nextLine();
-            }
-        } while (true);
+            } while (true);
+        } catch (Exception e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
     }
 
     private static void clientSelectMenu(Client cl) {
@@ -136,7 +140,7 @@ public class ClientView {
                     default:
                         break;
                 }
-            } catch (NumberFormatException | InputMismatchException e) {
+            } catch (Exception e) {
                 System.out.println("Exception: " + e.getMessage());
                 _scan.nextLine();
             }
@@ -187,7 +191,7 @@ public class ClientView {
             var daos = DAOFactory.getDAOFactory(_persistance);
             daos.getClientDAO().update(cl);
 
-        } catch (NumberFormatException | InputMismatchException e) {
+        } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
             _scan.nextLine();
         }

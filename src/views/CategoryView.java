@@ -1,5 +1,6 @@
 package views;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -56,36 +57,41 @@ public class CategoryView {
             var daos = DAOFactory.getDAOFactory(_persistance);
             daos.getCategoryDAO().create(new Category(-1, title, visuel));
 
-        } catch (SQLException | NumberFormatException | InputMismatchException e) {
+        } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
             _scan.nextLine();
         }
     }
 
     public static void displayCategoryMenu() {
-        var daos = DAOFactory.getDAOFactory(_persistance);
-        ArrayList<Category> categories = daos.getCategoryDAO().getAll();
-        System.out.println("\n-- Liste categories -- " + _persistance + " \n0/ Quitter");
-        for (int i = 0; i < categories.size(); i++)
-            System.out.println(String.format("\n%s/ %s", i + 1, categories.get(i).getTitle()));
-        System.out.print("Choix : ");
+        try {
 
-        do {
-            try {
-                var submenu = _scan.nextInt();
-                _scan.nextLine();
-                if (submenu == 0)
-                    return;
-                else {
-                    var ca = categories.get(submenu - 1);
-                    categorySelectMenu(ca);
+            var daos = DAOFactory.getDAOFactory(_persistance);
+            ArrayList<Category> categories = daos.getCategoryDAO().getAll();
+            System.out.println("\n-- Liste categories -- " + _persistance + " \n0/ Quitter");
+            for (int i = 0; i < categories.size(); i++)
+                System.out.println(String.format("\n%s/ %s", i + 1, categories.get(i).getTitle()));
+
+            do {
+                System.out.print("Choix : ");
+                try {
+                    var submenu = _scan.nextInt();
+                    _scan.nextLine();
+                    if (submenu == 0)
+                        return;
+                    else {
+                        var ca = categories.get(submenu - 1);
+                        categorySelectMenu(ca);
+                    }
+
+                } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
+                    System.out.println("Exception: " + e.getMessage());
+                    _scan.nextLine();
                 }
-
-            } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
-                System.out.println("Exception: " + e.getMessage());
-                _scan.nextLine();
-            }
-        } while (true);
+            } while (true);
+        } catch (Exception e) {
+            System.out.println("Exeption: " + e.getMessage());
+        }
     }
 
     private static void categorySelectMenu(Category ca) {
@@ -113,7 +119,7 @@ public class CategoryView {
                     default:
                         break;
                 }
-            } catch (NumberFormatException | InputMismatchException e) {
+            } catch (Exception e) {
                 System.out.println("Exception: " + e.getMessage());
                 _scan.nextLine();
             }
@@ -136,7 +142,7 @@ public class CategoryView {
             var daos = DAOFactory.getDAOFactory(_persistance);
             daos.getCategoryDAO().update(ca);
 
-        } catch (NumberFormatException | InputMismatchException e) {
+        } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
             _scan.nextLine();
         }

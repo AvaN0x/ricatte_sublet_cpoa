@@ -71,7 +71,6 @@ public class CategoryView {
         System.out.print("Choix : ");
 
         do {
-
             try {
                 var submenu = _scan.nextInt();
                 _scan.nextLine();

@@ -17,4 +17,10 @@ public abstract class DAOFactory {
     public abstract CategoryDAO getCategoryDAO() throws Exception;
 
     public abstract ProductDAO getProductDAO() throws Exception;
+
+    public abstract ClientDAO getClientDAO() throws Exception;
+
+    public abstract CommandDAO getCommandDAO() throws Exception;
+
+    public abstract CommandLineDAO getCommandLineDAO() throws Exception;
 }

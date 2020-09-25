@@ -5,14 +5,16 @@ public abstract class DAOFactory {
         DAOFactory daoF = null;
         switch (target) {
             case MYSQL:
-                daoF = new MySQLDAOFactory();
+                daoF = new dao.MySQL.MySQLDAOFactory();
                 break;
             case LISTE_MEMOIRE:
-                // daoF = new ListeMemoireDAOFactory();
+                // daoF = new dao.ListeMemoire.ListeMemoireDAOFactory();
                 break;
         }
         return daoF;
     }
 
     public abstract CategoryDAO getCategoryDAO() throws Exception;
+
+    public abstract ProductDAO getProductDAO() throws Exception;
 }

@@ -8,16 +8,16 @@ public class Command {
     private int _id;
     private LocalDate _date_command;
     private Client _client;
-    private HashMap<Integer, CommandLine> _commandLines; // HashMap<id_produit, commandLine>
+    private HashMap<Product, CommandLine> _commandLines; // HashMap<id_produit, commandLine>
 
     public Command(int id, LocalDate date_command, Client client) {
         this._id = id;
         this._date_command = date_command;
         this._client = client;
-        this._commandLines = new HashMap<Integer, CommandLine>();
+        this._commandLines = new HashMap<Product, CommandLine>();
     }
 
-    public Command(int id, LocalDate date_command, Client client, HashMap<Integer, CommandLine> commandLines) {
+    public Command(int id, LocalDate date_command, Client client, HashMap<Product, CommandLine> commandLines) {
         this._id = id;
         this._date_command = date_command;
         this._client = client;
@@ -48,11 +48,11 @@ public class Command {
         this._client = client;
     }
 
-    public HashMap<Integer, CommandLine> getCommandLines() {
+    public HashMap<Product, CommandLine> getCommandLines() {
         return this._commandLines;
     }
 
-    public void setCommandLines(HashMap<Integer, CommandLine> commandLines) {
+    public void setCommandLines(HashMap<Product, CommandLine> commandLines) {
         this._commandLines = commandLines;
     }
 

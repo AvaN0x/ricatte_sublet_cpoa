@@ -3,22 +3,23 @@ package models;
 import java.util.Objects;
 
 public class CommandLine {
-    private Product _produit;
+    // HashMap<id_produit, commandLine>
+    private Command _command;
     private int _quantite;
-    private int _tarif_unitaire;
+    private float _tarif_unitaire;
 
-    public CommandLine(Product produit, int quantite, int tarif_unitaire) {
-        this._produit = produit;
+    public CommandLine(Command command, int quantite, float tarif_unitaire) {
+        this._command = command;
         this._quantite = quantite;
         this._tarif_unitaire = tarif_unitaire;
     }
 
-    public Product getProduit() {
-        return this._produit;
+    public Command getCommand() {
+        return this._command;
     }
 
-    public void setProduit(Product produit) {
-        this._produit = produit;
+    public void setCommand(Command command) {
+        this._command = command;
     }
 
     public int getQuantite() {
@@ -29,11 +30,11 @@ public class CommandLine {
         this._quantite = quantite;
     }
 
-    public int getTarifUnitaire() {
+    public float getTarifUnitaire() {
         return this._tarif_unitaire;
     }
 
-    public void setTarifUnitaire(int tarif_unitaire) {
+    public void setTarifUnitaire(float tarif_unitaire) {
         this._tarif_unitaire = tarif_unitaire;
     }
 
@@ -45,18 +46,18 @@ public class CommandLine {
             return false;
         }
         CommandLine commandLine = (CommandLine) o;
-        return Objects.equals(_produit, commandLine._produit) && _quantite == commandLine._quantite
+        return Objects.equals(_command, commandLine._command) && _quantite == commandLine._quantite
                 && _tarif_unitaire == commandLine._tarif_unitaire;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_produit, _quantite, _tarif_unitaire);
+        return Objects.hash(_command, _quantite, _tarif_unitaire);
     }
 
     @Override
     public String toString() {
-        return "{" + " _produit='" + getProduit() + "'" + ", _quantite='" + getQuantite() + "'" + ", _tarif_unitaire='"
+        return "{" + " _produit='" + getCommand() + "'" + ", _quantite='" + getQuantite() + "'" + ", _tarif_unitaire='"
                 + getTarifUnitaire() + "'" + "}";
     }
 

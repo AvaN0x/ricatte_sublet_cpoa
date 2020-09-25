@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.ProductDAO;
@@ -19,7 +20,7 @@ public class MySQLProductDAO extends BaseMySQL implements ProductDAO {
     private static MySQLProductDAO instance;
 
     @Override
-    public Product getById(int id) throws Exception {
+    public Product getById(int id) throws SQLException {
         Connection con = startConnection();
         PreparedStatement query = con.prepareStatement("SELECT * FROM produit WHERE id_produit=? LIMIT 1");
         query.setInt(1, id);
@@ -40,7 +41,7 @@ public class MySQLProductDAO extends BaseMySQL implements ProductDAO {
     }
 
     @Override
-    public boolean create(Product prod) throws Exception {
+    public boolean create(Product prod) throws SQLException {
         Connection con = startConnection();
         PreparedStatement update = con.prepareStatement(
                 "INSERT INTO produit(nom, description, tarif, visuel, id_categorie) VALUES (?, ?, ?, ?, ?)");
@@ -55,7 +56,7 @@ public class MySQLProductDAO extends BaseMySQL implements ProductDAO {
     }
 
     @Override
-    public boolean update(Product prod) throws Exception {
+    public boolean update(Product prod) throws SQLException {
         Connection con = startConnection();
         PreparedStatement update = con.prepareStatement(
                 "UPDATE produit SET nom=?, description=?, tarif=?, visuel=?, id_categorie=? WHERE id_produit=?");
@@ -71,7 +72,7 @@ public class MySQLProductDAO extends BaseMySQL implements ProductDAO {
     }
 
     @Override
-    public boolean delete(Product prod) throws Exception {
+    public boolean delete(Product prod) throws SQLException {
         Connection con = startConnection();
         PreparedStatement update = con.prepareStatement("DELETE FROM produit WHERE id_produit=?");
         update.setInt(1, prod.getId());
@@ -81,7 +82,7 @@ public class MySQLProductDAO extends BaseMySQL implements ProductDAO {
     }
 
     @Override
-    public Product getByName(String name) throws Exception {
+    public Product getByName(String name) throws SQLException {
         Connection con = startConnection();
         PreparedStatement query = con.prepareStatement("SELECT id_produit FROM produit WHERE name=? LIMIT 1");
         query.setString(1, name);
@@ -96,7 +97,7 @@ public class MySQLProductDAO extends BaseMySQL implements ProductDAO {
     }
 
     @Override
-    public ArrayList<Product> getByCategory(Category categ) throws Exception {
+    public ArrayList<Product> getByCategory(Category categ) throws SQLException {
         Connection con = startConnection();
         PreparedStatement query = con.prepareStatement("SELECT * FROM produit WHERE id_categorie=?");
         query.setInt(1, categ.getId());
@@ -111,7 +112,7 @@ public class MySQLProductDAO extends BaseMySQL implements ProductDAO {
     }
 
     @Override
-    public ArrayList<Product> getAll() throws Exception {
+    public ArrayList<Product> getAll() throws SQLException {
         Connection con = startConnection();
         PreparedStatement query = con.prepareStatement("SELECT * FROM produit");
         ResultSet prodRes = query.executeQuery();

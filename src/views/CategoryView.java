@@ -94,9 +94,9 @@ public class CategoryView {
 
     private static void categorySelectMenu(Category ca) {
         System.out.println("\n-- Category -- " + _persistance);
-        System.out.println("\nID : " + ca.getId());
-        System.out.println("\nTitre : " + ca.getTitle());
-        System.out.println("\nVisuel : " + ca.getVisuel());
+        System.out.println("ID : " + ca.getId());
+        System.out.println("Titre : " + ca.getTitle());
+        System.out.println("Visuel : " + ca.getVisuel());
         do {
             System.out.println("\n0/Quitter\n1/Modifier\n2/Supprimer\n");
             System.out.print("Choix : ");

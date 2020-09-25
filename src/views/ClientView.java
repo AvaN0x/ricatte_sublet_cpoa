@@ -110,16 +110,16 @@ public class ClientView {
 
     private static void clientSelectMenu(Client cl) {
         System.out.println("\n-- Client -- " + _persistance);
-        System.out.println("\nID : " + cl.getId());
-        System.out.println("\nNom : " + cl.getNom());
-        System.out.println("\nPrenom : " + cl.getPrenom());
-        System.out.println("\nIdentifiant : " + cl.getIdentifiant());
-        System.out.println("\nMot de passe : " + cl.getMotDePasse());
-        System.out.println("\nNuméro d'adresse : " + cl.getAdrNumero());
-        System.out.println("\nVoie adresse : " + cl.getAdrVoie());
-        System.out.println("\nCode postal : " + cl.getAdrCodePostal());
-        System.out.println("\nVille : " + cl.getAdrVille());
-        System.out.println("\nPays : " + cl.getAdrPays());
+        System.out.println("ID : " + cl.getId());
+        System.out.println("Nom : " + cl.getNom());
+        System.out.println("Prenom : " + cl.getPrenom());
+        System.out.println("Identifiant : " + cl.getIdentifiant());
+        System.out.println("Mot de passe : " + cl.getMotDePasse());
+        System.out.println("Numéro d'adresse : " + cl.getAdrNumero());
+        System.out.println("Voie adresse : " + cl.getAdrVoie());
+        System.out.println("Code postal : " + cl.getAdrCodePostal());
+        System.out.println("Ville : " + cl.getAdrVille());
+        System.out.println("Pays : " + cl.getAdrPays());
         do {
             System.out.println("\n0/Quitter\n1/Modifier\n2/Supprimer\n");
             System.out.print("Choix : ");

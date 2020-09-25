@@ -101,8 +101,8 @@ public class ProductView {
 
     private static void productSelectMenu(Product pr) {
         System.out.println("\n-- Product -- " + _persistance);
-        System.out.println("\nID : " + pr.getId());
-        System.out.println("\nNom : " + pr.getNom());
+        System.out.println("ID : " + pr.getId());
+        System.out.println("Nom : " + pr.getNom());
         do {
             System.out.println("\n0/Quitter\n1/Modifier\n2/Supprimer\n");
             System.out.print("Choix : ");

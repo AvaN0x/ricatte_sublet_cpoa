@@ -57,10 +57,12 @@ public class ClientView {
             String motDePasse = _scan.nextLine().trim();
             System.out.print("Numéro adresse : ");
             int adrNumero = _scan.nextInt();
+            _scan.nextLine();
             System.out.print("Voie adresse : ");
             String adrVoie = _scan.nextLine().trim();
             System.out.print("Code postal : ");
             int adrCodePostal = _scan.nextInt();
+            _scan.nextLine();
             System.out.print("Ville : ");
             String adrVille = _scan.nextLine().trim();
             System.out.print("Pays : ");
@@ -84,7 +86,7 @@ public class ClientView {
                 System.out.println("\n-- Liste clients -- " + _persistance + " \n0/ Quitter");
                 for (int i = 0; i < clients.size(); i++)
                     System.out.println(
-                            String.format("\n%s/ %s %s", i + 1, clients.get(i).getNom(), clients.get(i).getPrenom()));
+                            String.format("%s/ %s %s", i + 1, clients.get(i).getNom(), clients.get(i).getPrenom()));
                 System.out.print("Choix : ");
 
                 try {

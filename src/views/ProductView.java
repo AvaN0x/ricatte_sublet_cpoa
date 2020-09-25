@@ -54,6 +54,7 @@ public class ProductView {
             String description = _scan.nextLine().trim();
             System.out.print("Tarif : ");
             Float tarif = _scan.nextFloat();
+            _scan.nextLine();
             System.out.print("Visuel : ");
             String visuel = _scan.nextLine().trim();
             Category category = SelectCategory();
@@ -75,7 +76,7 @@ public class ProductView {
             do {
                 System.out.println("\n-- Liste produits -- " + _persistance + " \n0/ Quitter");
                 for (int i = 0; i < products.size(); i++)
-                    System.out.println(String.format("\n%s/ %s", i + 1, products.get(i).getNom()));
+                    System.out.println(String.format("%s/ %s", i + 1, products.get(i).getNom()));
                 System.out.print("Choix : ");
 
                 try {
@@ -180,7 +181,7 @@ public class ProductView {
             var daos = DAOFactory.getDAOFactory(_persistance);
             ArrayList<Category> categories = daos.getCategoryDAO().getAll();
             for (int i = 0; i < categories.size(); i++)
-                System.out.println(String.format("\n%s/ %s", i, categories.get(i).getTitle()));
+                System.out.println(String.format("%s/ %s", i, categories.get(i).getTitle()));
             System.out.print("Choix : ");
             do {
                 try {

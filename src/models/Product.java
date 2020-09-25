@@ -87,9 +87,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "{" + " _id='" + getId() + "'" + ", _nom='" + getNom() + "'" + ", _description='" + getDescription()
-                + "'" + ", _tarif='" + getTarif() + "'" + ", _visuel='" + getVisuel() + "'" + ", _category='"
-                + getCategory() + "'" + "}";
+        return getNom();
     }
 
 }

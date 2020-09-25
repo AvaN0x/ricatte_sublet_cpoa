@@ -55,10 +55,4 @@ public class CommandLine {
         return Objects.hash(_command, _quantite, _tarif_unitaire);
     }
 
-    @Override
-    public String toString() {
-        return "{" + " _produit='" + getCommand() + "'" + ", _quantite='" + getQuantite() + "'" + ", _tarif_unitaire='"
-                + getTarifUnitaire() + "'" + "}";
-    }
-
 }

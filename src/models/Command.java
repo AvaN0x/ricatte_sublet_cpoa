@@ -75,8 +75,7 @@ public class Command {
 
     @Override
     public String toString() {
-        return "{" + " _id='" + getId() + "'" + ", _date_command='" + getDateCommand() + "'" + ", _client='"
-                + getClient() + "'" + ", _commandLines='" + getCommandLines() + "'" + "}";
+        return getId() + " " + getDateCommand();
     }
 
 }

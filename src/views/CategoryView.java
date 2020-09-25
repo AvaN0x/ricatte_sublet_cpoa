@@ -70,7 +70,7 @@ public class CategoryView {
                 ArrayList<Category> categories = daos.getCategoryDAO().getAll();
                 System.out.println("\n-- Liste categories -- " + _persistance + " \n0/ Quitter");
                 for (int i = 0; i < categories.size(); i++)
-                    System.out.println(String.format("%s/ %s", i + 1, categories.get(i).getTitle()));
+                    System.out.println(String.format("%s/ %s", i + 1, categories.get(i)));
 
                 System.out.print("Choix : ");
                 try {

@@ -86,8 +86,7 @@ public class ClientView {
                 ArrayList<Client> clients = daos.getClientDAO().getAll();
                 System.out.println("\n-- Liste clients -- " + _persistance + " \n0/ Quitter");
                 for (int i = 0; i < clients.size(); i++)
-                    System.out.println(
-                            String.format("%s/ %s %s", i + 1, clients.get(i).getNom(), clients.get(i).getPrenom()));
+                    System.out.println(String.format("%s/ %s", i + 1, clients.get(i)));
                 System.out.print("Choix : ");
 
                 try {

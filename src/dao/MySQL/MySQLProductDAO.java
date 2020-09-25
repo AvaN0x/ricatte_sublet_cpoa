@@ -11,7 +11,7 @@ import dao.ProductDAO;
 import models.Category;
 import models.Product;
 
-public class MySQLProductDAO extends BaseMySQL implements ProductDAO {
+public class MySQLProductDAO extends MySQLDAO implements ProductDAO {
 
     private MySQLProductDAO() throws IOException {
         super();
@@ -20,22 +20,17 @@ public class MySQLProductDAO extends BaseMySQL implements ProductDAO {
     private static MySQLProductDAO instance;
 
     @Override
-    public Product getById(int id) throws SQLException {
+    public Product getById(int id) throws SQLException, IOException {
         Connection con = startConnection();
         PreparedStatement query = con.prepareStatement("SELECT * FROM produit WHERE id_produit=? LIMIT 1");
         query.setInt(1, id);
         ResultSet prodRes = query.executeQuery();
 
-        query = con.prepareStatement("SELECT * FROM categorie WHERE id_categorie=? LIMIT 1");
-
         Product prod = null;
         while (prodRes.next()) {
-            query.setInt(1, prodRes.getInt("id_categorie"));
-            ResultSet categRes = query.executeQuery();
-            while (categRes.next())
-                prod = new Product(prodRes.getInt(1), prodRes.getString("nom"), prodRes.getString("description"),
-                        prodRes.getFloat("tarif"), prodRes.getString("visuel"),
-                        new Category(categRes.getInt(1), categRes.getString("titre"), categRes.getString("visuel")));
+            prod = new Product(prodRes.getInt(1), prodRes.getString("nom"), prodRes.getString("description"),
+                    prodRes.getFloat("tarif"), prodRes.getString("visuel"),
+                    MySQLCategoryDAO.getInstance().getById(prodRes.getInt("id_categorie")));
         }
         return prod;
     }
@@ -82,7 +77,7 @@ public class MySQLProductDAO extends BaseMySQL implements ProductDAO {
     }
 
     @Override
-    public Product getByName(String name) throws SQLException {
+    public Product getByName(String name) throws SQLException, IOException {
         Connection con = startConnection();
         PreparedStatement query = con.prepareStatement("SELECT id_produit FROM produit WHERE name=? LIMIT 1");
         query.setString(1, name);
@@ -112,21 +107,16 @@ public class MySQLProductDAO extends BaseMySQL implements ProductDAO {
     }
 
     @Override
-    public ArrayList<Product> getAll() throws SQLException {
+    public ArrayList<Product> getAll() throws SQLException, IOException {
         Connection con = startConnection();
         PreparedStatement query = con.prepareStatement("SELECT * FROM produit");
         ResultSet prodRes = query.executeQuery();
 
-        query = con.prepareStatement("SELECT * FROM categorie WHERE id_categorie=? LIMIT 1");
-
         ArrayList<Product> products = new ArrayList<Product>();
         while (prodRes.next()) {
-            query.setInt(1, prodRes.getInt("id_categorie"));
-            ResultSet categRes = query.executeQuery();
-            while (categRes.next())
-                products.add(new Product(prodRes.getInt(1), prodRes.getString("nom"), prodRes.getString("description"),
-                        prodRes.getFloat("tarif"), prodRes.getString("visuel"),
-                        new Category(categRes.getInt(1), categRes.getString("titre"), categRes.getString("visuel"))));
+            products.add(new Product(prodRes.getInt(1), prodRes.getString("nom"), prodRes.getString("description"),
+                    prodRes.getFloat("tarif"), prodRes.getString("visuel"),
+                    MySQLCategoryDAO.getInstance().getById(prodRes.getInt("id_categorie"))));
         }
         return products;
     }

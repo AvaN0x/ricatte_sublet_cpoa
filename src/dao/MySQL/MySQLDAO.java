@@ -8,14 +8,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class BaseMySQL {
+public class MySQLDAO {
     private static String _server;
     private static String _port;
     private static String _database;
     private static String _username;
     private static String _password;
 
-    public BaseMySQL() throws IOException {
+    public MySQLDAO() throws IOException {
         Properties credits = new Properties();
         File fBdd = new File("config/creditentials.properties");
         FileInputStream source = new FileInputStream(fBdd);

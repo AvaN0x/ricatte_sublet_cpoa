@@ -55,18 +55,26 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
     }
 
     @Override
-    public boolean create(Command cmd) throws SQLException {
+    public boolean create(Command cmd) throws SQLException, IOException {
         Connection con = startConnection();
         PreparedStatement update = con.prepareStatement("INSERT INTO commande(date_commande, id_client) VALUES (?, ?)");
         update.setDate(1, (Date) Date.from(cmd.getDateCommand().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         update.setInt(2, cmd.getClient().getId());
         int result = update.executeUpdate();
         con.close();
-        return result >= 1;
+
+        boolean lineResult = true;
+        for (HashMap.Entry<Product, CommandLine> line : cmd.getCommandLines().entrySet()) {
+            boolean res = MySQLCommandLineDAO.getInstance().create(line.getValue(), line.getKey());
+            if (!res)
+                lineResult = false;
+        }
+
+        return result >= 1 && lineResult;
     }
 
     @Override
-    public boolean update(Command cmd) throws SQLException {
+    public boolean update(Command cmd) throws SQLException, IOException {
         Connection con = startConnection();
         PreparedStatement update = con
                 .prepareStatement("UPDATE commande SET date_commande=?, id_client=? WHERE id_commande=?");
@@ -75,17 +83,33 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
         update.setInt(3, cmd.getId());
         int result = update.executeUpdate();
         con.close();
-        return result >= 1;
+
+        boolean lineResult = true;
+        for (HashMap.Entry<Product, CommandLine> line : cmd.getCommandLines().entrySet()) {
+            boolean res = MySQLCommandLineDAO.getInstance().update(line.getValue(), line.getKey());
+            if (!res)
+                lineResult = false;
+        }
+
+        return result >= 1 && lineResult;
     }
 
     @Override
-    public boolean delete(Command cmd) throws SQLException {
+    public boolean delete(Command cmd) throws SQLException, IOException {
         Connection con = startConnection();
         PreparedStatement update = con.prepareStatement("DELETE FROM commande WHERE id_commande=?");
         update.setInt(1, cmd.getId());
         int result = update.executeUpdate();
         con.close();
-        return result >= 1;
+
+        boolean lineResult = true;
+        for (HashMap.Entry<Product, CommandLine> line : cmd.getCommandLines().entrySet()) {
+            boolean res = MySQLCommandLineDAO.getInstance().delete(line.getValue(), line.getKey());
+            if (!res)
+                lineResult = false;
+        }
+
+        return result >= 1 && lineResult;
     }
 
     @Override

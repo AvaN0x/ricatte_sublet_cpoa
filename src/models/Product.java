@@ -19,6 +19,24 @@ public class Product {
         this._category = category;
     }
 
+    public Product(String nom, String description, float tarif, String visuel, Category category) {
+        this._id = -1;
+        this._nom = nom;
+        this._description = description;
+        this._tarif = tarif;
+        this._visuel = visuel;
+        this._category = category;
+    }
+
+    public Product(int id) {
+        this._id = id;
+        this._nom = "";
+        this._description = "";
+        this._tarif = 0;
+        this._visuel = "";
+        this._category = null;
+    }
+
     public int getId() {
         return this._id;
     }
@@ -75,9 +93,7 @@ public class Product {
             return false;
         }
         Product product = (Product) o;
-        return _id == product._id && Objects.equals(_nom, product._nom)
-                && Objects.equals(_description, product._description) && _tarif == product._tarif
-                && Objects.equals(_visuel, product._visuel) && Objects.equals(_category, product._category);
+        return _id == product._id;
     }
 
     @Override

@@ -119,7 +119,7 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
         PreparedStatement query = con.prepareStatement("SELECT * FROM commande");
         ResultSet comRes = query.executeQuery();
 
-        query = con.prepareStatement("SELECT * FROM ligne_commande WHERE id_commande=?");
+        query = con.prepareStatement("SELECT * FROM ligne_commande");
 
         ArrayList<Command> cmds = new ArrayList<Command>();
         while (comRes.next()) {

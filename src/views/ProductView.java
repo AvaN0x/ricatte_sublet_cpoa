@@ -154,23 +154,23 @@ public class ProductView {
 
             if (editCommand == "y") {
                 pr.setCategory(SelectCategory());
-                System.out.println("La catégorie a était modifiée");
+                System.out.println("La catégorie a été modifiée");
             }
             if (!nom.isEmpty()) {
                 pr.setNom(nom);
-                System.out.println("Le nom a était modifié");
+                System.out.println("Le nom a été modifié");
             }
             if (!description.isEmpty()) {
                 pr.setDescription(description);
-                System.out.println("La description a était modifiée");
+                System.out.println("La description a été modifiée");
             }
             if (!tarif.isEmpty()) {
                 pr.setTarif(Float.parseFloat(tarif));
-                System.out.println("Le tarif a était modifié");
+                System.out.println("Le tarif a été modifié");
             }
             if (!visuel.isEmpty()) {
                 pr.setVisuel(visuel);
-                System.out.println("Le visuel a était modifié");
+                System.out.println("Le visuel a été modifié");
             }
 
             var daos = DAOFactory.getDAOFactory(_persistance);

@@ -15,7 +15,7 @@ public class ListeMemoireCommandDAO implements CommandDAO {
     }
 
     @Override
-    public Command getById(int id) throws Exception {
+    public Command getById(int id) throws IllegalArgumentException {
         int i = data.indexOf(new Command(id));
         if (i == -1)
             throw new IllegalArgumentException("No command have this id");
@@ -23,14 +23,14 @@ public class ListeMemoireCommandDAO implements CommandDAO {
     }
 
     @Override
-    public boolean create(Command cmd) throws Exception {
+    public boolean create(Command cmd) {
         while (data.contains(cmd))
             cmd.setId(cmd.getId() + 1);
         return data.add(cmd);
     }
 
     @Override
-    public boolean update(Command cmd) throws Exception {
+    public boolean update(Command cmd) throws IllegalArgumentException {
         int i = data.indexOf(cmd);
         if (i == -1)
             throw new IllegalArgumentException("This command doesn't exist");
@@ -39,7 +39,7 @@ public class ListeMemoireCommandDAO implements CommandDAO {
     }
 
     @Override
-    public boolean delete(Command cmd) throws Exception {
+    public boolean delete(Command cmd) throws IllegalArgumentException {
         int i = data.indexOf(cmd);
         if (i == -1)
             throw new IllegalArgumentException("This command doesn't exist");
@@ -47,7 +47,7 @@ public class ListeMemoireCommandDAO implements CommandDAO {
     }
 
     @Override
-    public ArrayList<Command> getAll() throws Exception {
+    public ArrayList<Command> getAll() {
         return data;
     }
 

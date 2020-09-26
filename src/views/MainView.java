@@ -6,13 +6,8 @@ import java.util.Scanner;
 import dao.Persistance;
 
 public class MainView {
-    private static Persistance _persistance;
+    private static Persistance _persistance = Persistance.MYSQL;
     private static Scanner _scan;
-
-    public static void main(String[] args) {
-        _persistance = Persistance.MYSQL;
-        openMainMenu();
-    }
 
     public static void openMainMenu() {
         var inMenu = true;

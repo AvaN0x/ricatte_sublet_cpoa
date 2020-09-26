@@ -15,7 +15,7 @@ public class MainView {
         do {
 
             System.out.println("\n-- Main menu -- " + _persistance
-                    + " \n0/ Quitter\n1/ Settings\n2/ Client\n3/ Catégorie\n4/ Produit\n");
+                    + " \n0/ Quitter\n1/ Settings\n2/ Client\n3/ Catégorie\n4/ Produit\n5/ Commandes\n");
             System.out.print("Choix : ");
 
             try {
@@ -37,7 +37,9 @@ public class MainView {
                     case 4:
                         ProductView.openProductMenu(_persistance, _scan);
                         break;
-
+                    case 5:
+                        CommandView.openCommandMenu(_persistance, _scan);
+                        break;
                     default:
                         break;
                 }

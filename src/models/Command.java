@@ -113,7 +113,7 @@ public class Command {
 
     @Override
     public String toString() {
-        return getId() + " " + getDateCommand();
+        return getId() + " " + DateTimeFormatter.ofPattern("dd/MM/yyyy").format(getDateCommand());
     }
 
 }

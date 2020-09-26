@@ -21,7 +21,7 @@ public class MySQLClientDAO extends MySQLDAO implements ClientDAO {
     @Override
     public Client getById(int id) throws SQLException {
         Connection con = startConnection();
-        PreparedStatement query = con.prepareStatement("SELECT * FROM client WHERE id_categorie=? LIMIT 1");
+        PreparedStatement query = con.prepareStatement("SELECT * FROM client WHERE id_client=? LIMIT 1");
         query.setInt(1, id);
         ResultSet cliRes = query.executeQuery();
 

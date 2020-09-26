@@ -31,6 +31,13 @@ public class Command {
         this._commandLines = commandLines;
     }
 
+    public Command(LocalDate date_command, Client client) {
+        this._id = 0;
+        this._date_command = date_command;
+        this._client = client;
+        this._commandLines = new HashMap<Product, CommandLine>();
+    }
+
     public Command(int id) {
         this._id = id;
         this._date_command = null;

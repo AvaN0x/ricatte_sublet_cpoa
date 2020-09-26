@@ -42,8 +42,8 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
             ResultSet lineRes = query.executeQuery();
             HashMap<Product, CommandLine> lines = new HashMap<Product, CommandLine>();
             while (lineRes.next()) { // multiple result
-                lines.put(MySQLProductDAO.getInstance().getById(comRes.getInt("id_produit")),
-                        new CommandLine(cmd, comRes.getInt("quantite"), comRes.getFloat("tarif_unitaire")));
+                lines.put(MySQLProductDAO.getInstance().getById(lineRes.getInt("id_produit")),
+                        new CommandLine(cmd, lineRes.getInt("quantite"), lineRes.getFloat("tarif_unitaire")));
             }
 
             cmd.setCommandLines(lines);
@@ -132,7 +132,7 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
             HashMap<Product, CommandLine> lines = new HashMap<Product, CommandLine>();
             while (lineRes.next()) { // multiple result
                 lines.put(MySQLProductDAO.getInstance().getById(lineRes.getInt("id_produit")),
-                        new CommandLine(cmd, comRes.getInt("quantite"), comRes.getFloat("tarif_unitaire")));
+                        new CommandLine(cmd, lineRes.getInt("quantite"), lineRes.getFloat("tarif_unitaire")));
             }
 
             cmd.setCommandLines(lines);

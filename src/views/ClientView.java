@@ -69,7 +69,7 @@ public class ClientView {
             String adrPays = _scan.nextLine().trim();
 
             var daos = DAOFactory.getDAOFactory(_persistance);
-            daos.getClientDAO().create(new Client(-1, nom, prenom, identifiant, motDePasse, adrNumero, adrVoie,
+            daos.getClientDAO().create(new Client(nom, prenom, identifiant, motDePasse, adrNumero, adrVoie,
                     adrCodePostal, adrVille, adrPays));
             System.out.println("Le client a bien été créé");
 

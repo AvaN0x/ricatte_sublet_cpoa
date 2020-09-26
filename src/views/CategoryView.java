@@ -53,7 +53,7 @@ public class CategoryView {
             String visuel = _scan.nextLine().trim();
 
             var daos = DAOFactory.getDAOFactory(_persistance);
-            daos.getCategoryDAO().create(new Category(-1, title, visuel));
+            daos.getCategoryDAO().create(new Category(title, visuel));
             System.out.println("La catégorie a bien été créée");
 
         } catch (Exception e) {
@@ -68,7 +68,7 @@ public class CategoryView {
             do {
                 var daos = DAOFactory.getDAOFactory(_persistance);
                 ArrayList<Category> categories = daos.getCategoryDAO().getAll();
-                System.out.println("\n-- Liste categories -- " + _persistance + " \n0/ Quitter");
+                System.out.println("\n-- Liste catégories -- " + _persistance + " \n0/ Quitter");
                 for (int i = 0; i < categories.size(); i++)
                     System.out.println(String.format("%s/ %s", i + 1, categories.get(i)));
 

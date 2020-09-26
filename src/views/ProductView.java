@@ -60,7 +60,7 @@ public class ProductView {
             Category category = SelectCategory();
 
             var daos = DAOFactory.getDAOFactory(_persistance);
-            daos.getProductDAO().create(new Product(-1, nom, description, tarif, visuel, category));
+            daos.getProductDAO().create(new Product(nom, description, tarif, visuel, category));
             System.out.println("Le produit a bien été crée");
 
         } catch (Exception e) {

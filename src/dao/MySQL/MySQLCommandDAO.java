@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.HashMap;
@@ -58,7 +57,7 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
     public boolean create(Command cmd) throws SQLException, IOException {
         Connection con = startConnection();
         PreparedStatement update = con.prepareStatement("INSERT INTO commande(date_commande, id_client) VALUES (?, ?)");
-        update.setDate(1, (Date) Date.from(cmd.getDateCommand().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        update.setDate(1, Date.valueOf(cmd.getDateCommand()));
         update.setInt(2, cmd.getClient().getId());
         int result = update.executeUpdate();
         con.close();
@@ -78,7 +77,7 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
         Connection con = startConnection();
         PreparedStatement update = con
                 .prepareStatement("UPDATE commande SET date_commande=?, id_client=? WHERE id_commande=?");
-        update.setDate(1, (Date) Date.from(cmd.getDateCommand().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        update.setDate(1, Date.valueOf(cmd.getDateCommand()));
         update.setInt(2, cmd.getClient().getId());
         update.setInt(3, cmd.getId());
         int result = update.executeUpdate();

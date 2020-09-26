@@ -104,7 +104,11 @@ public class ProductView {
         System.out.println("\n-- Product -- " + _persistance);
         System.out.println("ID : " + pr.getId());
         System.out.println("Nom : " + pr.getNom());
-        // TODO print other parameters
+        System.out.println("Description : " + pr.getDescription());
+        System.out.println("Tarif : " + pr.getTarif());
+        System.out.println("Visuel : " + pr.getVisuel());
+        System.out.println("Catégorie : " + pr.getCategory().getTitle());
+
         do {
             System.out.println("\n0/Quitter\n1/Modifier\n2/Supprimer\n");
             System.out.print("Choix : ");

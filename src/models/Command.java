@@ -70,6 +70,24 @@ public class Command {
         this._commandLines = commandLines;
     }
 
+    public void addCommandLine(Product prod, CommandLine line) {
+        this._commandLines.put(prod, line);
+    }
+
+    public void updateCommandLine(Product prod, CommandLine line) {
+        if (this._commandLines.containsKey(prod))
+            this._commandLines.put(prod, line);
+        else
+            throw new IllegalArgumentException("This product is not in the command");
+    }
+
+    public void remCommandLine(Product prod) {
+        if (this._commandLines.containsKey(prod))
+            this._commandLines.remove(prod);
+        else
+            throw new IllegalArgumentException("This product is not in the command");
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)

@@ -42,7 +42,7 @@ public class MainView {
                         break;
                 }
             } catch (NumberFormatException | InputMismatchException e) {
-                System.out.println("Exception: " + e.getMessage());
+                System.out.println("Exception: " + e);
                 _scan.nextLine();
             }
         } while (inMenu);
@@ -75,7 +75,7 @@ public class MainView {
                         break;
                 }
             } catch (NumberFormatException | InputMismatchException e) {
-                System.out.println("Exception: " + e.getMessage());
+                System.out.println("Exception: " + e);
                 _scan.nextLine();
             }
         } while (inMenu);

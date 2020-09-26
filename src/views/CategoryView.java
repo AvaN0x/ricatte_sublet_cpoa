@@ -37,7 +37,7 @@ public class CategoryView {
                         break;
                 }
             } catch (NumberFormatException | InputMismatchException e) {
-                System.out.println("Exception: " + e.getMessage());
+                System.out.println("Exception: " + e);
                 _scan.nextLine();
             }
         } while (inMenu);
@@ -57,7 +57,7 @@ public class CategoryView {
             System.out.println("La catégorie a bien été créée");
 
         } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e);
             _scan.nextLine();
         }
     }
@@ -84,12 +84,12 @@ public class CategoryView {
                     }
 
                 } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
-                    System.out.println("Exception: " + e.getMessage());
+                    System.out.println("Exception: " + e);
                     _scan.nextLine();
                 }
             } while (true);
         } catch (Exception e) {
-            System.out.println("Exeption: " + e.getMessage());
+            System.out.println("Exeption: " + e);
         }
     }
 
@@ -120,7 +120,7 @@ public class CategoryView {
                         break;
                 }
             } catch (Exception e) {
-                System.out.println("Exception: " + e.getMessage());
+                System.out.println("Exception: " + e);
                 _scan.nextLine();
             }
         } while (true);
@@ -147,7 +147,7 @@ public class CategoryView {
             daos.getCategoryDAO().update(ca);
 
         } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e);
             _scan.nextLine();
         }
 

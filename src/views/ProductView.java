@@ -38,7 +38,7 @@ public class ProductView {
                         break;
                 }
             } catch (NumberFormatException | InputMismatchException e) {
-                System.out.println("Exception: " + e.getMessage());
+                System.out.println("Exception: " + e);
                 _scan.nextLine();
             }
         } while (inMenu);
@@ -64,7 +64,7 @@ public class ProductView {
             System.out.println("Le produit a bien été crée");
 
         } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e);
             _scan.nextLine();
         }
     }
@@ -91,12 +91,12 @@ public class ProductView {
                     }
 
                 } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
-                    System.out.println("Exception: " + e.getMessage());
+                    System.out.println("Exception: " + e);
                     _scan.nextLine();
                 }
             } while (true);
         } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e);
         }
     }
 
@@ -131,7 +131,7 @@ public class ProductView {
                         break;
                 }
             } catch (Exception e) {
-                System.out.println("Exception: " + e.getMessage());
+                System.out.println("Exception: " + e);
                 _scan.nextLine();
             }
         } while (true);
@@ -177,7 +177,7 @@ public class ProductView {
             daos.getProductDAO().update(pr);
 
         } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e);
             _scan.nextLine();
         }
     }
@@ -196,12 +196,12 @@ public class ProductView {
                     _scan.nextLine();
                     category = categories.get(submenu);
                 } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
-                    System.out.println("Exception: " + e.getMessage());
+                    System.out.println("Exception: " + e);
                     _scan.nextLine();
                 }
             } while (category == null);
         } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e);
         }
         return category;
     }

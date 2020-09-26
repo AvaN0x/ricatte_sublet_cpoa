@@ -37,7 +37,7 @@ public class ClientView {
                         break;
                 }
             } catch (NumberFormatException | InputMismatchException e) {
-                System.out.println("Exception: " + e.getMessage());
+                System.out.println("Exception: " + e);
                 _scan.nextLine();
             }
         } while (inMenu);
@@ -74,7 +74,7 @@ public class ClientView {
             System.out.println("Le client a bien été créé");
 
         } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e);
             _scan.nextLine();
         }
     }
@@ -100,12 +100,12 @@ public class ClientView {
                     }
 
                 } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
-                    System.out.println("Exception: " + e.getMessage());
+                    System.out.println("Exception: " + e);
                     _scan.nextLine();
                 }
             } while (true);
         } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e);
         }
     }
 
@@ -143,7 +143,7 @@ public class ClientView {
                         break;
                 }
             } catch (Exception e) {
-                System.out.println("Exception: " + e.getMessage());
+                System.out.println("Exception: " + e);
                 _scan.nextLine();
             }
         } while (true);
@@ -213,7 +213,7 @@ public class ClientView {
             daos.getClientDAO().update(cl);
 
         } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e);
             _scan.nextLine();
         }
 

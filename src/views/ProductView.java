@@ -152,6 +152,10 @@ public class ProductView {
             System.out.print("Modifier la catégorie? (y/n) ");
             String editCommand = _scan.nextLine().trim().toLowerCase();
 
+            if (editCommand == "y") {
+                pr.setCategory(SelectCategory());
+                System.out.println("La catégorie a était modifiée");
+            }
             if (!nom.isEmpty()) {
                 pr.setNom(nom);
                 System.out.println("Le nom a était modifié");
@@ -167,10 +171,6 @@ public class ProductView {
             if (!visuel.isEmpty()) {
                 pr.setVisuel(visuel);
                 System.out.println("Le visuel a était modifié");
-            }
-            if (editCommand == "y") {
-                pr.setCategory(SelectCategory());
-                System.out.println("La catégorie a était modifiée");
             }
 
             var daos = DAOFactory.getDAOFactory(_persistance);

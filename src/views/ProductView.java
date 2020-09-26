@@ -149,7 +149,7 @@ public class ProductView {
             String tarif = _scan.nextLine().trim();
             System.out.print("Visuel : ");
             String visuel = _scan.nextLine().trim();
-            System.out.print("Modifier la catégorie? (y/n) ");
+            System.out.print("Modifier la catégorie? (y/n) : ");
             String editCommand = _scan.nextLine().trim().toLowerCase();
 
             if (editCommand == "y") {

@@ -61,6 +61,7 @@ public class ProductView {
 
             var daos = DAOFactory.getDAOFactory(_persistance);
             daos.getProductDAO().create(new Product(-1, nom, description, tarif, visuel, category));
+            System.out.println("Le produit a bien été crée");
 
         } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
@@ -103,6 +104,7 @@ public class ProductView {
         System.out.println("\n-- Product -- " + _persistance);
         System.out.println("ID : " + pr.getId());
         System.out.println("Nom : " + pr.getNom());
+        // TODO print other parameters
         do {
             System.out.println("\n0/Quitter\n1/Modifier\n2/Supprimer\n");
             System.out.print("Choix : ");
@@ -183,17 +185,17 @@ public class ProductView {
             ArrayList<Category> categories = daos.getCategoryDAO().getAll();
             for (int i = 0; i < categories.size(); i++)
                 System.out.println(String.format("%s/ %s", i, categories.get(i)));
-            System.out.print("Choix : ");
             do {
+                System.out.print("Choisissez une catégorie : ");
                 try {
                     var submenu = _scan.nextInt();
                     _scan.nextLine();
-                    category = categories.get(submenu - 1);
+                    category = categories.get(submenu);
                 } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
                     System.out.println("Exception: " + e.getMessage());
                     _scan.nextLine();
                 }
-            } while (true);
+            } while (category == null);
         } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
         }

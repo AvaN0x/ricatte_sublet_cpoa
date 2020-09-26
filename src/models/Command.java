@@ -24,6 +24,20 @@ public class Command {
         this._commandLines = commandLines;
     }
 
+    public Command(LocalDate date_command, Client client, HashMap<Product, CommandLine> commandLines) {
+        this._id = 0;
+        this._date_command = date_command;
+        this._client = client;
+        this._commandLines = commandLines;
+    }
+
+    public Command(int id) {
+        this._id = id;
+        this._date_command = null;
+        this._client = null;
+        this._commandLines = null;
+    }
+
     public int getId() {
         return this._id;
     }
@@ -64,8 +78,7 @@ public class Command {
             return false;
         }
         Command command = (Command) o;
-        return _id == command._id && Objects.equals(_date_command, command._date_command)
-                && Objects.equals(_client, command._client) && Objects.equals(_commandLines, command._commandLines);
+        return _id == command._id;
     }
 
     @Override

@@ -81,7 +81,7 @@ public class MySQLCommandLineDAO extends MySQLDAO implements CommandLineDAO {
     public boolean delete(CommandLine line, Product prod) throws SQLException {
         Connection con = startConnection();
         PreparedStatement update = con
-                .prepareStatement("DELETE FROM ligne_commande WHERE id_commande=? AND id_porduit=?");
+                .prepareStatement("DELETE FROM ligne_commande WHERE id_commande=? AND id_produit=?");
         update.setInt(1, line.getCommand().getId());
         update.setInt(2, prod.getId());
         int result = update.executeUpdate();

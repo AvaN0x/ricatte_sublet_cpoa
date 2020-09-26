@@ -3,7 +3,7 @@ package models;
 import java.util.Objects;
 
 public class CommandLine {
-    // HashMap<id_produit, commandLine>
+    // HashMap<Produit, commandLine>
     private Command _command;
     private int _quantite;
     private float _tarif_unitaire;

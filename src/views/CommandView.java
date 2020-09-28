@@ -44,7 +44,6 @@ public class CommandView {
                 }
             } catch (NumberFormatException | InputMismatchException e) {
                 System.out.println("Exception: " + e);
-                e.printStackTrace();
                 _scan.nextLine();
             }
         } while (inMenu);
@@ -67,7 +66,6 @@ public class CommandView {
 
         } catch (Exception e) {
             System.out.println("Exception: " + e);
-            e.printStackTrace();
 
             _scan.nextLine();
         }
@@ -95,13 +93,11 @@ public class CommandView {
 
                 } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
                     System.out.println("Exception: " + e);
-                    e.printStackTrace();
                     _scan.nextLine();
                 }
             } while (true);
         } catch (Exception e) {
             System.out.println("Exception: " + e);
-            e.printStackTrace();
         }
     }
 
@@ -141,7 +137,6 @@ public class CommandView {
                 }
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
-                e.printStackTrace();
                 _scan.nextLine();
             }
         } while (true);
@@ -172,7 +167,6 @@ public class CommandView {
 
         } catch (Exception e) {
             System.out.println("Exception: " + e);
-            e.printStackTrace();
             _scan.nextLine();
         }
     }
@@ -180,7 +174,6 @@ public class CommandView {
     private static void displayCommandLinesMenu(Command cmd) {
         try {
             do {
-                var daos = DAOFactory.getDAOFactory(_persistance);
                 var cmdLines = cmd.getCommandLines();
                 System.out.println(
                         "\n-- Liste des produits de la commande -- " + _persistance + " \n0/ Quitter\n1/ Ajouter");
@@ -204,13 +197,11 @@ public class CommandView {
 
                 } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
                     System.out.println("Exception: " + e);
-                    e.printStackTrace();
                     _scan.nextLine();
                 }
             } while (true);
         } catch (Exception e) {
             System.out.println("Exception: " + e);
-            e.printStackTrace();
             _scan.nextLine();
         }
     }
@@ -244,7 +235,6 @@ public class CommandView {
                 }
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
-                e.printStackTrace();
                 _scan.nextLine();
             }
         } while (true);
@@ -266,7 +256,6 @@ public class CommandView {
 
         } catch (Exception e) {
             System.out.println("Exception: " + e);
-            e.printStackTrace();
             _scan.nextLine();
         }
     }
@@ -301,7 +290,6 @@ public class CommandView {
 
         } catch (Exception e) {
             System.out.println("Exception: " + e);
-            e.printStackTrace();
             _scan.nextLine();
         }
     }
@@ -350,7 +338,6 @@ public class CommandView {
             } while (client == null);
         } catch (Exception e) {
             System.out.println("Exception: " + e);
-            e.printStackTrace();
         }
         return client;
     }

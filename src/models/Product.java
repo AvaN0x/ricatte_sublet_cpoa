@@ -20,7 +20,7 @@ public class Product {
     }
 
     public Product(String nom, String description, float tarif, String visuel, Category category) {
-        this._id = -1;
+        this._id = 0;
         this._nom = nom;
         this._description = description;
         this._tarif = tarif;

@@ -53,16 +53,20 @@ public class CommandView {
         System.out.println("\n-- Ajouter une commande -- " + _persistance);
 
         try {
-            System.out.print("Date (dd/MM/yyyy) \n(Laisser vide pour aujourd'hui) : ");
-            LocalDate dateCommand = LocalDate.now();
-            String sDateCommand = _scan.nextLine().trim();
-            if (!sDateCommand.isEmpty())
-                dateCommand = LocalDate.parse(sDateCommand, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            Client client = SelectClient();
-
             var daos = DAOFactory.getDAOFactory(_persistance);
-            daos.getCommandDAO().create(new Command(dateCommand, client));
-            System.out.println("La commande a bien été créé");
+            if (daos.getClientDAO().getAll().size() > 0) {
+
+                System.out.print("Date (dd/MM/yyyy) \n(Laisser vide pour aujourd'hui) : ");
+                LocalDate dateCommand = LocalDate.now();
+                String sDateCommand = _scan.nextLine().trim();
+                if (!sDateCommand.isEmpty())
+                    dateCommand = LocalDate.parse(sDateCommand, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                Client client = SelectClient();
+
+                daos.getCommandDAO().create(new Command(dateCommand, client));
+                System.out.println("La commande a bien été créé");
+            } else
+                System.out.println("Vous ne pouvez pas créer de commande s'il n'existe pas de client.");
 
         } catch (Exception e) {
             System.out.println("Exception: " + e);
@@ -243,16 +247,20 @@ public class CommandView {
     public static void createCommandLineMenu(Command cmd) {
         System.out.println("\n-- Ajouter une ligne de commande -- " + _persistance);
         try {
-            Product prod = SelectProduct();
-            System.out.print("Quantité : ");
-            int quantite = _scan.nextInt();
-            _scan.nextLine();
-
-            cmd.addCommandLine(prod, new CommandLine(cmd, quantite, prod.getTarif()));
-
             var daos = DAOFactory.getDAOFactory(_persistance);
-            daos.getCommandDAO().update(cmd);
-            System.out.println("La commande a bien été modifiée");
+            if (daos.getProductDAO().getAll().size() > 0) {
+
+                Product prod = SelectProduct();
+                System.out.print("Quantité : ");
+                int quantite = _scan.nextInt();
+                _scan.nextLine();
+
+                cmd.addCommandLine(prod, new CommandLine(cmd, quantite, prod.getTarif()));
+
+                daos.getCommandDAO().update(cmd);
+                System.out.println("La commande a bien été modifiée");
+            } else
+                System.out.println("Vous ne pouvez rajouter de produit à une commande s'il n'existe pas de produit.");
 
         } catch (Exception e) {
             System.out.println("Exception: " + e);

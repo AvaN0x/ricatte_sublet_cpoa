@@ -64,7 +64,7 @@ public class ProductView {
                 daos.getProductDAO().create(new Product(nom, description, tarif, visuel, category));
                 System.out.println("Le produit a bien été crée");
             } else
-                System.out.println("Vous ne pouvez pas créer de produit s'il n'existe pas de catégorie");
+                System.out.println("Vous ne pouvez pas créer de produit s'il n'existe pas de catégorie.");
 
         } catch (Exception e) {
             System.out.println("Exception: " + e);

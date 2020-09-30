@@ -30,7 +30,7 @@ public class Client {
 
     public Client(String nom, String prenom, String identifiant, String motDePasse, int adrNumero, String adrVoie,
             int adrCodePostal, String adrVille, String adrPays) {
-        this._id = -1;
+        this._id = 0;
         this._nom = nom;
         this._prenom = prenom;
         this._identifiant = identifiant;

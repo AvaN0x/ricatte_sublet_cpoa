@@ -1,16 +1,16 @@
-package dao.ListeMemoire;
+package dao.RAM;
 
 import java.util.ArrayList;
 
 import dao.CommandDAO;
 import models.Command;
 
-public class ListeMemoireCommandDAO implements CommandDAO {
-    private static ListeMemoireCommandDAO instance;
+public class RAMCommandDAO implements CommandDAO {
+    private static RAMCommandDAO instance;
 
     private ArrayList<Command> data;
 
-    private ListeMemoireCommandDAO() {
+    private RAMCommandDAO() {
         this.data = new ArrayList<Command>();
     }
 
@@ -51,9 +51,9 @@ public class ListeMemoireCommandDAO implements CommandDAO {
         return data;
     }
 
-    public static ListeMemoireCommandDAO getInstance() {
+    public static RAMCommandDAO getInstance() {
         if (instance == null)
-            instance = new ListeMemoireCommandDAO();
+            instance = new RAMCommandDAO();
 
         return instance;
     }

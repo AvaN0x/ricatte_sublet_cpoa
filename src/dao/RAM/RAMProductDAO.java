@@ -1,4 +1,4 @@
-package dao.ListeMemoire;
+package dao.RAM;
 
 import java.util.ArrayList;
 
@@ -6,12 +6,12 @@ import dao.ProductDAO;
 import models.Category;
 import models.Product;
 
-public class ListeMemoireProductDAO implements ProductDAO {
-    private static ListeMemoireProductDAO instance;
+public class RAMProductDAO implements ProductDAO {
+    private static RAMProductDAO instance;
 
     private ArrayList<Product> data;
 
-    private ListeMemoireProductDAO() {
+    private RAMProductDAO() {
         this.data = new ArrayList<Product>();
     }
 
@@ -72,9 +72,9 @@ public class ListeMemoireProductDAO implements ProductDAO {
         throw new IllegalArgumentException("No product have this category");
     }
 
-    public static ListeMemoireProductDAO getInstance() {
+    public static RAMProductDAO getInstance() {
         if (instance == null)
-            instance = new ListeMemoireProductDAO();
+            instance = new RAMProductDAO();
 
         return instance;
     }

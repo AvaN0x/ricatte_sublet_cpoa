@@ -1,27 +1,27 @@
-package dao.ListeMemoire;
+package dao.RAM;
 
 import java.io.IOException;
 
 import dao.*;
 
-public class ListeMemoireDAOFactory extends DAOFactory {
+public class RAMDAOFactory extends DAOFactory {
     @Override
     public CategoryDAO getCategoryDAO() throws IOException {
-        return ListeMemoireCategoryDAO.getInstance();
+        return RAMCategoryDAO.getInstance();
     }
 
     @Override
     public ProductDAO getProductDAO() throws Exception {
-        return ListeMemoireProductDAO.getInstance();
+        return RAMProductDAO.getInstance();
     }
 
     @Override
     public ClientDAO getClientDAO() throws Exception {
-        return ListeMemoireClientDAO.getInstance();
+        return RAMClientDAO.getInstance();
     }
 
     @Override
     public CommandDAO getCommandDAO() throws Exception {
-        return ListeMemoireCommandDAO.getInstance();
+        return RAMCommandDAO.getInstance();
     }
 }

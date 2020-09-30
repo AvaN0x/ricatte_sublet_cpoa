@@ -1,16 +1,16 @@
-package dao.ListeMemoire;
+package dao.RAM;
 
 import java.util.ArrayList;
 
 import dao.CategoryDAO;
 import models.Category;
 
-public class ListeMemoireCategoryDAO implements CategoryDAO {
-    private static ListeMemoireCategoryDAO instance;
+public class RAMCategoryDAO implements CategoryDAO {
+    private static RAMCategoryDAO instance;
 
     private ArrayList<Category> data;
 
-    private ListeMemoireCategoryDAO() {
+    private RAMCategoryDAO() {
         this.data = new ArrayList<Category>();
     }
 
@@ -59,9 +59,9 @@ public class ListeMemoireCategoryDAO implements CategoryDAO {
         throw new IllegalArgumentException("No category have this title");
     }
 
-    public static ListeMemoireCategoryDAO getInstance() {
+    public static RAMCategoryDAO getInstance() {
         if (instance == null)
-            instance = new ListeMemoireCategoryDAO();
+            instance = new RAMCategoryDAO();
 
         return instance;
     }

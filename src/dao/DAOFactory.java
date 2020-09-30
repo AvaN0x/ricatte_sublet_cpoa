@@ -1,7 +1,5 @@
 package dao;
 
-import dao.ListeMemoire.ListeMemoireDAOFactory;
-
 public abstract class DAOFactory {
     public static DAOFactory getDAOFactory(Persistance target) {
         DAOFactory daoF = null;
@@ -9,8 +7,8 @@ public abstract class DAOFactory {
             case MYSQL:
                 daoF = new dao.MySQL.MySQLDAOFactory();
                 break;
-            case LISTE_MEMOIRE:
-                daoF = new ListeMemoireDAOFactory();
+            case RAM:
+                daoF = new dao.RAM.RAMDAOFactory();
                 break;
         }
         return daoF;

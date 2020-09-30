@@ -1,16 +1,16 @@
-package dao.ListeMemoire;
+package dao.RAM;
 
 import java.util.ArrayList;
 
 import dao.ClientDAO;
 import models.Client;
 
-public class ListeMemoireClientDAO implements ClientDAO {
-    private static ListeMemoireClientDAO instance;
+public class RAMClientDAO implements ClientDAO {
+    private static RAMClientDAO instance;
 
     private ArrayList<Client> data;
 
-    private ListeMemoireClientDAO() {
+    private RAMClientDAO() {
         this.data = new ArrayList<Client>();
     }
 
@@ -51,9 +51,9 @@ public class ListeMemoireClientDAO implements ClientDAO {
         return data;
     }
 
-    public static ListeMemoireClientDAO getInstance() {
+    public static RAMClientDAO getInstance() {
         if (instance == null)
-            instance = new ListeMemoireClientDAO();
+            instance = new RAMClientDAO();
 
         return instance;
     }

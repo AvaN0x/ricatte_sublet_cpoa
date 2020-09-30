@@ -66,7 +66,7 @@ public class MainView {
                         inMenu = false;
                         break;
                     case 1:
-                        _persistance = Persistance.LISTE_MEMOIRE;
+                        _persistance = Persistance.RAM;
                         inMenu = false;
                         break;
                     case 2:

@@ -48,20 +48,23 @@ public class ProductView {
         System.out.println("\n-- Ajouter un produit -- " + _persistance);
 
         try {
-            System.out.print("Nom : ");
-            String nom = _scan.nextLine().trim();
-            System.out.print("Description : ");
-            String description = _scan.nextLine().trim();
-            System.out.print("Tarif : ");
-            Float tarif = _scan.nextFloat();
-            _scan.nextLine();
-            System.out.print("Visuel : ");
-            String visuel = _scan.nextLine().trim();
-            Category category = SelectCategory();
-
             var daos = DAOFactory.getDAOFactory(_persistance);
-            daos.getProductDAO().create(new Product(nom, description, tarif, visuel, category));
-            System.out.println("Le produit a bien été crée");
+            if (daos.getCategoryDAO().getAll().size() > 0) {
+                System.out.print("Nom : ");
+                String nom = _scan.nextLine().trim();
+                System.out.print("Description : ");
+                String description = _scan.nextLine().trim();
+                System.out.print("Tarif : ");
+                Float tarif = _scan.nextFloat();
+                _scan.nextLine();
+                System.out.print("Visuel : ");
+                String visuel = _scan.nextLine().trim();
+                Category category = SelectCategory();
+
+                daos.getProductDAO().create(new Product(nom, description, tarif, visuel, category));
+                System.out.println("Le produit a bien été crée");
+            } else
+                System.out.println("Vous ne pouvez pas créer de produit s'il n'existe pas de catégorie");
 
         } catch (Exception e) {
             System.out.println("Exception: " + e);

@@ -150,7 +150,7 @@ public class ClientView {
     }
 
     private static void editClientMenu(Client cl) {
-        System.out.println("\n-- Modification client numéro " + cl.getId() + "-- " + _persistance
+        System.out.println("\n-- Modification client numéro " + cl.getId() + " -- " + _persistance
                 + "\nLaisser la chaine vide ne modifiera pas la valeur");
         try {
             System.out.print("Nom : ");

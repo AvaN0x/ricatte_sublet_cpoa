@@ -20,6 +20,23 @@ public class MySQLCommandLineDAO extends MySQLDAO implements CommandLineDAO {
     private static MySQLCommandLineDAO instance;
 
     @Override
+    public CommandLine getByProductCommandId(int prodId, int comId) throws SQLException, IOException {
+        Connection con = startConnection();
+        PreparedStatement query = con
+                .prepareStatement("SELECT * FROM ligne_commande WHERE id_commande=? AND id_produit=? LIMIT 1");
+        query.setInt(1, comId);
+        query.setInt(2, prodId);
+        ResultSet lineRes = query.executeQuery();
+
+        CommandLine line = null;
+        while (lineRes.next())
+            line = new CommandLine(MySQLCommandDAO.getInstance().getById(lineRes.getInt("id_commande")),
+                    lineRes.getInt("quantite"), lineRes.getFloat("tarif_unitaire"));
+        con.close();
+        return line;
+    }
+
+    @Override
     public ArrayList<CommandLine> getByCommandId(int id) throws SQLException, IOException {
         Connection con = startConnection();
         PreparedStatement query = con.prepareStatement("SELECT * FROM ligne_commande WHERE id_commande=?");
@@ -98,7 +115,7 @@ public class MySQLCommandLineDAO extends MySQLDAO implements CommandLineDAO {
         ArrayList<CommandLine> line = new ArrayList<CommandLine>();
         while (lineRes.next())
             line.add(new CommandLine(MySQLCommandDAO.getInstance().getById(lineRes.getInt("id_commande")),
-                    lineRes.getInt("quantite"), lineRes.getFloat("raif_unitaire")));
+                    lineRes.getInt("quantite"), lineRes.getFloat("tarif_unitaire")));
         con.close();
         return line;
     }

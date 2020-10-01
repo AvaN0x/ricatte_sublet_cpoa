@@ -46,7 +46,7 @@ public class MySQLCommandLineDAO extends MySQLDAO implements CommandLineDAO {
         ArrayList<CommandLine> line = new ArrayList<CommandLine>();
         while (lineRes.next())
             line.add(new CommandLine(MySQLCommandDAO.getInstance().getById(lineRes.getInt("id_commande")),
-                    lineRes.getInt("quantite"), lineRes.getFloat("raif_unitaire")));
+                    lineRes.getInt("quantite"), lineRes.getFloat("tarif_unitaire")));
         con.close();
         return line;
     }
@@ -61,7 +61,7 @@ public class MySQLCommandLineDAO extends MySQLDAO implements CommandLineDAO {
         ArrayList<CommandLine> line = new ArrayList<CommandLine>();
         while (lineRes.next())
             line.add(new CommandLine(MySQLCommandDAO.getInstance().getById(lineRes.getInt("id_commande")),
-                    lineRes.getInt("quantite"), lineRes.getFloat("raif_unitaire")));
+                    lineRes.getInt("quantite"), lineRes.getFloat("tarif_unitaire")));
         con.close();
         return line;
     }

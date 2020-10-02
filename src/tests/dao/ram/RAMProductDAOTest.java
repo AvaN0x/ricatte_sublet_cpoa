@@ -53,5 +53,12 @@ public class RAMProductDAOTest {
         assertNotNull(RAMProductDAO.getInstance().getByName(prod.getNom()));
     }
 
+    @Test
+    public void testGetByTitleError() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            RAMProductDAO.getInstance().getByName("ThisNameDoesNotExist");
+        });
+    }
+
     // TODO getByCategory
 }

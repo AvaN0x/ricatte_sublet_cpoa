@@ -10,32 +10,39 @@ public class RAMCategoryDAOTest {
 
     @Test
     public void testSelectExist() {
-        Category cli = new Category(0);
-        RAMCategoryDAO.getInstance().create(cli);
-        assertNotNull(RAMCategoryDAO.getInstance().getById(cli.getId()));
+        Category categ = new Category(0);
+        RAMCategoryDAO.getInstance().create(categ);
+        assertNotNull(RAMCategoryDAO.getInstance().getById(categ.getId()));
     }
 
     @Test
     public void testUpdate() {
-        Category cli = new Category(0);
-        RAMCategoryDAO.getInstance().create(cli);
-        cli.setTitle("title");
-        RAMCategoryDAO.getInstance().update(cli);
-        assertEquals(RAMCategoryDAO.getInstance().getById(cli.getId()).getTitle(), "title");
+        Category categ = new Category(0);
+        RAMCategoryDAO.getInstance().create(categ);
+        categ.setTitle("title");
+        RAMCategoryDAO.getInstance().update(categ);
+        assertEquals(RAMCategoryDAO.getInstance().getById(categ.getId()).getTitle(), "title");
     }
 
     @Test
     public void testDelete() {
-        Category cli = new Category(0);
-        RAMCategoryDAO.getInstance().create(cli);
-        assertTrue(RAMCategoryDAO.getInstance().delete(cli));
+        Category categ = new Category(0);
+        RAMCategoryDAO.getInstance().create(categ);
+        assertTrue(RAMCategoryDAO.getInstance().delete(categ));
     }
 
     @Test
     public void testGetAll() {
-        Category cli = new Category(0);
-        RAMCategoryDAO.getInstance().create(cli);
+        Category categ = new Category(0);
+        RAMCategoryDAO.getInstance().create(categ);
         assertFalse(RAMCategoryDAO.getInstance().getAll().isEmpty());
+    }
+
+    @Test
+    public void testGetByTitle() {
+        Category categ = new Category(0, "MyTestingCategoryName", "");
+        RAMCategoryDAO.getInstance().create(categ);
+        assertNotNull(RAMCategoryDAO.getInstance().getByTitle(categ.getTitle()));
     }
 
 }

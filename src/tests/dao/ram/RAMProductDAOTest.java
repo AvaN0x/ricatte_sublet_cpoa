@@ -69,5 +69,21 @@ public class RAMProductDAOTest {
         });
     }
 
-    // TODO getByCategory
+    // @Test
+    // public void testGetByCategory() {
+    // Category categ = new Category(-1);
+    // Product prod = new Product(-1, "MyTestingProductName", "", (float) 0.0, "",
+    // categ);
+    // RAMProductDAO.getInstance().create(prod);
+    // assertFalse(RAMProductDAO.getInstance().getByCategory(categ).isEmpty());
+    // RAMProductDAO.getInstance().delete(prod);
+    // }
+
+    // @Test
+    // public void testGetByCategoryError() {
+    // assertThrows(IllegalArgumentException.class, () -> {
+    // RAMProductDAO.getInstance().getByCategory(new Category(-1));
+    // });
+    // }
+
 }

@@ -1,8 +1,11 @@
 # Avan0x icons
 desktop.ini
 
+# Security duh
+creditentials.xaml
+
 # Java debug files
-lib/*.jar
+lib/
 .settings
 
 #VS Code files

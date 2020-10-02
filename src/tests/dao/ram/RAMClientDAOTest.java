@@ -2,6 +2,9 @@ package tests.dao.ram;
 
 import models.*;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.IllegalFormatException;
+
 import org.junit.jupiter.api.Test;
 
 import dao.ram.RAMClientDAO;
@@ -25,10 +28,18 @@ public class RAMClientDAOTest {
     }
 
     @Test
-    public void testDelete() {
+    public void testDeleteWork() {
         Client cli = new Client(0);
         RAMClientDAO.getInstance().create(cli);
         assertTrue(RAMClientDAO.getInstance().delete(cli));
+    }
+
+    @Test
+    public void testDeleteError() {
+        Client cli = new Client(-1);
+        assertThrows(IllegalArgumentException.class, () -> {
+            RAMClientDAO.getInstance().delete(cli);
+        });
     }
 
     @Test

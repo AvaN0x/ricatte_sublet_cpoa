@@ -25,10 +25,18 @@ public class RAMCategoryDAOTest {
     }
 
     @Test
-    public void testDelete() {
+    public void testDeleteWork() {
         Category categ = new Category(0);
         RAMCategoryDAO.getInstance().create(categ);
         assertTrue(RAMCategoryDAO.getInstance().delete(categ));
+    }
+
+    @Test
+    public void testDeleteError() {
+        Category categ = new Category(-1);
+        assertThrows(IllegalArgumentException.class, () -> {
+            RAMCategoryDAO.getInstance().delete(categ);
+        });
     }
 
     @Test

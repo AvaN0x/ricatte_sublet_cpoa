@@ -3,8 +3,6 @@ package tests.dao.ram;
 import models.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.IllegalFormatException;
-
 import org.junit.jupiter.api.Test;
 
 import dao.ram.RAMClientDAO;

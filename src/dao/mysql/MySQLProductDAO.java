@@ -3,6 +3,7 @@ package dao.mysql;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -39,13 +40,19 @@ public class MySQLProductDAO extends MySQLDAO implements ProductDAO {
     public boolean create(Product prod) throws SQLException {
         Connection con = startConnection();
         PreparedStatement update = con.prepareStatement(
-                "INSERT INTO produit(nom, description, tarif, visuel, id_categorie) VALUES (?, ?, ?, ?, ?)");
+                "INSERT INTO produit(nom, description, tarif, visuel, id_categorie) VALUES (?, ?, ?, ?, ?)",
+                Statement.RETURN_GENERATED_KEYS);
         update.setString(1, prod.getNom());
         update.setString(2, prod.getDescription());
         update.setFloat(3, prod.getTarif());
         update.setString(4, prod.getVisuel());
         update.setInt(5, prod.getCategory().getId());
         int result = update.executeUpdate();
+
+        var keys = update.getGeneratedKeys();
+        while (keys.next())
+            prod.setId(keys.getInt(1));
+
         con.close();
         return result >= 1;
     }
@@ -79,7 +86,7 @@ public class MySQLProductDAO extends MySQLDAO implements ProductDAO {
     @Override
     public Product getByName(String name) throws SQLException, IOException {
         Connection con = startConnection();
-        PreparedStatement query = con.prepareStatement("SELECT id_produit FROM produit WHERE name=? LIMIT 1");
+        PreparedStatement query = con.prepareStatement("SELECT id_produit FROM produit WHERE nom=? LIMIT 1");
         query.setString(1, name);
         ResultSet prodRes = query.executeQuery();
 

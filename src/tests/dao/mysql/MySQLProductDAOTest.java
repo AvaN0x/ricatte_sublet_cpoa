@@ -17,8 +17,8 @@ public class MySQLProductDAOTest {
     @BeforeEach
     public void setUp() throws Exception {
         this.daos = dao.DAOFactory.getDAOFactory(dao.Persistance.MYSQL);
-        var items = daos.getProductDAO().getAll();
         daos.getProductDAO().create(new Product("Test", "JUnit product", 0, "junit.png", new models.Category(0)));
+        var items = daos.getProductDAO().getAll();
         this.prod_id = items.get(items.size() - 1).getId();
     }
 
@@ -62,32 +62,24 @@ public class MySQLProductDAOTest {
     @Test
     @Order(5)
     public void testGetByName() throws Exception {
-        this.daos = dao.DAOFactory.getDAOFactory(dao.Persistance.MYSQL);
         assertNotNull(daos.getProductDAO().getByName("Test"));
     }
 
     @Test
     @Order(6)
     public void testGetByCategory() throws Exception {
-        this.daos = dao.DAOFactory.getDAOFactory(dao.Persistance.MYSQL);
-        var prods = daos.getProductDAO().getByCategory(new models.Category(0));
-        if (prods.size() < 1)
-            fail("getByCategory is empty");
+        assertFalse(daos.getProductDAO().getByCategory(new models.Category(0)).isEmpty());
     }
 
     @Test
     @Order(7)
     public void testGetAll() throws Exception {
-        this.daos = dao.DAOFactory.getDAOFactory(dao.Persistance.MYSQL);
-        var prods = daos.getProductDAO().getAll();
-        if (prods.size() < 1)
-            fail("getAll is empty");
+        assertFalse(daos.getProductDAO().getAll().isEmpty());
     }
 
     @Test
     @Order(1)
     public void testGetInstance() throws Exception {
-        this.daos = dao.DAOFactory.getDAOFactory(dao.Persistance.MYSQL);
         assertEquals(dao.mysql.MySQLProductDAO.class, daos.getProductDAO().getClass());
     }
 }

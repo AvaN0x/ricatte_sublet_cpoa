@@ -13,6 +13,7 @@ public class RAMProductDAOTest {
         Product prod = new Product(0);
         RAMProductDAO.getInstance().create(prod);
         assertNotNull(RAMProductDAO.getInstance().getById(prod.getId()));
+        RAMProductDAO.getInstance().delete(prod);
     }
 
     @Test
@@ -22,6 +23,7 @@ public class RAMProductDAOTest {
         prod.setNom("nom");
         RAMProductDAO.getInstance().update(prod);
         assertEquals(RAMProductDAO.getInstance().getById(prod.getId()).getNom(), "nom");
+        RAMProductDAO.getInstance().delete(prod);
     }
 
     @Test
@@ -40,10 +42,16 @@ public class RAMProductDAOTest {
     }
 
     @Test
-    public void testGetAll() {
+    public void testGetAllNotEmpty() {
+        assertTrue(RAMProductDAO.getInstance().getAll().isEmpty());
+    }
+
+    @Test
+    public void testGetAllEmpty() {
         Product prod = new Product(0);
         RAMProductDAO.getInstance().create(prod);
         assertFalse(RAMProductDAO.getInstance().getAll().isEmpty());
+        RAMProductDAO.getInstance().delete(prod);
     }
 
     @Test
@@ -51,6 +59,7 @@ public class RAMProductDAOTest {
         Product prod = new Product(0, "MyTestingProductName", "", (float) 0.0, "", new Category(0));
         RAMProductDAO.getInstance().create(prod);
         assertNotNull(RAMProductDAO.getInstance().getByName(prod.getNom()));
+        RAMProductDAO.getInstance().delete(prod);
     }
 
     @Test

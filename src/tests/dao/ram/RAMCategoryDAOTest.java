@@ -13,6 +13,7 @@ public class RAMCategoryDAOTest {
         Category categ = new Category(0);
         RAMCategoryDAO.getInstance().create(categ);
         assertNotNull(RAMCategoryDAO.getInstance().getById(categ.getId()));
+        RAMCategoryDAO.getInstance().delete(categ);
     }
 
     @Test
@@ -22,6 +23,7 @@ public class RAMCategoryDAOTest {
         categ.setTitle("title");
         RAMCategoryDAO.getInstance().update(categ);
         assertEquals(RAMCategoryDAO.getInstance().getById(categ.getId()).getTitle(), "title");
+        RAMCategoryDAO.getInstance().delete(categ);
     }
 
     @Test
@@ -40,10 +42,16 @@ public class RAMCategoryDAOTest {
     }
 
     @Test
-    public void testGetAll() {
+    public void testGetAllNotEmpty() {
+        assertTrue(RAMCategoryDAO.getInstance().getAll().isEmpty());
+    }
+
+    @Test
+    public void testGetAllEmpty() {
         Category categ = new Category(0);
         RAMCategoryDAO.getInstance().create(categ);
         assertFalse(RAMCategoryDAO.getInstance().getAll().isEmpty());
+        RAMCategoryDAO.getInstance().delete(categ);
     }
 
     @Test
@@ -51,6 +59,7 @@ public class RAMCategoryDAOTest {
         Category categ = new Category(0, "MyTestingCategoryTitle", "");
         RAMCategoryDAO.getInstance().create(categ);
         assertNotNull(RAMCategoryDAO.getInstance().getByTitle(categ.getTitle()));
+        RAMCategoryDAO.getInstance().delete(categ);
     }
 
     @Test

@@ -14,6 +14,7 @@ public class RAMClientDAOTest {
         Client cli = new Client(0);
         RAMClientDAO.getInstance().create(cli);
         assertNotNull(RAMClientDAO.getInstance().getById(cli.getId()));
+        RAMClientDAO.getInstance().delete(cli);
     }
 
     @Test
@@ -23,6 +24,7 @@ public class RAMClientDAOTest {
         cli.setNom("nom");
         RAMClientDAO.getInstance().update(cli);
         assertEquals(RAMClientDAO.getInstance().getById(cli.getId()).getNom(), "nom");
+        RAMClientDAO.getInstance().delete(cli);
     }
 
     @Test
@@ -41,10 +43,16 @@ public class RAMClientDAOTest {
     }
 
     @Test
-    public void testGetAll() {
+    public void testGetAllNotEmpty() {
+        assertTrue(RAMClientDAO.getInstance().getAll().isEmpty());
+    }
+
+    @Test
+    public void testGetAllEmpty() {
         Client cli = new Client(0);
         RAMClientDAO.getInstance().create(cli);
         assertFalse(RAMClientDAO.getInstance().getAll().isEmpty());
+        RAMClientDAO.getInstance().delete(cli);
     }
 
 }

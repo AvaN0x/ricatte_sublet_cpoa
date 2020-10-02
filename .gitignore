@@ -1,8 +1,8 @@
-# Avan0x icons
+  # AvaN0x icons
 desktop.ini
 
 # Security duh
-creditentials.xaml
+config/creditentials.properties
 
 # Java debug files
 lib/
@@ -11,3 +11,6 @@ lib/
 #VS Code files
 .vscode
 vscode.code-workspace
+
+#Log files
+*.log

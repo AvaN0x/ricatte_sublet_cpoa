@@ -1,4 +1,4 @@
-package tests.dao.RAM;
+package tests.dao.ram;
 
 import models.*;
 import static org.junit.jupiter.api.Assertions.*;

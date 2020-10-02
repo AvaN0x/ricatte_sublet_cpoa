@@ -1,4 +1,4 @@
-package dao.RAM;
+package dao.ram;
 
 import java.util.ArrayList;
 

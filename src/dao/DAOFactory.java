@@ -5,10 +5,10 @@ public abstract class DAOFactory {
         DAOFactory daoF = null;
         switch (target) {
             case MYSQL:
-                daoF = new dao.MySQL.MySQLDAOFactory();
+                daoF = new dao.mysql.MySQLDAOFactory();
                 break;
             case RAM:
-                daoF = new dao.RAM.RAMDAOFactory();
+                daoF = new dao.ram.RAMDAOFactory();
                 break;
         }
         return daoF;

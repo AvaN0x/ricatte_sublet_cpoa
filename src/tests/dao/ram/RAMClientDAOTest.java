@@ -4,7 +4,7 @@ import models.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import dao.RAM.RAMClientDAO;
+import dao.ram.RAMClientDAO;
 
 public class RAMClientDAOTest {
 

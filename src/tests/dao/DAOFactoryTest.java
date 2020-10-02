@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import dao.MySQL.*;
-import dao.RAM.*;
+import dao.mysql.*;
+import dao.ram.*;
 
 public class DAOFactoryTest {
 

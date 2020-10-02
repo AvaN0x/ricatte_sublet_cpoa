@@ -1,4 +1,4 @@
-package dao.MySQL;
+package dao.mysql;
 
 import java.io.IOException;
 

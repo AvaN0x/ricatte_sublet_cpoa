@@ -48,9 +48,16 @@ public class RAMCategoryDAOTest {
 
     @Test
     public void testGetByTitle() {
-        Category categ = new Category(0, "MyTestingCategoryName", "");
+        Category categ = new Category(0, "MyTestingCategoryTitle", "");
         RAMCategoryDAO.getInstance().create(categ);
         assertNotNull(RAMCategoryDAO.getInstance().getByTitle(categ.getTitle()));
+    }
+
+    @Test
+    public void testGetByTitleError() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            RAMCategoryDAO.getInstance().getByTitle("ThisTitleDoesNotExist");
+        });
     }
 
 }

@@ -31,4 +31,11 @@ public class RAMClientDAOTest {
         assertTrue(RAMClientDAO.getInstance().delete(cli));
     }
 
+    @Test
+    public void testGetAll() {
+        Client cli = new Client(0);
+        RAMClientDAO.getInstance().create(cli);
+        assertFalse(RAMClientDAO.getInstance().getAll().isEmpty());
+    }
+
 }

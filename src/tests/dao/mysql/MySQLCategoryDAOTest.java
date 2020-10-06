@@ -49,7 +49,7 @@ public class MySQLCategoryDAOTest {
     }
 
     @Test
-    @Order(6)
+    @Order(7)
     public void testDelete() throws Exception {
         var cat = new Category("JUnitTest", "junit.png");
         daos.getCategoryDAO().create(cat);
@@ -59,6 +59,12 @@ public class MySQLCategoryDAOTest {
 
     @Test
     @Order(5)
+    public void testGetByName() throws Exception {
+        assertNotNull(daos.getCategoryDAO().getByTitle("JUnitTest"));
+    }
+
+    @Test
+    @Order(6)
     public void testGetAll() throws Exception {
         assertFalse(daos.getCategoryDAO().getAll().isEmpty());
     }

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Order;
 
 import models.Client;
 
-public class MySQLClientDAO {
+public class MySQLClientDAOTest {
 
     private dao.DAOFactory daos;
     private int client_id;
@@ -37,11 +37,11 @@ public class MySQLClientDAO {
     @Test
     @Order(2)
     public void testCreate() throws Exception {
-        var com = new Client("JUnit-Test", "MyClient", "id", "mymdp", 0, "avenue du g de gaulle", 57000, "Metz",
+        var cli = new Client("JUnit-Test", "MyClient", "id", "mymdp", 0, "avenue du g de gaulle", 57000, "Metz",
                 "France");
-        daos.getClientDAO().create(com);
+        daos.getClientDAO().create(cli);
         assertNotNull(daos.getClientDAO().getById(client_id));
-        daos.getClientDAO().delete(com);
+        daos.getClientDAO().delete(cli);
     }
 
     @Test
@@ -55,11 +55,11 @@ public class MySQLClientDAO {
     @Test
     @Order(6)
     public void testDelete() throws Exception {
-        var com = new Client("JUnit-Test", "MyClient", "id", "mymdp", 0, "avenue du g de gaulle", 57000, "Metz",
+        var cli = new Client("JUnit-Test", "MyClient", "id", "mymdp", 0, "avenue du g de gaulle", 57000, "Metz",
                 "France");
-        daos.getClientDAO().create(com);
-        daos.getClientDAO().delete(com);
-        assertNull(daos.getClientDAO().getById(com.getId()));
+        daos.getClientDAO().create(cli);
+        daos.getClientDAO().delete(cli);
+        assertNull(daos.getClientDAO().getById(cli.getId()));
     }
 
     @Test

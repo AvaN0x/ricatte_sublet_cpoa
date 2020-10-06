@@ -67,7 +67,7 @@ public class RAMProductDAO implements ProductDAO {
         for (Product prod : data)
             if (prod.getCategory().equals(categ))
                 prods.add(prod);
-        if (prods.size() > 1)
+        if (prods.size() > 0)
             return prods;
         throw new IllegalArgumentException("No product have this category");
     }

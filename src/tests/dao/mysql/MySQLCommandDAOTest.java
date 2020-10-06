@@ -48,7 +48,7 @@ public class MySQLCommandDAOTest {
     public void testUpdate() throws Exception {
         var date = LocalDate.now();
         daos.getCommandDAO()
-                .update(new Command(date, new models.Client(0)););
+                .update(new Command(date, new models.Client(0)));
         assertEquals(date, daos.getCommandDAO().getById(com_id).getDateCommand());
     }
 

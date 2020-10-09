@@ -16,15 +16,15 @@ import models.Product;
 
 public class ProductController implements Initializable {
     @FXML
-    private TextField tf_nom;
+    private TextField tfNom;
     @FXML
-    private TextArea ta_description;
+    private TextArea taDescription;
     @FXML
-    private TextField tf_tarif;
+    private TextField tfTarif;
     @FXML
-    private Label lbl_result;
+    private Label lblResult;
     @FXML
-    private ChoiceBox<models.Category> cb_categorie;
+    private ChoiceBox<models.Category> cbCategorie;
 
     private DAOFactory daos;
 
@@ -33,33 +33,33 @@ public class ProductController implements Initializable {
         try {
             daos = DAOFactory.getDAOFactory(Persistance.MYSQL);
             var list = daos.getCategoryDAO().getAll();
-            this.cb_categorie.setItems(FXCollections.observableArrayList(list));
+            this.cbCategorie.setItems(FXCollections.observableArrayList(list));
         } catch (Exception e) {
-            lbl_result.setText(e.getMessage());
-            lbl_result.getStyleClass().add("exception");
+            lblResult.setText(e.getMessage());
+            lblResult.getStyleClass().add("exception");
         }
     }
 
     public void createClick() {
         try {
-            var prod = new Product(tf_nom.getText(), ta_description.getText(), Float.parseFloat(tf_tarif.getText()),
-                    "null", cb_categorie.getValue());
+            var prod = new Product(tfNom.getText(), taDescription.getText(), Float.parseFloat(tfTarif.getText()),
+                    "null", cbCategorie.getValue());
 
-            tf_nom.setText("");
-            ta_description.setText("");
-            tf_tarif.setText("");
-            cb_categorie.setValue(null);
+            tfNom.setText("");
+            taDescription.setText("");
+            tfTarif.setText("");
+            cbCategorie.setValue(null);
 
-            lbl_result.getStyleClass().remove("exception");
-            lbl_result.setText(prod.toString());
+            lblResult.getStyleClass().remove("exception");
+            lblResult.setText(prod.toString());
 
             daos.getProductDAO().create(prod);
 
         } catch (Exception e) {
-            lbl_result.setText(e.getClass().getSimpleName() + " : " + e.getMessage());
-            if (tf_tarif.getText().trim().isEmpty())
-                lbl_result.setText("\"Tarif\" must be specified");
-            lbl_result.getStyleClass().add("exception");
+            lblResult.setText(e.getClass().getSimpleName() + " : " + e.getMessage());
+            if (tfTarif.getText().trim().isEmpty())
+                lblResult.setText("\"Tarif\" must be specified");
+            lblResult.getStyleClass().add("exception");
         }
     }
 }

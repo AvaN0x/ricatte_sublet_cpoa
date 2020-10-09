@@ -56,7 +56,9 @@ public class ProductController implements Initializable {
             daos.getProductDAO().create(prod);
 
         } catch (Exception e) {
-            lbl_result.setText(e.getMessage());
+            lbl_result.setText(e.getClass().getSimpleName() + " : " + e.getMessage());
+            if (tf_tarif.getText().trim().isEmpty())
+                lbl_result.setText("\"Tarif\" must be specified");
             lbl_result.getStyleClass().add("exception");
         }
     }

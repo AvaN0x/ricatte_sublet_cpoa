@@ -1,4 +1,5 @@
 .exception {
     -fx-text-fill: #FF0000;
     -fx-font-weight: bold;
+    font-weight: bold;
 }

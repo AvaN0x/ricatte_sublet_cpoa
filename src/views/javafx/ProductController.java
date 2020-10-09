@@ -50,11 +50,16 @@ public class ProductController implements Initializable {
             var categs = daos.getCategoryDAO().getAll();
             this.cbCategorie.setItems(FXCollections.observableArrayList(categs));
 
-            colNom.setCellValueFactory(new PropertyValueFactory<>("_nom"));
-            colDescription.setCellValueFactory(new PropertyValueFactory<>("_description"));
-            colTarif.setCellValueFactory(new PropertyValueFactory<>("_tarif"));
-            colCategorie.setCellValueFactory(new PropertyValueFactory<>("_category"));
+            colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+            colTarif.setCellValueFactory(new PropertyValueFactory<>("tarif"));
+            colCategorie.setCellValueFactory(new PropertyValueFactory<>("category"));
 
+            // Set Sort type for userName column
+            colNom.setSortType(TableColumn.SortType.DESCENDING);
+            colDescription.setSortable(false);
+
+            updateProductTable();
         } catch (Exception e) {
             lblResult.setText(e.getMessage());
             lblResult.getStyleClass().add("exception");

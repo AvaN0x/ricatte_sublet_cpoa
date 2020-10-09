@@ -185,7 +185,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return getNom() + " " + getPrenom();
+        return getNom() + " " + getPrenom() + " (" + getIdentifiant() + "), " + getAdrPays();
     }
 
 }

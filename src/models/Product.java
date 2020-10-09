@@ -122,7 +122,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return getNom();
+        return getNom() + " (" + getCategory() + "), " + getTarif();
     }
 
 }

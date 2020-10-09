@@ -1,12 +1,17 @@
 package views.javafx;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,6 +30,16 @@ public class ProductController implements Initializable {
     private Label lblResult;
     @FXML
     private ChoiceBox<models.Category> cbCategorie;
+    @FXML
+    private TableView<Product> tvProduits;
+    @FXML
+    private TableColumn<Product, String> colNom;
+    @FXML
+    private TableColumn<Product, String> colDescription;
+    @FXML
+    private TableColumn<Product, Float> colTarif;
+    @FXML
+    private TableColumn<Product, String> colCategorie;
 
     private DAOFactory daos;
 
@@ -32,12 +47,22 @@ public class ProductController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             daos = DAOFactory.getDAOFactory(Persistance.MYSQL);
-            var list = daos.getCategoryDAO().getAll();
-            this.cbCategorie.setItems(FXCollections.observableArrayList(list));
+            var categs = daos.getCategoryDAO().getAll();
+            this.cbCategorie.setItems(FXCollections.observableArrayList(categs));
+
+            colNom.setCellValueFactory(new PropertyValueFactory<>("_nom"));
+            colDescription.setCellValueFactory(new PropertyValueFactory<>("_description"));
+            colTarif.setCellValueFactory(new PropertyValueFactory<>("_tarif"));
+            colCategorie.setCellValueFactory(new PropertyValueFactory<>("_category"));
+
         } catch (Exception e) {
             lblResult.setText(e.getMessage());
             lblResult.getStyleClass().add("exception");
         }
+    }
+
+    public void updateProductTable() throws Exception {
+        tvProduits.setItems(FXCollections.observableArrayList(daos.getProductDAO().getAll()));
     }
 
     public void createClick() {
@@ -55,6 +80,7 @@ public class ProductController implements Initializable {
 
             daos.getProductDAO().create(prod);
 
+            updateProductTable();
         } catch (Exception e) {
             lblResult.setText(e.getClass().getSimpleName() + " : " + e.getMessage());
             if (tfTarif.getText().trim().isEmpty())

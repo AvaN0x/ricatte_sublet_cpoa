@@ -55,7 +55,6 @@ public class ProductController implements Initializable {
             colTarif.setCellValueFactory(new PropertyValueFactory<>("tarif"));
             colCategorie.setCellValueFactory(new PropertyValueFactory<>("category"));
 
-            // Set Sort type for userName column
             colNom.setSortType(TableColumn.SortType.DESCENDING);
             colDescription.setSortable(false);
 

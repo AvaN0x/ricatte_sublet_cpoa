@@ -8,21 +8,25 @@ public class Category {
     private String _visuel;
 
     public Category(int id, String title, String visuel) {
+        if (id < 0)
+            throw new IllegalArgumentException("id can't be a negative");
         this._id = id;
+
+        if (title == null || title.trim().isEmpty())
+            throw new IllegalArgumentException("title can't be empty or null");
         this._title = title;
+
+        if (visuel == null || visuel.trim().isEmpty())
+            throw new IllegalArgumentException("visuel can't be empty or null");
         this._visuel = visuel;
     }
 
     public Category(String title, String visuel) {
-        this._id = 0;
-        this._title = title;
-        this._visuel = visuel;
+        this(0, title, visuel);
     }
 
     public Category(int id) {
-        this._id = id;
-        this._title = "";
-        this._visuel = "";
+        this(id, "", "");
     }
 
     public int getId() {
@@ -30,6 +34,8 @@ public class Category {
     }
 
     public void setId(int id) {
+        if (id < 0)
+            throw new IllegalArgumentException("id can't be a negative");
         this._id = id;
     }
 
@@ -38,6 +44,8 @@ public class Category {
     }
 
     public void setTitle(String title) {
+        if (title == null || title.trim().isEmpty())
+            throw new IllegalArgumentException("title can't be empty or null");
         this._title = title;
     }
 
@@ -46,6 +54,8 @@ public class Category {
     }
 
     public void setVisuel(String visuel) {
+        if (visuel == null || visuel.trim().isEmpty())
+            throw new IllegalArgumentException("visuel can't be empty or null");
         this._visuel = visuel;
     }
 

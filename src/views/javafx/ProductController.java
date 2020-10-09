@@ -31,7 +31,7 @@ public class ProductController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            daos = DAOFactory.getDAOFactory(Persistance.RAM);
+            daos = DAOFactory.getDAOFactory(Persistance.MYSQL);
             var list = daos.getCategoryDAO().getAll();
             this.cb_categorie.setItems(FXCollections.observableArrayList(list));
         } catch (Exception e) {

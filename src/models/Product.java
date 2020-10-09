@@ -17,11 +17,11 @@ public class Product {
 
         if (nom == null || nom.trim().isEmpty())
             throw new IllegalArgumentException("nom can't be empty or null");
-        this._nom = nom;
+        this._nom = nom.trim();
 
         if (description == null || description.trim().isEmpty())
             throw new IllegalArgumentException("description can't be empty or null");
-        this._description = description;
+        this._description = description.trim();
 
         if (tarif <= 0)
             throw new IllegalArgumentException("tarif can't be a negative or null");
@@ -29,7 +29,7 @@ public class Product {
 
         if (visuel == null || visuel.trim().isEmpty())
             throw new IllegalArgumentException("description can't be empty or null");
-        this._visuel = visuel;
+        this._visuel = visuel.trim();
 
         if (category == null)
             throw new IllegalArgumentException("category can't be null");

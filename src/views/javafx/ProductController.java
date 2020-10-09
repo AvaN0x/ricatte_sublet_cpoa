@@ -43,7 +43,14 @@ public class ProductController implements Initializable {
         try {
             var prod = new Product(tf_nom.getText(), ta_description.getText(), Float.parseFloat(tf_tarif.getText()),
                     "null", cb_categorie.getValue());
+
             daos.getProductDAO().create(prod);
+
+            tf_nom.setText("");
+            ta_description.setText("");
+            tf_tarif.setText("");
+            cb_categorie.setValue(null);
+
             lbl_result.setText(prod.toString());
 
         } catch (Exception e) {

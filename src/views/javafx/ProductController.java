@@ -45,8 +45,6 @@ public class ProductController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             daos = DAOFactory.getDAOFactory(Persistance.MYSQL);
-            var categs = daos.getCategoryDAO().getAll();
-            this.cbCategorie.setItems(FXCollections.observableArrayList(categs));
 
             colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -65,6 +63,10 @@ public class ProductController implements Initializable {
 
     public void updateProductTable() throws Exception {
         tvProduits.setItems(FXCollections.observableArrayList(daos.getProductDAO().getAll()));
+    }
+
+    public void updateCategsBox() throws Exception {
+        this.cbCategorie.setItems(FXCollections.observableArrayList(daos.getCategoryDAO().getAll()));
     }
 
     public void createClick() {

@@ -1,4 +1,4 @@
-package views;
+package views.cli;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

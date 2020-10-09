@@ -11,30 +11,37 @@ public class Product {
     private Category _category;
 
     public Product(int id, String nom, String description, float tarif, String visuel, Category category) {
+        if (id < 0)
+            throw new IllegalArgumentException("id can't be a negative");
         this._id = id;
+
+        if (nom == null || nom.trim().isEmpty())
+            throw new IllegalArgumentException("nom can't be empty or null");
         this._nom = nom;
+
+        if (description == null || description.trim().isEmpty())
+            throw new IllegalArgumentException("description can't be empty or null");
         this._description = description;
+
+        if (tarif <= 0)
+            throw new IllegalArgumentException("tarif can't be a negative or null");
         this._tarif = tarif;
+
+        if (visuel == null || visuel.trim().isEmpty())
+            throw new IllegalArgumentException("description can't be empty or null");
         this._visuel = visuel;
+
+        if (category == null)
+            throw new IllegalArgumentException("category can't be null");
         this._category = category;
     }
 
     public Product(String nom, String description, float tarif, String visuel, Category category) {
-        this._id = 0;
-        this._nom = nom;
-        this._description = description;
-        this._tarif = tarif;
-        this._visuel = visuel;
-        this._category = category;
+        this(0, nom, description, tarif, visuel, category);
     }
 
     public Product(int id) {
-        this._id = id;
-        this._nom = "";
-        this._description = "";
-        this._tarif = 0;
-        this._visuel = "";
-        this._category = null;
+        this(id, "", "", 0, "", null);
     }
 
     public int getId() {
@@ -42,6 +49,8 @@ public class Product {
     }
 
     public void setId(int id) {
+        if (id < 0)
+            throw new IllegalArgumentException("id can't be a negative");
         this._id = id;
     }
 
@@ -50,6 +59,8 @@ public class Product {
     }
 
     public void setNom(String nom) {
+        if (nom == null || nom.trim().isEmpty())
+            throw new IllegalArgumentException("nom can't be empty or null");
         this._nom = nom;
     }
 
@@ -58,6 +69,8 @@ public class Product {
     }
 
     public void setDescription(String description) {
+        if (description == null || description.trim().isEmpty())
+            throw new IllegalArgumentException("description can't be empty or null");
         this._description = description;
     }
 
@@ -66,6 +79,8 @@ public class Product {
     }
 
     public void setTarif(float tarif) {
+        if (tarif <= 0)
+            throw new IllegalArgumentException("tarif can't be a negative or null");
         this._tarif = tarif;
     }
 
@@ -74,6 +89,8 @@ public class Product {
     }
 
     public void setVisuel(String visuel) {
+        if (visuel == null || visuel.trim().isEmpty())
+            throw new IllegalArgumentException("description can't be empty or null");
         this._visuel = visuel;
     }
 
@@ -82,6 +99,8 @@ public class Product {
     }
 
     public void setCategory(Category category) {
+        if (category == null)
+            throw new IllegalArgumentException("category can't be null");
         this._category = category;
     }
 

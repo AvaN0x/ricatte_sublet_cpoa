@@ -11,39 +11,38 @@ public class Command {
     private Client _client;
     private HashMap<Product, CommandLine> _commandLines; // HashMap<id_produit, commandLine>
 
-    public Command(int id, LocalDate date_command, Client client) {
+    public Command(int id, LocalDate date_command, Client client, HashMap<Product, CommandLine> commandLines) {
+        if (id < 0)
+            throw new IllegalArgumentException("id can't be a negative");
         this._id = id;
+
+        if (date_command == null)
+            throw new IllegalArgumentException("date_command can't be null");
         this._date_command = date_command;
+
+        if (client == null)
+            throw new IllegalArgumentException("client can't be null");
         this._client = client;
-        this._commandLines = new HashMap<Product, CommandLine>();
+
+        if (commandLines == null)
+            throw new IllegalArgumentException("commandLines can't be null");
+        this._commandLines = commandLines;
     }
 
-    public Command(int id, LocalDate date_command, Client client, HashMap<Product, CommandLine> commandLines) {
-        this._id = id;
-        this._date_command = date_command;
-        this._client = client;
-        this._commandLines = commandLines;
+    public Command(int id, LocalDate date_command, Client client) {
+        this(id, date_command, client, new HashMap<Product, CommandLine>());
     }
 
     public Command(LocalDate date_command, Client client, HashMap<Product, CommandLine> commandLines) {
-        this._id = 0;
-        this._date_command = date_command;
-        this._client = client;
-        this._commandLines = commandLines;
+        this(0, date_command, client, commandLines);
     }
 
     public Command(LocalDate date_command, Client client) {
-        this._id = 0;
-        this._date_command = date_command;
-        this._client = client;
-        this._commandLines = new HashMap<Product, CommandLine>();
+        this(0, date_command, client);
     }
 
     public Command(int id) {
-        this._id = id;
-        this._date_command = null;
-        this._client = null;
-        this._commandLines = null;
+        this(id, null, null, null);
     }
 
     public int getId() {
@@ -51,6 +50,8 @@ public class Command {
     }
 
     public void setId(int id) {
+        if (id < 0)
+            throw new IllegalArgumentException("id can't be a negative");
         this._id = id;
     }
 
@@ -59,6 +60,8 @@ public class Command {
     }
 
     public void setDateCommand(LocalDate date_command) {
+        if (date_command == null)
+            throw new IllegalArgumentException("date_command can't be null");
         this._date_command = date_command;
     }
 
@@ -67,6 +70,8 @@ public class Command {
     }
 
     public void setClient(Client client) {
+        if (client == null)
+            throw new IllegalArgumentException("client can't be null");
         this._client = client;
     }
 
@@ -75,6 +80,8 @@ public class Command {
     }
 
     public void setCommandLines(HashMap<Product, CommandLine> commandLines) {
+        if (commandLines == null)
+            throw new IllegalArgumentException("commandLines can't be null");
         this._commandLines = commandLines;
     }
 

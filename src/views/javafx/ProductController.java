@@ -31,7 +31,7 @@ public class ProductController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            daos = DAOFactory.getDAOFactory(Persistance.MYSQL);
+            daos = DAOFactory.getDAOFactory(Persistance.RAM);
             var list = daos.getCategoryDAO().getAll();
             this.cb_categorie.setItems(FXCollections.observableArrayList(list));
         } catch (Exception e) {
@@ -45,8 +45,6 @@ public class ProductController implements Initializable {
             var prod = new Product(tf_nom.getText(), ta_description.getText(), Float.parseFloat(tf_tarif.getText()),
                     "null", cb_categorie.getValue());
 
-            daos.getProductDAO().create(prod);
-
             tf_nom.setText("");
             ta_description.setText("");
             tf_tarif.setText("");
@@ -54,6 +52,8 @@ public class ProductController implements Initializable {
 
             lbl_result.getStyleClass().remove("exception");
             lbl_result.setText(prod.toString());
+
+            daos.getProductDAO().create(prod);
 
         } catch (Exception e) {
             lbl_result.setText(e.getMessage());

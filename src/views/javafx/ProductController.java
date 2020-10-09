@@ -8,6 +8,10 @@ public class ProductController {
     private Label lbl_result;
 
     public void createClick() {
-        lbl_result.setText("test");
+        try {
+            var categ = new models.Category("", "");
+        } catch (IllegalArgumentException e) {
+            lbl_result.setText(e.getMessage());
+        }
     }
 }

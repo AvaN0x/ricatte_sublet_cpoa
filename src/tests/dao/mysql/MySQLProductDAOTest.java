@@ -17,7 +17,7 @@ public class MySQLProductDAOTest {
     @BeforeEach
     public void setUp() throws Exception {
         this.daos = dao.DAOFactory.getDAOFactory(dao.Persistance.MYSQL);
-        daos.getProductDAO().create(new Product("Test", "JUnit product", 0, "junit.png", new models.Category(0)));
+        daos.getProductDAO().create(new Product("Test", "JUnit product", 8, "junit.png", new models.Category(0)));
         var items = daos.getProductDAO().getAll();
         this.prod_id = items.get(items.size() - 1).getId();
     }
@@ -36,7 +36,7 @@ public class MySQLProductDAOTest {
     @Test
     @Order(2)
     public void testCreate() throws Exception {
-        var prod = new Product("TestCre", "JUnit product", 0, "junit.png", new models.Category(0));
+        var prod = new Product("TestCre", "JUnit product", 8, "junit.png", new models.Category(0));
         daos.getProductDAO().create(prod);
         assertNotNull(daos.getProductDAO().getById(prod_id));
         daos.getProductDAO().delete(prod);
@@ -46,14 +46,14 @@ public class MySQLProductDAOTest {
     @Order(4)
     public void testUpdate() throws Exception {
         daos.getProductDAO()
-                .update(new Product(prod_id, "MyTest", "JUnit product", 0, "junit.png", new models.Category(0)));
+                .update(new Product(prod_id, "MyTest", "JUnit product", 8, "junit.png", new models.Category(0)));
         assertEquals("MyTest", daos.getProductDAO().getById(prod_id).getNom());
     }
 
     @Test
     @Order(8)
     public void testDelete() throws Exception {
-        var prod = new Product("TestDel", "JUnit product", 0, "junit.png", new models.Category(0));
+        var prod = new Product("TestDel", "JUnit product", 8, "junit.png", new models.Category(0));
         daos.getProductDAO().create(prod);
         daos.getProductDAO().delete(prod);
         assertNull(daos.getProductDAO().getById(prod.getId()));

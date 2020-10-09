@@ -42,7 +42,7 @@ public class Command {
     }
 
     public Command(int id) {
-        this(id, null, null, null);
+        this(id, LocalDate.now(), new Client(0));
     }
 
     public int getId() {

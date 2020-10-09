@@ -41,7 +41,7 @@ public class Product {
     }
 
     public Product(int id) {
-        this(id, "", "", 0, "", null);
+        this(id, "null", "null", 1, "null", new Category(0));
     }
 
     public int getId() {

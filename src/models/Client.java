@@ -63,7 +63,7 @@ public class Client {
     }
 
     public Client(int id) {
-        this(id, "", "", "", "", 0, "", 0, "", "");
+        this(id, "null", "null", "null", "null", 0, "null", 0, "null", "null");
     }
 
     public int getId() {

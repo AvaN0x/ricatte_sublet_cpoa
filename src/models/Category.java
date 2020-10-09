@@ -26,7 +26,7 @@ public class Category {
     }
 
     public Category(int id) {
-        this(id, "", "");
+        this(id, "null", "null");
     }
 
     public int getId() {

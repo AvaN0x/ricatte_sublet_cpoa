@@ -36,6 +36,7 @@ public class ProductController implements Initializable {
             this.cb_categorie.setItems(FXCollections.observableArrayList(list));
         } catch (Exception e) {
             lbl_result.setText(e.getMessage());
+            lbl_result.getStyleClass().add("exception");
         }
     }
 
@@ -51,10 +52,12 @@ public class ProductController implements Initializable {
             tf_tarif.setText("");
             cb_categorie.setValue(null);
 
+            lbl_result.getStyleClass().remove("exception");
             lbl_result.setText(prod.toString());
 
         } catch (Exception e) {
             lbl_result.setText(e.getMessage());
+            lbl_result.getStyleClass().add("exception");
         }
     }
 }

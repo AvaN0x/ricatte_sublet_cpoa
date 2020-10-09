@@ -21,39 +21,39 @@ public class Client {
         this._id = id;
 
         if (nom == null || nom.trim().isEmpty())
-            throw new IllegalArgumentException("nom can't be empty or null");
+            throw new IllegalArgumentException("\"Nom\" can't be empty or null");
         this._nom = nom;
 
         if (prenom == null || prenom.trim().isEmpty())
-            throw new IllegalArgumentException("prenom can't be empty or null");
+            throw new IllegalArgumentException("\"Prenom\" can't be empty or null");
         this._prenom = prenom;
 
         if (identifiant == null || identifiant.trim().isEmpty())
-            throw new IllegalArgumentException("identifiant can't be empty or null");
+            throw new IllegalArgumentException("\"Identifiant\" can't be empty or null");
         this._identifiant = identifiant;
 
         if (motDePasse == null || motDePasse.trim().isEmpty())
-            throw new IllegalArgumentException("motDePasse can't be empty or null");
+            throw new IllegalArgumentException("\"MotDePasse\" can't be empty or null");
         this._motDePasse = motDePasse;
 
         if (adrNumero < 0)
-            throw new IllegalArgumentException("adrNumero can't be a negative");
+            throw new IllegalArgumentException("\"Numero\" can't be a negative");
         this._adrNumero = adrNumero;
 
         if (adrVoie == null || adrVoie.trim().isEmpty())
-            throw new IllegalArgumentException("adrVoie can't be empty or null");
+            throw new IllegalArgumentException("\"Voie\" can't be empty or null");
         this._adrVoie = adrVoie;
 
         if (adrCodePostal < 1000)
-            throw new IllegalArgumentException("adrCodePostal must be valid");
+            throw new IllegalArgumentException("\"CodePostal\" must be valid");
         this._adrCodePostal = adrCodePostal;
 
         if (adrVille == null || adrVille.trim().isEmpty())
-            throw new IllegalArgumentException("adrVille can't be empty or null");
+            throw new IllegalArgumentException("\"Ville\" can't be empty or null");
         this._adrVille = adrVille;
 
         if (adrPays == null || adrPays.trim().isEmpty())
-            throw new IllegalArgumentException("adrPays can't be empty or null");
+            throw new IllegalArgumentException("\"Pays\" can't be empty or null");
         this._adrPays = adrPays;
     }
 
@@ -82,7 +82,7 @@ public class Client {
 
     public void setNom(String nom) {
         if (nom == null || nom.trim().isEmpty())
-            throw new IllegalArgumentException("nom can't be empty or null");
+            throw new IllegalArgumentException("\"Nom\" can't be empty or null");
         this._nom = nom;
     }
 
@@ -92,7 +92,7 @@ public class Client {
 
     public void setPrenom(String prenom) {
         if (prenom == null || prenom.trim().isEmpty())
-            throw new IllegalArgumentException("prenom can't be empty or null");
+            throw new IllegalArgumentException("\"Prenom\" can't be empty or null");
         this._prenom = prenom;
     }
 
@@ -102,7 +102,7 @@ public class Client {
 
     public void setIdentifiant(String identifiant) {
         if (identifiant == null || identifiant.trim().isEmpty())
-            throw new IllegalArgumentException("identifiant can't be empty or null");
+            throw new IllegalArgumentException("\"Identifiant\" can't be empty or null");
         this._identifiant = identifiant;
     }
 
@@ -112,7 +112,7 @@ public class Client {
 
     public void setMotDePasse(String motDePasse) {
         if (motDePasse == null || motDePasse.trim().isEmpty())
-            throw new IllegalArgumentException("motDePasse can't be empty or null");
+            throw new IllegalArgumentException("\"MotDePasse\" can't be empty or null");
         this._motDePasse = motDePasse;
     }
 
@@ -122,7 +122,7 @@ public class Client {
 
     public void setAdrNumero(int adrNumero) {
         if (adrNumero < 0)
-            throw new IllegalArgumentException("adrNumero can't be a negative");
+            throw new IllegalArgumentException("\"Numero\" can't be a negative");
         this._adrNumero = adrNumero;
     }
 
@@ -132,7 +132,7 @@ public class Client {
 
     public void setAdrVoie(String adrVoie) {
         if (adrVoie == null || adrVoie.trim().isEmpty())
-            throw new IllegalArgumentException("adrVoie can't be empty or null");
+            throw new IllegalArgumentException("\"Voie\" can't be empty or null");
         this._adrVoie = adrVoie;
     }
 
@@ -142,7 +142,7 @@ public class Client {
 
     public void setAdrCodePostal(int adrCodePostal) {
         if (adrCodePostal < 1000)
-            throw new IllegalArgumentException("adrCodePostal must be valid");
+            throw new IllegalArgumentException("\"CodePostal\" must be valid");
         this._adrCodePostal = adrCodePostal;
     }
 
@@ -152,7 +152,7 @@ public class Client {
 
     public void setAdrVille(String adrVille) {
         if (adrVille == null || adrVille.trim().isEmpty())
-            throw new IllegalArgumentException("adrVille can't be empty or null");
+            throw new IllegalArgumentException("\"Ville\" can't be empty or null");
         this._adrVille = adrVille;
     }
 
@@ -162,7 +162,7 @@ public class Client {
 
     public void setAdrPays(String adrPays) {
         if (adrPays == null || adrPays.trim().isEmpty())
-            throw new IllegalArgumentException("adrPays can't be empty or null");
+            throw new IllegalArgumentException("\"Pays\" can't be empty or null");
         this._adrPays = adrPays;
     }
 
@@ -185,7 +185,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return getNom() + " " + getPrenom();
+        return getNom() + " " + getPrenom() + " (" + getIdentifiant() + "), " + getAdrPays();
     }
 
 }

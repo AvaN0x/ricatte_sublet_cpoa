@@ -13,11 +13,11 @@ public class Category {
         this._id = id;
 
         if (title == null || title.trim().isEmpty())
-            throw new IllegalArgumentException("title can't be empty or null");
+            throw new IllegalArgumentException("\"Title\" can't be empty or null");
         this._title = title;
 
         if (visuel == null || visuel.trim().isEmpty())
-            throw new IllegalArgumentException("visuel can't be empty or null");
+            throw new IllegalArgumentException("\"Visuel\" can't be empty or null");
         this._visuel = visuel;
     }
 
@@ -45,7 +45,7 @@ public class Category {
 
     public void setTitle(String title) {
         if (title == null || title.trim().isEmpty())
-            throw new IllegalArgumentException("title can't be empty or null");
+            throw new IllegalArgumentException("\"Title\" can't be empty or null");
         this._title = title;
     }
 
@@ -55,7 +55,7 @@ public class Category {
 
     public void setVisuel(String visuel) {
         if (visuel == null || visuel.trim().isEmpty())
-            throw new IllegalArgumentException("visuel can't be empty or null");
+            throw new IllegalArgumentException("\"Visuel\" can't be empty or null");
         this._visuel = visuel;
     }
 

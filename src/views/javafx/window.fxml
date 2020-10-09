@@ -66,7 +66,7 @@
       </GridPane>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="101.0" prefWidth="600.0">
          <children>
-            <Button fx:id="btn_create" alignment="CENTER" mnemonicParsing="false" text="Créer">
+            <Button fx:id="btn_create" alignment="CENTER" mnemonicParsing="false" text="Créer" onAction="#createClick">
                <FlowPane.margin>
                   <Insets bottom="5.0" />
                </FlowPane.margin>

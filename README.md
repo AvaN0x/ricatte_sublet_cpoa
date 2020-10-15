@@ -7,4 +7,5 @@ Using jdk 15 and github branches
 ## Répartition
 
 _Clément_ : 50%
+
 _Tom_ : 50%

@@ -2,3 +2,9 @@
 A repo made for school stuff
 
 Using jdk 15 and github branches
+
+
+## Répartition
+
+_Clément_ : 50%
+_Tom_ : 50%

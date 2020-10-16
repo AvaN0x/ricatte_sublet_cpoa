@@ -53,7 +53,29 @@
         <tabs>
           <Tab text="Client">
                <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" />
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="colCliNom" prefWidth="75.0" text="Nom" />
+                              <TableColumn fx:id="colCliPrenom" prefWidth="75.0" text="Prenom" />
+                              <TableColumn fx:id="colCliVille" prefWidth="75.0" text="Ville" />
+                              <TableColumn fx:id="colCliPays" prefWidth="75.0" text="Pays" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </center>
+                     <right>
+                        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="btnCliAdd" mnemonicParsing="false" text="Ajouter" />
+                              <Button fx:id="btnCliEdit" mnemonicParsing="false" text="Modifier" />
+                              <Button fx:id="btnCliRem" mnemonicParsing="false" text="Supprimer" />
+                           </children>
+                        </VBox>
+                     </right></BorderPane>
                </content>
             </Tab>
           <Tab text="Categorie">

@@ -12,7 +12,7 @@ public abstract class BaseController implements Initializable {
     }
 
     public static void reloadPersistance() {
-        _daos = dao.DAOFactory.getDAOFactory(dao.Persistance.RAM);
+        _daos = dao.DAOFactory.getDAOFactory(dao.Persistance.MYSQL);
     }
 
     public void setVue(Stage view) {

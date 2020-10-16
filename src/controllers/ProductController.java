@@ -43,15 +43,6 @@ public class ProductController extends BaseController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-            colTarif.setCellValueFactory(new PropertyValueFactory<>("tarif"));
-            colCategorie.setCellValueFactory(new PropertyValueFactory<>("category"));
-
-            colNom.setSortType(TableColumn.SortType.DESCENDING);
-            colDescription.setSortable(false);
-
-            updateProductTable();
             updateCategsBox();
 
             btnCreate.setDisable(true);
@@ -77,10 +68,6 @@ public class ProductController extends BaseController {
         }
     }
 
-    public void updateProductTable() throws Exception {
-        tvProduits.setItems(FXCollections.observableArrayList(_daos.getProductDAO().getAll()));
-    }
-
     public void updateCategsBox() throws Exception {
         this.cbCategorie.setItems(FXCollections.observableArrayList(_daos.getCategoryDAO().getAll()));
     }
@@ -100,8 +87,6 @@ public class ProductController extends BaseController {
             lblResult.setText(prod.toString());
 
             _daos.getProductDAO().create(prod);
-
-            updateProductTable();
         } catch (Exception e) {
             lblResult.setText(e.getClass().getSimpleName() + " : " + e.getMessage());
             if (tfTarif.getText().trim().isEmpty())

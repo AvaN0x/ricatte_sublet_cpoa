@@ -67,10 +67,10 @@
                      <center>
                         <TableView fx:id="tvProduits" prefHeight="160.0" prefWidth="590.0" BorderPane.alignment="CENTER">
                            <columns>
-                              <TableColumn fx:id="colNom" minWidth="70.0" prefWidth="100.0" text="Nom" />
-                              <TableColumn fx:id="colDescription" minWidth="150.0" prefWidth="260.0" text="Description" />
-                              <TableColumn fx:id="colTarif" minWidth="50.0" prefWidth="50.0" text="Tarif" />
-                              <TableColumn fx:id="colCategorie" minWidth="80.0" prefWidth="150.0" text="Catégorie" />
+                              <TableColumn fx:id="colProdNom" minWidth="70.0" prefWidth="100.0" text="Nom" />
+                              <TableColumn fx:id="colProdDescription" minWidth="150.0" prefWidth="260.0" text="Description" />
+                              <TableColumn fx:id="colProdTarif" minWidth="50.0" prefWidth="50.0" text="Tarif" />
+                              <TableColumn fx:id="colProdCategorie" minWidth="80.0" prefWidth="150.0" text="Catégorie" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

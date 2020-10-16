@@ -55,7 +55,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tvClients" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn fx:id="colCliNom" prefWidth="75.0" text="Nom" />
                               <TableColumn fx:id="colCliPrenom" prefWidth="75.0" text="Prenom" />
@@ -80,7 +80,26 @@
             </Tab>
             <Tab text="Catégorie">
                <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" />
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="tvCategories" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="colCategTitre" prefWidth="75.0" text="Titre" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </center>
+                     <right>
+                        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="btnCategAdd" mnemonicParsing="false" text="Ajouter" />
+                              <Button fx:id="btnCategEdit" mnemonicParsing="false" text="Modifier" />
+                              <Button fx:id="btnCategRem" mnemonicParsing="false" text="Supprimer" />
+                           </children>
+                        </VBox>
+                     </right></BorderPane>
                </content>
             </Tab>
             <Tab text="Produit">
@@ -115,7 +134,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="tvProduits1" prefHeight="160.0" prefWidth="590.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tvCommandes" prefHeight="160.0" prefWidth="590.0" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="colCmdCli" minWidth="70.0" prefWidth="100.0" text="Client" />
                               <TableColumn fx:id="colCmdDate" minWidth="150.0" prefWidth="260.0" text="Date de commande" />

@@ -8,10 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class CategoryView extends Stage {
-    public CategoryView() {
+public abstract class BaseView extends Stage {
+    public BaseView(String filename) {
         try {
-            URL fxmlURL = getClass().getResource("category.fxml");
+            URL fxmlURL = getClass().getResource(filename);
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
             var node = (VBox) fxmlLoader.load();
             Scene scene = new Scene(node);

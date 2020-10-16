@@ -14,7 +14,7 @@ import models.*;
 
 public class MainController extends BaseController {
 
-    // region Produits
+    // region Products Fields
     @FXML
     private TableView<Product> tvProduits;
     @FXML
@@ -30,25 +30,38 @@ public class MainController extends BaseController {
     @Override
     public void initialize(URL location, ResourceBundle ressources) {
         try {
-            // region Tableau Produit
-            colProdNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            colProdDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-            colProdTarif.setCellValueFactory(new PropertyValueFactory<>("tarif"));
-            colProdCategorie.setCellValueFactory(new PropertyValueFactory<>("category"));
-
-            colProdNom.setSortType(TableColumn.SortType.DESCENDING);
-            colProdDescription.setSortable(false);
-
-            updateProductTable();
-            // endregion
-
+            initProducts();
         } catch (Exception e) {
-            // TODO: handle exception
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
         }
     }
 
-    public void updateProductTable() throws Exception {
+    private void updateProductTable() throws Exception {
         tvProduits.setItems(FXCollections.observableArrayList(_daos.getProductDAO().getAll()));
     }
+
+    // region Products Methods/Events
+    private void initProducts() throws Exception {
+        colProdNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        colProdDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colProdTarif.setCellValueFactory(new PropertyValueFactory<>("tarif"));
+        colProdCategorie.setCellValueFactory(new PropertyValueFactory<>("category"));
+
+        colProdNom.setSortType(TableColumn.SortType.DESCENDING);
+        colProdDescription.setSortable(false);
+
+        updateProductTable();
+    }
+
+    public void createProdClick() {
+        try {
+            _daos.getCategoryDAO().create(new models.Category("debug", "null"));
+            new views.javafx.ProductView().showAndWait();
+            updateProductTable();
+        } catch (Exception e) {
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+        }
+    }
+    // endregion
 
 }

@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -9,7 +10,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,8 +23,6 @@ public class ProductController extends BaseController {
     private TextArea taDescription;
     @FXML
     private TextField tfTarif;
-    @FXML
-    private Label lblResult;
     @FXML
     private ChoiceBox<models.Category> cbCategorie;
     @FXML
@@ -64,8 +62,7 @@ public class ProductController extends BaseController {
                         || tfTarif.getText() == null || newValue == null);
             });
         } catch (Exception e) {
-            lblResult.setText(e.getMessage());
-            lblResult.getStyleClass().add("exception");
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
         }
     }
 
@@ -75,24 +72,11 @@ public class ProductController extends BaseController {
 
     public void createClick() {
         try {
-            var prod = new Product(tfNom.getText(), taDescription.getText(), Float.parseFloat(tfTarif.getText()),
-                    "null", cbCategorie.getValue());
-
-            tfNom.setText("");
-            taDescription.setText("");
-            tfTarif.setText("");
-            cbCategorie.setValue(null);
-            btnCreate.setDisable(true);
-
-            lblResult.getStyleClass().remove("exception");
-            lblResult.setText(prod.toString());
-
-            _daos.getProductDAO().create(prod);
+            _daos.getProductDAO().create(new Product(tfNom.getText(), taDescription.getText(),
+                    Float.parseFloat(tfTarif.getText()), "null", cbCategorie.getValue()));
+            fermer();
         } catch (Exception e) {
-            lblResult.setText(e.getClass().getSimpleName() + " : " + e.getMessage());
-            if (tfTarif.getText().trim().isEmpty())
-                lblResult.setText("\"Tarif\" must be specified");
-            lblResult.getStyleClass().add("exception");
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
         }
     }
 }

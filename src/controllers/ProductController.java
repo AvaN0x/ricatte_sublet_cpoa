@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -36,6 +37,8 @@ public class ProductController extends BaseController {
     private TableColumn<Product, Float> colTarif;
     @FXML
     private TableColumn<Product, String> colCategorie;
+    @FXML
+    private Button btnCreate;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,6 +52,25 @@ public class ProductController extends BaseController {
             colDescription.setSortable(false);
 
             updateProductTable();
+            updateCategsBox();
+
+            btnCreate.setDisable(true);
+            tfNom.textProperty().addListener((observable, oldValue, newValue) -> {
+                btnCreate.setDisable(newValue == null || taDescription.getText() == null || tfTarif.getText() == null
+                        || cbCategorie.getValue() == null);
+            });
+            taDescription.textProperty().addListener((observable, oldValue, newValue) -> {
+                btnCreate.setDisable(tfNom.getText() == null || newValue == null || tfTarif.getText() == null
+                        || cbCategorie.getValue() == null);
+            });
+            tfTarif.textProperty().addListener((observable, oldValue, newValue) -> {
+                btnCreate.setDisable(tfNom.getText() == null || taDescription.getText() == null || newValue == null
+                        || cbCategorie.getValue() == null);
+            });
+            cbCategorie.itemsProperty().addListener((observable, oldValue, newValue) -> {
+                btnCreate.setDisable(tfNom.getText() == null || taDescription.getText() == null
+                        || tfTarif.getText() == null || newValue == null);
+            });
         } catch (Exception e) {
             lblResult.setText(e.getMessage());
             lblResult.getStyleClass().add("exception");
@@ -56,11 +78,11 @@ public class ProductController extends BaseController {
     }
 
     public void updateProductTable() throws Exception {
-        tvProduits.setItems(FXCollections.observableArrayList(daos.getProductDAO().getAll()));
+        tvProduits.setItems(FXCollections.observableArrayList(_daos.getProductDAO().getAll()));
     }
 
     public void updateCategsBox() throws Exception {
-        this.cbCategorie.setItems(FXCollections.observableArrayList(daos.getCategoryDAO().getAll()));
+        this.cbCategorie.setItems(FXCollections.observableArrayList(_daos.getCategoryDAO().getAll()));
     }
 
     public void createClick() {
@@ -72,11 +94,12 @@ public class ProductController extends BaseController {
             taDescription.setText("");
             tfTarif.setText("");
             cbCategorie.setValue(null);
+            btnCreate.setDisable(true);
 
             lblResult.getStyleClass().remove("exception");
             lblResult.setText(prod.toString());
 
-            daos.getProductDAO().create(prod);
+            _daos.getProductDAO().create(prod);
 
             updateProductTable();
         } catch (Exception e) {

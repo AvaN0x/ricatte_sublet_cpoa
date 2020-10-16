@@ -46,6 +46,7 @@ public class ProductController extends BaseController {
             updateCategsBox();
 
             btnCreate.setDisable(true);
+
             tfNom.textProperty().addListener((observable, oldValue, newValue) -> {
                 btnCreate.setDisable(newValue == null || taDescription.getText() == null || tfTarif.getText() == null
                         || cbCategorie.getValue() == null);

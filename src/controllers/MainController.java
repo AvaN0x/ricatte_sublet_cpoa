@@ -14,6 +14,7 @@ import models.*;
 
 public class MainController extends BaseController {
 
+    // region Produits
     @FXML
     private TableView<Product> tvProduits;
     @FXML
@@ -24,10 +25,12 @@ public class MainController extends BaseController {
     private TableColumn<Product, Float> colProdTarif;
     @FXML
     private TableColumn<Product, String> colProdCategorie;
+    // endregion
 
     @Override
     public void initialize(URL location, ResourceBundle ressources) {
         try {
+            // region Tableau Produit
             colProdNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             colProdDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
             colProdTarif.setCellValueFactory(new PropertyValueFactory<>("tarif"));
@@ -37,6 +40,7 @@ public class MainController extends BaseController {
             colProdDescription.setSortable(false);
 
             updateProductTable();
+            // endregion
 
         } catch (Exception e) {
             // TODO: handle exception

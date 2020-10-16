@@ -2,7 +2,6 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -37,6 +36,7 @@ public class MainController extends BaseController {
     }
 
     private void updateProductTable() throws Exception {
+        tvProduits.getItems().clear();
         tvProduits.setItems(FXCollections.observableArrayList(_daos.getProductDAO().getAll()));
     }
 
@@ -56,6 +56,25 @@ public class MainController extends BaseController {
     public void createProdClick() {
         try {
             new views.javafx.ProductView().showAndWait();
+            updateProductTable();
+        } catch (Exception e) {
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+        }
+    }
+
+    public void editProdClick() {
+        try {
+            new views.javafx.ProductView(tvProduits.getSelectionModel().getSelectedItem()).showAndWait();
+            updateProductTable();
+        } catch (Exception e) {
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+        }
+    }
+
+    public void delProdClick() {
+        try {
+            if (!_daos.getProductDAO().delete(tvProduits.getSelectionModel().getSelectedItem()))
+                showErrorAlert("On s'attendait à tout, sauf à ça.", "La supression n'a pas modifié les données");
             updateProductTable();
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());

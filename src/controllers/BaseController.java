@@ -19,7 +19,7 @@ public abstract class BaseController implements javafx.fxml.Initializable {
         this._view = view;
     }
 
-    public void fermer() {
+    protected void fermer() {
         this._view.close();
     }
 

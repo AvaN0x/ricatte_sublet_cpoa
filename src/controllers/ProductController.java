@@ -38,6 +38,8 @@ public class ProductController extends BaseController {
     @FXML
     private Button btnCreate;
 
+    private int idProd = -1;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -72,11 +74,28 @@ public class ProductController extends BaseController {
 
     public void createClick() {
         try {
-            _daos.getProductDAO().create(new Product(tfNom.getText(), taDescription.getText(),
-                    Float.parseFloat(tfTarif.getText()), "null", cbCategorie.getValue()));
+            if (idProd == -1) {
+                if (!_daos.getProductDAO().create(new Product(tfNom.getText(), taDescription.getText(),
+                        Float.parseFloat(tfTarif.getText()), "null", cbCategorie.getValue())))
+                    showErrorAlert("On s'attendait à tout, sauf à ça.", "La création n'a pas modifié les données");
+            } else {
+
+                if (!_daos.getProductDAO().update(new Product(idProd, tfNom.getText(), taDescription.getText(),
+                        Float.parseFloat(tfTarif.getText()), "null", cbCategorie.getValue())))
+                    showErrorAlert("On s'attendait à tout, sauf à ça.", "La modification n'a pas modifié les données");
+            }
             fermer();
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
         }
+    }
+
+    public void setProduct(Product prod) {
+        tfNom.setText(prod.getNom());
+        taDescription.setText(prod.getDescription());
+        tfTarif.setText(Float.toString(prod.getTarif()));
+        cbCategorie.getSelectionModel().select(prod.getCategory());
+        btnCreate.setText("Modifier");
+        this.idProd = prod.getId();
     }
 }

@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 import models.Product;
 
-public class ProductController implements Initializable {
+public class ProductController extends BaseController {
     @FXML
     private TextField tfNom;
     @FXML
@@ -38,13 +38,9 @@ public class ProductController implements Initializable {
     @FXML
     private TableColumn<Product, String> colCategorie;
 
-    private dao.DAOFactory daos;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            daos = dao.DAOFactory.getDAOFactory(dao.Persistance.MYSQL);
-
             colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
             colTarif.setCellValueFactory(new PropertyValueFactory<>("tarif"));

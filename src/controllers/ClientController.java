@@ -4,13 +4,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import models.Client;
 
-public class ClientController implements Initializable {
+public class ClientController extends BaseController {
 	@FXML
 	private TextField tfNom;
 	@FXML
@@ -30,12 +29,10 @@ public class ClientController implements Initializable {
 	@FXML
 	private TextField tfPays;
 
-	private dao.DAOFactory daos;
-
 	@Override
 	public void initialize(URL location, ResourceBundle ressources) {
 		try {
-			daos = dao.DAOFactory.getDAOFactory(dao.Persistance.MYSQL);
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

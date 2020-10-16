@@ -76,25 +76,6 @@
                   <Insets bottom="5.0" />
                </FlowPane.margin>
             </Button>
-            <Label fx:id="lblResult" alignment="CENTER" />
-         </children>
-      </FlowPane>
-      <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
-         <children>
-            <TableView fx:id="tvProduits" prefHeight="160.0" prefWidth="590.0">
-              <columns>
-                <TableColumn fx:id="colNom" prefWidth="100.0" minWidth="70.0" text="Nom" />
-                <TableColumn fx:id="colDescription" prefWidth="260.0" minWidth="150.0" text="Description" />
-                <TableColumn fx:id="colTarif" prefWidth="50.0" minWidth="50.0" text="Tarif" />
-                <TableColumn fx:id="colCategorie" prefWidth="150.0" minWidth="80.0" text="Catégorie" />
-              </columns>
-               <FlowPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </FlowPane.margin>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
          </children>
       </FlowPane>
    </children>

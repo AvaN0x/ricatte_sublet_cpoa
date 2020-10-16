@@ -11,13 +11,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            URL fxmlURL = getClass().getResource("views/javafx/main.fxml");
+            URL fxmlURL = getClass().getResource("views/javafx/MainView.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
-            Node root = fxmlLoader.load();
-            Scene scene = new Scene((GridPane) root, 600, 400);
+            Scene scene = new Scene((GridPane) fxmlLoader.load(), 600, 400);
             scene.getStylesheets().add("views/javafx/style.css");
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Création de produit");
+            primaryStage.setTitle("TITRE");
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();

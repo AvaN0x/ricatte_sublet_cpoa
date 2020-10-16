@@ -55,7 +55,6 @@ public class MainController extends BaseController {
 
     public void createProdClick() {
         try {
-            _daos.getCategoryDAO().create(new models.Category("debug", "null"));
             new views.javafx.ProductView().showAndWait();
             updateProductTable();
         } catch (Exception e) {

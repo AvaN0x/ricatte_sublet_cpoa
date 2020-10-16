@@ -1,5 +1,6 @@
 package views.javafx;
 
+import java.io.IOException;
 import java.net.URL;
 
 import controllers.BaseController;
@@ -9,19 +10,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public abstract class BaseView extends Stage {
-    public BaseView(String filename) {
-        try {
-            URL fxmlURL = getClass().getResource(filename);
-            FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
-            var node = (VBox) fxmlLoader.load();
-            Scene scene = new Scene(node);
+    public BaseView(String filename) throws IOException {
+        URL fxmlURL = getClass().getResource(filename);
+        FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
+        var node = (VBox) fxmlLoader.load();
+        Scene scene = new Scene(node);
 
-            var controller = (BaseController) fxmlLoader.getController();
-            controller.setVue(this);
+        var controller = (BaseController) fxmlLoader.getController();
+        controller.setVue(this);
 
-            this.show();
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+        this.show();
     }
 }

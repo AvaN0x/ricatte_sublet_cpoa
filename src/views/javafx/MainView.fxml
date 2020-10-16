@@ -121,7 +121,7 @@
                      <right>
                         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnProdAdd" mnemonicParsing="false" text="Ajouter" />
+                              <Button fx:id="btnProdAdd" mnemonicParsing="false" text="Ajouter"  onAction="#createProdClick"/>
                               <Button fx:id="btnProdEdit" mnemonicParsing="false" text="Modifier" />
                               <Button fx:id="btnProdRem" mnemonicParsing="false" text="Supprimer" />
                            </children>

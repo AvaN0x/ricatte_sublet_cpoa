@@ -21,7 +21,7 @@ public abstract class BaseView extends Stage {
         _controller = (BaseController) fxmlLoader.getController();
         _controller.setVue(this);
 
-        this.setScene(new Scene(node, 600, 500));
+        this.setScene(new Scene(node));
         this.initModality(Modality.APPLICATION_MODAL);
     }
 }

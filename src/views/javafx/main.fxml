@@ -80,7 +80,26 @@
             </Tab>
             <Tab text="Catégorie">
                <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" />
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="colCategTitre" prefWidth="75.0" text="Titre" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </center>
+                     <right>
+                        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="btnCategAdd" mnemonicParsing="false" text="Ajouter" />
+                              <Button fx:id="btnCategEdit" mnemonicParsing="false" text="Modifier" />
+                              <Button fx:id="btnCategRem" mnemonicParsing="false" text="Supprimer" />
+                           </children>
+                        </VBox>
+                     </right></BorderPane>
                </content>
             </Tab>
             <Tab text="Produit">

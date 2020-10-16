@@ -14,7 +14,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import dao.*;
 import models.Product;
 
 public class ProductController implements Initializable {
@@ -39,12 +38,12 @@ public class ProductController implements Initializable {
     @FXML
     private TableColumn<Product, String> colCategorie;
 
-    private DAOFactory daos;
+    private dao.DAOFactory daos;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            daos = DAOFactory.getDAOFactory(Persistance.MYSQL);
+            daos = dao.DAOFactory.getDAOFactory(dao.Persistance.MYSQL);
 
             colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));

@@ -10,8 +10,7 @@ public class NewProductView extends BaseView {
     }
 
     public NewProductView(models.Product prod) throws IOException {
-        super("NewProductView.fxml");
-        this.setTitle("Edition d'un produit");
+        this();
         ((controllers.ProductController) _controller).setProduct(prod);
     }
 

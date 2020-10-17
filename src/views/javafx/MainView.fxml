@@ -94,9 +94,9 @@
                      <right>
                         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnCategAdd" mnemonicParsing="false" text="Ajouter" />
-                              <Button fx:id="btnCategEdit" mnemonicParsing="false" text="Modifier" />
-                              <Button fx:id="btnCategRem" mnemonicParsing="false" text="Supprimer" />
+                              <Button fx:id="btnCategAdd" mnemonicParsing="false" text="Ajouter" onAction="#createCategClick" />
+                              <Button fx:id="btnCategEdit" mnemonicParsing="false" text="Modifier" onAction="#editCategClick" />
+                              <Button fx:id="btnCategRem" mnemonicParsing="false" text="Supprimer" onAction="#delCategClick" />
                            </children>
                         </VBox>
                      </right></BorderPane>

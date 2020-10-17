@@ -19,15 +19,15 @@ public class ClientController extends BaseController {
 	@FXML
 	private PasswordField pfPassword;
 	@FXML
-	private TextField tfNumero;
+	private TextField tfAdrNumero;
 	@FXML
-	private TextField tfVoie;
+	private TextField tfAdrVoie;
 	@FXML
-	private TextField tfPostal;
+	private TextField tfAdrCodePostal;
 	@FXML
-	private TextField tfVille;
+	private TextField tfAdrVille;
 	@FXML
-	private TextField tfPays;
+	private TextField tfAdrPays;
 
 	@Override
 	public void initialize(URL location, ResourceBundle ressources) {
@@ -40,11 +40,13 @@ public class ClientController extends BaseController {
 
 	public void createClick() {
 		try {
-			var cli = new Client(tfNom.getText(), tfPrenom.getText(), tfIdentifiant.getText(), pfPassword.getText(),
-					Integer.parseInt(tfNumero.getText()), tfVoie.getText(), Integer.parseInt(tfPostal.getText()),
-					tfVille.getText(), tfPays.getText());
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+
+	public void setClient(Client cli) {
+
 	}
 }

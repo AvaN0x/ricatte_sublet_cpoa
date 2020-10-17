@@ -9,9 +9,9 @@ public class NewCategoryView extends BaseView {
         this.setTitle("Création d'une catégorie");
     }
 
-    public NewCategoryView(models.Category prod) throws IOException {
+    public NewCategoryView(models.Category categ) throws IOException {
         this();
-        ((controllers.CategoryController) _controller).setCategory(prod);
+        ((controllers.CategoryController) _controller).setCategory(categ);
     }
 
 }

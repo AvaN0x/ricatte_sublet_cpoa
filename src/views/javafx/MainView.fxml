@@ -70,9 +70,9 @@
                      <right>
                         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnCliAdd" mnemonicParsing="false" text="Ajouter" />
-                              <Button fx:id="btnCliEdit" mnemonicParsing="false" text="Modifier" />
-                              <Button fx:id="btnCliRem" mnemonicParsing="false" text="Supprimer" />
+                              <Button fx:id="btnCliAdd" mnemonicParsing="false" text="Ajouter" onAction="createClientClick" />
+                              <Button fx:id="btnCliEdit" mnemonicParsing="false" text="Modifier" onAction="editClientClick" />
+                              <Button fx:id="btnCliRem" mnemonicParsing="false" text="Supprimer" onAction="delClientClick" />
                            </children>
                         </VBox>
                      </right></BorderPane>

@@ -14,6 +14,16 @@ import models.*;
 public class MainController extends BaseController {
 
     // region Client Fields
+    @FXML
+    private TableView<Client> tvClients;
+    @FXML
+    private TableColumn<Client, String> colCliNom;
+    @FXML
+    private TableColumn<Client, String> colCliPrenom;
+    @FXML
+    private TableColumn<Client, Float> colCliVille;
+    @FXML
+    private TableColumn<Client, String> colCliPays;
     // endregion
 
     // region Category Fields
@@ -42,6 +52,7 @@ public class MainController extends BaseController {
     @Override
     public void initialize(URL location, ResourceBundle ressources) {
         try {
+            initClients();
             initCategs();
             initProducts();
         } catch (Exception e) {
@@ -50,6 +61,49 @@ public class MainController extends BaseController {
     }
 
     // region Client Methods/Events
+    private void updateClientTable() throws Exception {
+        tvClients.getItems().clear();
+        tvClients.setItems(FXCollections.observableArrayList(_daos.getClientDAO().getAll()));
+    }
+
+    private void initClients() throws Exception {
+        colCliNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        colCliPrenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        colCliVille.setCellValueFactory(new PropertyValueFactory<>("adrVille"));
+        colCliPays.setCellValueFactory(new PropertyValueFactory<>("adrPays"));
+
+        colCliNom.setSortType(TableColumn.SortType.DESCENDING);
+
+        updateClientTable();
+    }
+
+    public void createClientClick() {
+        try {
+            new views.javafx.NewClientView().showAndWait();
+            updateClientTable();
+        } catch (Exception e) {
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+        }
+    }
+
+    public void editClientClick() {
+        try {
+            new views.javafx.NewClientView(tvClients.getSelectionModel().getSelectedItem()).showAndWait();
+            updateClientTable();
+        } catch (Exception e) {
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+        }
+    }
+
+    public void delClientClick() {
+        try {
+            if (!_daos.getClientDAO().delete(tvClients.getSelectionModel().getSelectedItem()))
+                showErrorAlert("On s'attendait à tout, sauf à ça.", "La supression n'a pas modifié les données");
+            updateClientTable();
+        } catch (Exception e) {
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+        }
+    }
     // endregion
 
     // region Category Methods/Events

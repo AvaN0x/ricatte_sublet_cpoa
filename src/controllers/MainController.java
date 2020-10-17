@@ -55,7 +55,7 @@ public class MainController extends BaseController {
 
     public void createProdClick() {
         try {
-            new views.javafx.ProductView().showAndWait();
+            new views.javafx.NewProductView().showAndWait();
             updateProductTable();
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
@@ -64,7 +64,7 @@ public class MainController extends BaseController {
 
     public void editProdClick() {
         try {
-            new views.javafx.ProductView(tvProduits.getSelectionModel().getSelectedItem()).showAndWait();
+            new views.javafx.NewProductView(tvProduits.getSelectionModel().getSelectedItem()).showAndWait();
             updateProductTable();
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());

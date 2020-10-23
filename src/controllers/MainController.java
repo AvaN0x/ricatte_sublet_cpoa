@@ -2,6 +2,8 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -12,6 +14,9 @@ import java.util.ResourceBundle;
 import models.*;
 
 public class MainController extends BaseController {
+
+    @FXML
+    private Menu menuPersistance;
 
     // region Client Fields
     @FXML
@@ -44,6 +49,14 @@ public class MainController extends BaseController {
     private TableColumn<Product, Float> colProdTarif;
     @FXML
     private TableColumn<Product, String> colProdCategorie;
+    @FXML
+    private Label lblProdInfoTarif;
+    @FXML
+    private Label lblProdInfoCateg;
+    @FXML
+    private Label lblProdInfoNom;
+    @FXML
+    private Label lblProdInfoDescription;
     // endregion
 
     // region Commands Fields
@@ -68,7 +81,7 @@ public class MainController extends BaseController {
     }
 
     // region Client Methods/Events
-    private void updateClientTable() throws Exception {
+    public void updateClientTable() throws Exception {
         tvClients.getItems().clear();
         tvClients.setItems(FXCollections.observableArrayList(_daos.getClientDAO().getAll()));
     }
@@ -114,7 +127,7 @@ public class MainController extends BaseController {
     // endregion
 
     // region Category Methods/Events
-    private void updateCategTable() throws Exception {
+    public void updateCategTable() throws Exception {
         tvCategories.getItems().clear();
         tvCategories.setItems(FXCollections.observableArrayList(_daos.getCategoryDAO().getAll()));
     }
@@ -157,7 +170,7 @@ public class MainController extends BaseController {
     // endregion
 
     // region Products Methods/Events
-    private void updateProductTable() throws Exception {
+    public void updateProductTable() throws Exception {
         tvProduits.getItems().clear();
         tvProduits.setItems(FXCollections.observableArrayList(_daos.getProductDAO().getAll()));
     }
@@ -172,6 +185,15 @@ public class MainController extends BaseController {
         colProdDescription.setSortable(false);
 
         updateProductTable();
+
+        tvProduits.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                lblProdInfoTarif.setText(Float.toString(newSelection.getTarif()) + " €");
+                lblProdInfoCateg.setText(newSelection.getCategory().getTitle());
+                lblProdInfoNom.setText(newSelection.getNom());
+                lblProdInfoDescription.setText(newSelection.getDescription());
+            }
+        });
     }
 
     public void createProdClick() {
@@ -204,7 +226,7 @@ public class MainController extends BaseController {
     // endregion
 
     // region Commands Methods/Events
-    private void updateCommandTable() throws Exception {
+    public void updateCommandTable() throws Exception {
         tvCommandes.getItems().clear();
         tvCommandes.setItems(FXCollections.observableArrayList(_daos.getCommandDAO().getAll()));
     }

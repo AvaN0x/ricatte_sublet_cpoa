@@ -75,7 +75,7 @@
                      <top>
                         <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnRefreshClient" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Actualiser">
+                              <Button fx:id="btnRefreshClient" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updateClientTable" text="Actualiser" >
                                  <HBox.margin>
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
@@ -121,7 +121,7 @@
                      <top>
                         <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnRefreshCateg" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Actualiser">
+                              <Button fx:id="btnRefreshCateg" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updateCategTable" text="Actualiser">
                                  <HBox.margin>
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
@@ -251,7 +251,7 @@
                      <top>
                         <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnRefreshProd" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Actualiser">
+                              <Button fx:id="btnRefreshProd" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updateCategTable" text="Actualiser">
                                  <HBox.margin>
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
@@ -296,7 +296,7 @@
                      <top>
                         <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnRefreshCommand" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Actualiser">
+                              <Button fx:id="btnRefreshCommand" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#updateCommandTable" text="Actualiser">
                                  <HBox.margin>
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>

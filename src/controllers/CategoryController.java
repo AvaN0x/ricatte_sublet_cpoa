@@ -22,14 +22,6 @@ public class CategoryController extends BaseController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            btnCreate.setDisable(true);
-
-            tfTitre.textProperty().addListener((observable, oldValue, newValue) -> {
-                btnCreate.setDisable(newValue == null || tfVisuel.getText() == null);
-            });
-            tfVisuel.textProperty().addListener((observable, oldValue, newValue) -> {
-                btnCreate.setDisable(tfTitre.getText() == null || newValue == null);
-            });
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
         }

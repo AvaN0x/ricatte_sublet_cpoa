@@ -28,8 +28,6 @@ public class CommandController extends BaseController {
             updateClientBox();
             if (idCommand == -1)
                 dpDateCommand.setValue(LocalDate.now());
-
-            btnCreate.setDisable(true);
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
         }

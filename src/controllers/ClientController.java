@@ -37,7 +37,6 @@ public class ClientController extends BaseController {
 	@Override
 	public void initialize(URL location, ResourceBundle ressources) {
 		try {
-			btnCreate.setDisable(true);
 		} catch (Exception e) {
 			showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
 		}

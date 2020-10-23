@@ -30,25 +30,6 @@ public class ProductController extends BaseController {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             updateCategsBox();
-
-            btnCreate.setDisable(true);
-
-            tfNom.textProperty().addListener((observable, oldValue, newValue) -> {
-                btnCreate.setDisable(newValue == null || taDescription.getText() == null || tfTarif.getText() == null
-                        || cbCategorie.getValue() == null);
-            });
-            taDescription.textProperty().addListener((observable, oldValue, newValue) -> {
-                btnCreate.setDisable(tfNom.getText() == null || newValue == null || tfTarif.getText() == null
-                        || cbCategorie.getValue() == null);
-            });
-            tfTarif.textProperty().addListener((observable, oldValue, newValue) -> {
-                btnCreate.setDisable(tfNom.getText() == null || taDescription.getText() == null || newValue == null
-                        || cbCategorie.getValue() == null);
-            });
-            cbCategorie.itemsProperty().addListener((observable, oldValue, newValue) -> {
-                btnCreate.setDisable(tfNom.getText() == null || taDescription.getText() == null
-                        || tfTarif.getText() == null || newValue == null);
-            });
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
         }

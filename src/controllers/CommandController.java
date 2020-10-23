@@ -25,9 +25,11 @@ public class CommandController extends BaseController {
     @Override
     public void initialize(URL location, ResourceBundle ressources) {
         try {
-            btnCreate.setDisable(true);
+            updateClientBox();
             if (idCommand == -1)
                 dpDateCommand.setValue(LocalDate.now());
+
+            btnCreate.setDisable(true);
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
         }

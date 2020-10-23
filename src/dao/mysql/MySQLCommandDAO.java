@@ -85,7 +85,7 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
 
         boolean lineResult = true;
         for (HashMap.Entry<Product, CommandLine> line : cmd.getCommandLines().entrySet()) {
-            boolean res = MySQLCommandLineDAO.getInstance().update(line.getValue(), line.getKey());
+            boolean res = MySQLCommandLineDAO.getInstance().v(line.getValue(), line.getKey());
             if (!res)
                 lineResult = false;
         }

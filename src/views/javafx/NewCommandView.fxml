@@ -56,10 +56,10 @@
                   </DatePicker>
                </children>
             </GridPane>
-            <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <TableView fx:id="tvProducts" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
               <columns>
-                <TableColumn prefWidth="75.0" text="Produit" />
-                <TableColumn prefWidth="75.0" text="Quantité" />
+                <TableColumn fx:id="colProdName" prefWidth="75.0" text="Produit" />
+                <TableColumn fx:id="colProdQuant" prefWidth="75.0" text="Quantité" />
               </columns>
                <GridPane.margin>
                   <Insets bottom="10.0" left="20.0" right="20.0" />
@@ -78,7 +78,7 @@
       </GridPane>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" minHeight="50.0" orientation="VERTICAL" prefHeight="70.0" prefWidth="600.0">
          <children>
-            <Button fx:id="btnCreate" alignment="CENTER" mnemonicParsing="false" onAction="#createClick" text="Créer" onAction="#createClick" >
+            <Button fx:id="btnCreate" alignment="CENTER" mnemonicParsing="false" text="Créer" onAction="#createClick" >
                <FlowPane.margin>
                   <Insets bottom="5.0" />
                </FlowPane.margin>

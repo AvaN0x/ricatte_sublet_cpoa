@@ -5,8 +5,8 @@ import java.io.IOException;
 public class NewCommandView extends BaseView {
 
     public NewCommandView() throws IOException {
-        super("NewClientView.fxml");
-        this.setTitle("Création d'un client");
+        super("NewCommandView.fxml");
+        this.setTitle("Création d'une commande");
     }
 
     public NewCommandView(models.Command cmd) throws IOException {

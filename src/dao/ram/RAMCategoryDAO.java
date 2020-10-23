@@ -23,9 +23,12 @@ public class RAMCategoryDAO implements CategoryDAO {
     }
 
     @Override
-    public boolean create(Category categ) {
-        while (data.contains(categ))
+    public boolean create(Category categ) throws IllegalArgumentException {
+        while (data.contains(categ)){
+            if(data.get(categ.getId()).getTitle() == categ.getTitle())
+                throw new IllegalAccessError("Duplicate key `titre`");
             categ.setId(categ.getId() + 1);
+        }
         return data.add(categ);
     }
 

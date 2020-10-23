@@ -24,8 +24,11 @@ public class RAMClientDAO implements ClientDAO {
 
     @Override
     public boolean create(Client cli) {
-        while (data.contains(cli))
+        while (data.contains(cli)) {
+            if (data.get(cli.getId()).getIdentifiant() == cli.getIdentifiant())
+                throw new IllegalAccessError("Duplicate key `identifiant`");
             cli.setId(cli.getId() + 1);
+        }
         return data.add(cli);
     }
 

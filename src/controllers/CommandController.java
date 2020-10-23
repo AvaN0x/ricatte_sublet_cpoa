@@ -38,4 +38,8 @@ public class CommandController extends BaseController {
         }
     }
 
+    public void setCommand(Command cmd) {
+
+    }
+
 }

@@ -47,6 +47,12 @@ public class MainController extends BaseController {
     // endregion
 
     // region Commands Fields
+    @FXML
+    private TableView<Command> tvCommandes;
+    @FXML
+    private TableColumn<Command, Client> colCmdCli;
+    @FXML
+    private TableColumn<Command, java.time.LocalTime> colCmdDate;
     // endregion
 
     @Override
@@ -55,6 +61,7 @@ public class MainController extends BaseController {
             initClients();
             initCategs();
             initProducts();
+            initCommands();
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
         }
@@ -197,5 +204,46 @@ public class MainController extends BaseController {
     // endregion
 
     // region Commands Methods/Events
+    private void updateCommandTable() throws Exception {
+        tvCommandes.getItems().clear();
+        tvCommandes.setItems(FXCollections.observableArrayList(_daos.getCommandDAO().getAll()));
+    }
+
+    private void initCommands() throws Exception {
+        colCmdCli.setCellValueFactory(new PropertyValueFactory<>("client"));
+        colCmdDate.setCellValueFactory(new PropertyValueFactory<>("dateCommand"));
+
+        colCmdCli.setSortType(TableColumn.SortType.DESCENDING);
+
+        updateCommandTable();
+    }
+
+    public void createCmdClick() {
+        try {
+            new views.javafx.NewCommandView().showAndWait();
+            updateCommandTable();
+        } catch (Exception e) {
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+        }
+    }
+
+    public void editCmdClick() {
+        try {
+            new views.javafx.NewCommandView(tvCommandes.getSelectionModel().getSelectedItem()).showAndWait();
+            updateCommandTable();
+        } catch (Exception e) {
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+        }
+    }
+
+    public void delCmdClick() {
+        try {
+            if (!_daos.getCommandDAO().delete(tvCommandes.getSelectionModel().getSelectedItem()))
+                showErrorAlert("On s'attendait à tout, sauf à ça.", "La supression n'a pas modifié les données");
+            updateCommandTable();
+        } catch (Exception e) {
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+        }
+    }
     // endregion
 }

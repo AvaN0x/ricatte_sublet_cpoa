@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -33,7 +36,7 @@ public class CommandController extends BaseController {
     @FXML
     private TableColumn<ProductLine, models.Product> colProdName;
     @FXML
-    private TableColumn<ProductLine, Integer> colProdQuant;
+    private TableColumn<ProductLine, ProductLine> colProdQuant;
 
     private ArrayList<ProductLine> prodLine;
     private Command command;
@@ -44,22 +47,56 @@ public class CommandController extends BaseController {
             updateClientBox();
 
             colProdQuant.setCellFactory(col -> {
-                TableCell<ProductLine, Integer> cell = new TableCell<>();
-                Spinner<Integer> spin = new Spinner<>();
-                spin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 5, 0));
-                spin.setEditable(true);
-                spin.valueProperty().addListener((observable, oldValue, newValue) -> {
-                    prodLine.get(cell.getIndex()).setQuant(newValue);
-                });
-                cell.setGraphic(spin);
+                TableCell<ProductLine, ProductLine> cell = new TableCell<ProductLine, ProductLine>() {
+                    private final Spinner<Integer> count;
+
+                    private final SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory;
+                    private final ChangeListener<Number> valueChangeListener;
+
+                    {
+                        valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0);
+                        count = new Spinner<>(valueFactory);
+                        count.setEditable(true);
+                        count.setVisible(false);
+                        setGraphic(count);
+                        valueChangeListener = (ObservableValue<? extends Number> observable, Number oldValue,
+                                Number newValue) -> {
+                            valueFactory.setValue(newValue.intValue());
+                        };
+                        count.valueProperty().addListener((obs, oldValue, newValue) -> {
+                            if (getItem() != null) {
+                                getItem().setQuant(newValue);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(ProductLine item, boolean empty) {
+                        valueFactory.maxProperty().unbind();
+                        if (getItem() != null) {
+                            getItem().getQuantProperty().removeListener(valueChangeListener);
+                        }
+
+                        super.updateItem(item, empty);
+
+                        if (empty || item == null) {
+                            count.setVisible(false);
+                        } else {
+                            valueFactory.maxProperty().bind(item.getMaxQuantProperty());
+                            valueFactory.setValue(item.getQuant());
+                            item.getQuantProperty().addListener(valueChangeListener);
+                            count.setVisible(true);
+                        }
+                    }
+                };
                 return cell;
             });
 
             colProdName.setCellValueFactory(new PropertyValueFactory<>("prod"));
-            colProdQuant.setCellValueFactory(new PropertyValueFactory<>("quant"));
+            colProdQuant.setCellValueFactory(cd -> Bindings.createObjectBinding(() -> cd.getValue()));
 
             updateProductTable();
-            if (command != null)
+            if (command == null)
                 dpDateCommand.setValue(LocalDate.now());
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
@@ -87,24 +124,28 @@ public class CommandController extends BaseController {
 
     public void createClick() {
         try {
-            System.out.println(prodLine);
             var cmd = new Command(dpDateCommand.getValue(), cbClient.getSelectionModel().getSelectedItem());
             var commandLines = new HashMap<models.Product, CommandLine>();
+            int count = 0;
             for (var productLine : prodLine) {
-                if (productLine.getQuant() > 0)
+                if (productLine.getQuant() > 0) {
                     commandLines.put(productLine.getProd(),
                             new CommandLine(cmd, productLine.getQuant(), productLine.getProd().getTarif()));
+                    count++;
+                }
+            }
+            if (count == 0) {
+                showErrorAlert("Vous avez oublié quelque chose...", "Veuillez renseigner au moins un produit.");
+                return;
             }
             cmd.setCommandLines(commandLines);
-            if (command != null) {
-                // if (!_daos.getCommandDAO().create(cmd))
-                // showErrorAlert("On s'attendait à tout, sauf à ça.", "La création n'a
-                // pas modifié les données");
+            if (command == null) {
+                if (!_daos.getCommandDAO().create(cmd))
+                    showErrorAlert("On s'attendait à tout, sauf à ça.", "La création n'a pas modifié les données");
             } else {
                 cmd.setId(command.getId());
-                // if (!_daos.getCommandDAO().update(cmd))
-                // showErrorAlert("On s'attendait à tout, sauf à ça.", "La modification n'a pas
-                // modifié les données");
+                if (!_daos.getCommandDAO().update(cmd))
+                    showErrorAlert("On s'attendait à tout, sauf à ça.", "La modification n'a pas modifié les données");
             }
             fermer();
         } catch (Exception e) {

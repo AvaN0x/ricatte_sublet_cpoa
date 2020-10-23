@@ -1,14 +1,18 @@
 package controllers;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import models.Product;
 
 public class ProductLine {
     private Product _prod;
-    private int _quant;
+    private IntegerProperty _quant = new SimpleIntegerProperty();
+    private IntegerProperty _maxquant = new SimpleIntegerProperty();
 
     public ProductLine(Product prod, int quant) {
         this._prod = prod;
-        this._quant = quant;
+        this._quant.setValue(quant);
+        this._maxquant.setValue(20);
     }
 
     public Product getProd() {
@@ -20,16 +24,24 @@ public class ProductLine {
     }
 
     public int getQuant() {
+        return this._quant.getValue();
+    }
+
+    public IntegerProperty getQuantProperty() {
         return this._quant;
     }
 
+    public IntegerProperty getMaxQuantProperty() {
+        return this._maxquant;
+    }
+
     public void setQuant(int quant) {
-        this._quant = quant;
+        this._quant.setValue(quant);
     }
 
     @Override
     public String toString() {
-        return this._prod.toString() + " - " +  _quant;
+        return this._prod.toString() + " - " + _quant;
     }
 
 }

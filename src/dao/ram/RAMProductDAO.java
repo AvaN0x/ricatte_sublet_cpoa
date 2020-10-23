@@ -25,8 +25,12 @@ public class RAMProductDAO implements ProductDAO {
 
     @Override
     public boolean create(Product prod) {
-        while (data.contains(prod))
+        while (data.contains(prod)) {
+            if (data.get(prod.getId()).getNom() == prod.getNom()
+                    && data.get(prod.getId()).getCategory().getId() == prod.getCategory().getId())
+                throw new IllegalAccessError("Duplicate key `nom` and `id_category`");
             prod.setId(prod.getId() + 1);
+        }
         return data.add(prod);
     }
 

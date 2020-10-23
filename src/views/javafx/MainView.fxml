@@ -240,9 +240,9 @@
                      <right>
                         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnCmdAdd" mnemonicParsing="false" text="Ajouter" />
-                              <Button fx:id="btnCmdEdit" mnemonicParsing="false" text="Modifier" />
-                              <Button fx:id="btnCmdRem" mnemonicParsing="false" text="Supprimer" />
+                              <Button fx:id="btnCmdAdd" mnemonicParsing="false" text="Ajouter" onAction="#createCmdClick" />
+                              <Button fx:id="btnCmdEdit" mnemonicParsing="false" text="Modifier" onAction="#editCmdClick"  />
+                              <Button fx:id="btnCmdRem" mnemonicParsing="false" text="Supprimer" onAction="#delCmdClick"  />
                            </children>
                         </VBox>
                      </right></BorderPane>

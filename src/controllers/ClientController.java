@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -17,7 +18,7 @@ public class ClientController extends BaseController {
 	@FXML
 	private TextField tfIdentifiant;
 	@FXML
-	private PasswordField pfPassword;
+	private PasswordField pfMotDePasse;
 	@FXML
 	private TextField tfAdrNumero;
 	@FXML
@@ -28,25 +29,53 @@ public class ClientController extends BaseController {
 	private TextField tfAdrVille;
 	@FXML
 	private TextField tfAdrPays;
+	@FXML
+	private Button btnCreate;
+
+	private int idCli = -1;
 
 	@Override
 	public void initialize(URL location, ResourceBundle ressources) {
 		try {
-
 		} catch (Exception e) {
-			// TODO: handle exception
+			showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
 		}
 	}
 
 	public void createClick() {
 		try {
-
+			if (idCli == -1) {
+				if (!_daos.getClientDAO()
+						.create(new Client(tfNom.getText(), tfPrenom.getText(), tfIdentifiant.getText(),
+								pfMotDePasse.getText(), Integer.parseInt(tfAdrNumero.getText()), tfAdrVoie.getText(),
+								Integer.parseInt(tfAdrCodePostal.getText()), tfAdrVille.getText(),
+								tfAdrPays.getText())))
+					showErrorAlert("On s'attendait à tout, sauf à ça.", "La création n'a pas modifié les données");
+			} else {
+				if (!_daos.getClientDAO()
+						.update(new Client(idCli, tfNom.getText(), tfPrenom.getText(), tfIdentifiant.getText(),
+								pfMotDePasse.getText(), Integer.parseInt(tfAdrNumero.getText()), tfAdrVoie.getText(),
+								Integer.parseInt(tfAdrCodePostal.getText()), tfAdrVille.getText(),
+								tfAdrPays.getText())))
+					showErrorAlert("On s'attendait à tout, sauf à ça.", "La modification n'a pas modifié les données");
+			}
+			fermer();
 		} catch (Exception e) {
-			// TODO: handle exception
+			showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
 		}
 	}
 
 	public void setClient(Client cli) {
-
+		tfNom.setText(cli.getNom());
+		tfPrenom.setText(cli.getPrenom());
+		tfIdentifiant.setText(cli.getIdentifiant());
+		pfMotDePasse.setText(cli.getMotDePasse());
+		tfAdrNumero.setText(Integer.toString(cli.getAdrNumero()));
+		tfAdrVoie.setText(cli.getAdrVoie());
+		tfAdrCodePostal.setText(Integer.toString(cli.getAdrCodePostal()));
+		tfAdrVille.setText(cli.getNom());
+		tfAdrPays.setText(cli.getNom());
+		btnCreate.setText("Editer");
+		this.idCli = cli.getId();
 	}
 }

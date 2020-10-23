@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class Command {
     private int _id;
-    private LocalDate _date_command;
+    private LocalDate _dateCommand;
     private Client _client;
     private HashMap<Product, CommandLine> _commandLines; // HashMap<id_produit, commandLine>
 
@@ -18,7 +18,7 @@ public class Command {
 
         if (date_command == null)
             throw new IllegalArgumentException("\"Date Command\" can't be null");
-        this._date_command = date_command;
+        this._dateCommand = date_command;
 
         if (client == null)
             throw new IllegalArgumentException("\"Client\" can't be null");
@@ -56,13 +56,13 @@ public class Command {
     }
 
     public LocalDate getDateCommand() {
-        return this._date_command;
+        return this._dateCommand;
     }
 
     public void setDateCommand(LocalDate date_command) {
         if (date_command == null)
             throw new IllegalArgumentException("\"Date Command\" can't be null");
-        this._date_command = date_command;
+        this._dateCommand = date_command;
     }
 
     public Client getClient() {
@@ -116,7 +116,7 @@ public class Command {
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _date_command, _client, _commandLines);
+        return Objects.hash(_id, _dateCommand, _client, _commandLines);
     }
 
     @Override

@@ -32,7 +32,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Fichier">
             <items>
-              <MenuItem mnemonicParsing="false" text="Ajout de Client" />
+              <MenuItem mnemonicParsing="false" onAction="#createClientClick" text="Ajout de Client" />
                   <MenuItem mnemonicParsing="false" onAction="#createCategClick" text="Ajout de catégorie" />
                   <MenuItem mnemonicParsing="false" onAction="#createProdClick" text="Ajout de produit" />
                   <MenuItem mnemonicParsing="false" onAction="#createCmdClick" text="Ajout de commande" />

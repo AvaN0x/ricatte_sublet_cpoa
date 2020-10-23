@@ -1,12 +1,15 @@
 package controllers;
 
 import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -21,6 +24,9 @@ public class MainController extends BaseController {
     private Menu menuPersistance;
 
     // region Client Fields
+    private FilteredList<Client> filteredClients;
+    @FXML
+    private TextField tfSearchClient;
     @FXML
     private TableView<Client> tvClients;
     @FXML
@@ -34,6 +40,9 @@ public class MainController extends BaseController {
     // endregion
 
     // region Category Fields
+    private FilteredList<Category> filteredCategs;
+    @FXML
+    private TextField tfSearchCateg;
     @FXML
     private TableView<Category> tvCategories;
     @FXML
@@ -41,6 +50,9 @@ public class MainController extends BaseController {
     // endregion
 
     // region Products Fields
+    private FilteredList<Product> filteredProds;
+    @FXML
+    private TextField tfSearchProd;
     @FXML
     private TableView<Product> tvProduits;
     @FXML
@@ -62,6 +74,9 @@ public class MainController extends BaseController {
     // endregion
 
     // region Commands Fields
+    private FilteredList<Command> filteredCmds;
+    @FXML
+    private TextField tfSearchCommand;
     @FXML
     private TableView<Command> tvCommandes;
     @FXML
@@ -99,8 +114,8 @@ public class MainController extends BaseController {
 
         reloadPersistance(persistance);
         try {
-            updateCategTable();
             updateClientTable();
+            updateCategTable();
             updateCommandTable();
             updateProductTable();
         } catch (Exception e) {
@@ -111,7 +126,10 @@ public class MainController extends BaseController {
     // region Client Methods/Events
     public void updateClientTable() throws Exception {
         tvClients.getItems().clear();
-        tvClients.setItems(FXCollections.observableArrayList(_daos.getClientDAO().getAll()));
+        filteredClients = new FilteredList<>(FXCollections.observableArrayList(_daos.getClientDAO().getAll()),
+                p -> true);
+        SortedList<Client> sortedData = new SortedList<>(filteredClients);
+        tvClients.setItems(sortedData);
     }
 
     private void initClients() throws Exception {
@@ -121,6 +139,23 @@ public class MainController extends BaseController {
         colCliPays.setCellValueFactory(new PropertyValueFactory<>("adrPays"));
 
         colCliNom.setSortType(TableColumn.SortType.DESCENDING);
+
+        tfSearchClient.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredClients.setPredicate(client -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (client.getPrenom().toLowerCase().contains(lowerCaseFilter)
+                        || client.getNom().toLowerCase().contains(lowerCaseFilter)
+                        || client.getAdrVille().toLowerCase().contains(lowerCaseFilter)
+                        || client.getAdrPays().toLowerCase().contains(lowerCaseFilter))
+                    return true;
+                return false;
+            });
+        });
 
         updateClientTable();
     }
@@ -157,13 +192,30 @@ public class MainController extends BaseController {
     // region Category Methods/Events
     public void updateCategTable() throws Exception {
         tvCategories.getItems().clear();
-        tvCategories.setItems(FXCollections.observableArrayList(_daos.getCategoryDAO().getAll()));
+        filteredCategs = new FilteredList<>(FXCollections.observableArrayList(_daos.getCategoryDAO().getAll()),
+                p -> true);
+        SortedList<Category> sortedData = new SortedList<>(filteredCategs);
+        tvCategories.setItems(sortedData);
     }
 
     private void initCategs() throws Exception {
         colCategTitre.setCellValueFactory(new PropertyValueFactory<>("title"));
 
         colCategTitre.setSortType(TableColumn.SortType.DESCENDING);
+
+        tfSearchCateg.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredCategs.setPredicate(categ -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (categ.getTitle().toLowerCase().contains(lowerCaseFilter))
+                    return true;
+                return false;
+            });
+        });
 
         updateCategTable();
     }
@@ -200,7 +252,10 @@ public class MainController extends BaseController {
     // region Products Methods/Events
     public void updateProductTable() throws Exception {
         tvProduits.getItems().clear();
-        tvProduits.setItems(FXCollections.observableArrayList(_daos.getProductDAO().getAll()));
+        filteredProds = new FilteredList<>(FXCollections.observableArrayList(_daos.getProductDAO().getAll()),
+                p -> true);
+        SortedList<Product> sortedData = new SortedList<>(filteredProds);
+        tvProduits.setItems(sortedData);
     }
 
     private void initProducts() throws Exception {
@@ -212,7 +267,20 @@ public class MainController extends BaseController {
         colProdNom.setSortType(TableColumn.SortType.DESCENDING);
         colProdDescription.setSortable(false);
 
-        updateProductTable();
+        tfSearchProd.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredProds.setPredicate(prod -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (prod.getNom().toLowerCase().contains(lowerCaseFilter)
+                        || prod.getCategory().getTitle().toLowerCase().contains(lowerCaseFilter))
+                    return true;
+                return false;
+            });
+        });
 
         tvProduits.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -222,6 +290,8 @@ public class MainController extends BaseController {
                 lblProdInfoDescription.setText(newSelection.getDescription());
             }
         });
+
+        updateProductTable();
     }
 
     public void createProdClick() {
@@ -256,7 +326,9 @@ public class MainController extends BaseController {
     // region Commands Methods/Events
     public void updateCommandTable() throws Exception {
         tvCommandes.getItems().clear();
-        tvCommandes.setItems(FXCollections.observableArrayList(_daos.getCommandDAO().getAll()));
+        filteredCmds = new FilteredList<>(FXCollections.observableArrayList(_daos.getCommandDAO().getAll()), p -> true);
+        SortedList<Command> sortedData = new SortedList<>(filteredCmds);
+        tvCommandes.setItems(sortedData);
     }
 
     private void initCommands() throws Exception {
@@ -264,6 +336,22 @@ public class MainController extends BaseController {
         colCmdDate.setCellValueFactory(new PropertyValueFactory<>("dateCommand"));
 
         colCmdCli.setSortType(TableColumn.SortType.DESCENDING);
+
+        tfSearchCommand.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredCmds.setPredicate(cmd -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (cmd.getClient().getPrenom().toLowerCase().contains(lowerCaseFilter)
+                        || cmd.getClient().getNom().toLowerCase().contains(lowerCaseFilter)
+                        || cmd.getDateCommand().toString().toLowerCase().contains(lowerCaseFilter))
+                    return true;
+                return false;
+            });
+        });
 
         updateCommandTable();
     }

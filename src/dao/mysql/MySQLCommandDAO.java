@@ -3,6 +3,7 @@ package dao.mysql;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -56,18 +57,22 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
     @Override
     public boolean create(Command cmd) throws SQLException, IOException {
         Connection con = startConnection();
-        PreparedStatement update = con.prepareStatement("INSERT INTO commande(date_commande, id_client) VALUES (?, ?)");
+        PreparedStatement update = con.prepareStatement("INSERT INTO commande(date_commande, id_client) VALUES (?, ?)",
+                Statement.RETURN_GENERATED_KEYS);
         update.setDate(1, Date.valueOf(cmd.getDateCommand()));
         update.setInt(2, cmd.getClient().getId());
         int result = update.executeUpdate();
-        con.close();
 
         boolean lineResult = true;
-        for (HashMap.Entry<Product, CommandLine> line : cmd.getCommandLines().entrySet()) {
-            boolean res = MySQLCommandLineDAO.getInstance().create(line.getValue(), line.getKey());
-            if (!res)
-                lineResult = false;
+        var keys = update.getGeneratedKeys();
+        while (keys.next()) {
+            cmd.setId(keys.getInt(1));
+            for (HashMap.Entry<Product, CommandLine> line : cmd.getCommandLines().entrySet()) {
+                if (!MySQLCommandLineDAO.getInstance().create(line.getValue(), line.getKey()))
+                    lineResult = false;
+            }
         }
+        con.close();
 
         return result >= 1 && lineResult;
     }
@@ -75,19 +80,25 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
     @Override
     public boolean update(Command cmd) throws SQLException, IOException {
         Connection con = startConnection();
-        PreparedStatement update = con
-                .prepareStatement("UPDATE commande SET date_commande=?, id_client=? WHERE id_commande=?");
+        PreparedStatement update = con.prepareStatement(
+                "UPDATE commande SET date_commande=?, id_client=? WHERE id_commande=?",
+                Statement.RETURN_GENERATED_KEYS);
         update.setDate(1, Date.valueOf(cmd.getDateCommand()));
         update.setInt(2, cmd.getClient().getId());
         update.setInt(3, cmd.getId());
         int result = update.executeUpdate();
-        con.close();
 
         boolean lineResult = true;
-        for (HashMap.Entry<Product, CommandLine> line : cmd.getCommandLines().entrySet()) {
-            boolean res = MySQLCommandLineDAO.getInstance().update(line.getValue(), line.getKey());
-            if (!res)
-                lineResult = false;
+        if (result > 0) {
+            PreparedStatement select = con.prepareStatement("DELETE FROM ligne_commande WHERE id_commande=?");
+            select.setInt(1, cmd.getId());
+            result = select.executeUpdate();
+            con.close();
+
+            for (HashMap.Entry<Product, CommandLine> line : cmd.getCommandLines().entrySet()) {
+                if (!MySQLCommandLineDAO.getInstance().create(line.getValue(), line.getKey()))
+                    lineResult = false;
+            }
         }
 
         return result >= 1 && lineResult;

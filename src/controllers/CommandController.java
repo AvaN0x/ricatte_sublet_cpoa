@@ -36,7 +36,7 @@ public class CommandController extends BaseController {
     private TableColumn<ProductLine, Integer> colProdQuant;
 
     private ArrayList<ProductLine> prodLine;
-    private int idCommand = -1;
+    private Command command;
 
     @Override
     public void initialize(URL location, ResourceBundle ressources) {
@@ -59,7 +59,7 @@ public class CommandController extends BaseController {
             colProdQuant.setCellValueFactory(new PropertyValueFactory<>("quant"));
 
             updateProductTable();
-            if (idCommand == -1)
+            if (command != null)
                 dpDateCommand.setValue(LocalDate.now());
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
@@ -71,18 +71,23 @@ public class CommandController extends BaseController {
     }
 
     public void updateProductTable() throws Exception {
-        tvProducts.getItems().clear();
-        prodLine = new ArrayList<>();
         var prods = _daos.getProductDAO().getAll();
-        if (idCommand == -1)
-            for (var product : prods) {
+        prodLine = new ArrayList<>();
+
+        tvProducts.getItems().clear();
+        for (var product : prods) {
+            if (command != null && command.getCommandLines().size() > 0
+                    && command.getCommandLines().containsKey(product))
+                prodLine.add(new ProductLine(product, command.getCommandLines().get(product).getQuantite()));
+            else
                 prodLine.add(new ProductLine(product, 0));
-            }
+        }
         tvProducts.setItems(FXCollections.observableArrayList(prodLine));
     }
 
     public void createClick() {
         try {
+            System.out.println(prodLine);
             var cmd = new Command(dpDateCommand.getValue(), cbClient.getSelectionModel().getSelectedItem());
             var commandLines = new HashMap<models.Product, CommandLine>();
             for (var productLine : prodLine) {
@@ -91,13 +96,15 @@ public class CommandController extends BaseController {
                             new CommandLine(cmd, productLine.getQuant(), productLine.getProd().getTarif()));
             }
             cmd.setCommandLines(commandLines);
-            if (idCommand == -1) {
-                if (!_daos.getCommandDAO().create(cmd))
-                    showErrorAlert("On s'attendait à tout, sauf à ça.", "La création n'a pasmodifié les données");
+            if (command != null) {
+                // if (!_daos.getCommandDAO().create(cmd))
+                // showErrorAlert("On s'attendait à tout, sauf à ça.", "La création n'a
+                // pas modifié les données");
             } else {
-                cmd.setId(idCommand);
-                if (!_daos.getCommandDAO().update(cmd))
-                    showErrorAlert("On s'attendait à tout, sauf à ça.", "La modification n'a pas modifié les données");
+                cmd.setId(command.getId());
+                // if (!_daos.getCommandDAO().update(cmd))
+                // showErrorAlert("On s'attendait à tout, sauf à ça.", "La modification n'a pas
+                // modifié les données");
             }
             fermer();
         } catch (Exception e) {
@@ -108,8 +115,13 @@ public class CommandController extends BaseController {
     public void setCommand(Command cmd) {
         cbClient.getSelectionModel().select(cmd.getClient());
         dpDateCommand.setValue(cmd.getDateCommand());
-        btnCreate.setText("Modififer");
-        this.idCommand = cmd.getId();
+        btnCreate.setText("Editer");
+        this.command = cmd;
+        try {
+            updateProductTable();
+        } catch (Exception e) {
+            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+        }
     }
 
 }

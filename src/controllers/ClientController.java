@@ -18,7 +18,7 @@ public class ClientController extends BaseController {
 	@FXML
 	private TextField tfIdentifiant;
 	@FXML
-	private PasswordField pfPassword;
+	private PasswordField pfMotDePasse;
 	@FXML
 	private TextField tfAdrNumero;
 	@FXML
@@ -47,14 +47,14 @@ public class ClientController extends BaseController {
 			if (idCli == -1) {
 				if (!_daos.getClientDAO()
 						.create(new Client(tfNom.getText(), tfPrenom.getText(), tfIdentifiant.getText(),
-								pfPassword.getText(), Integer.parseInt(tfAdrNumero.getText()), tfAdrVoie.getText(),
+								pfMotDePasse.getText(), Integer.parseInt(tfAdrNumero.getText()), tfAdrVoie.getText(),
 								Integer.parseInt(tfAdrCodePostal.getText()), tfAdrVille.getText(),
 								tfAdrPays.getText())))
 					showErrorAlert("On s'attendait à tout, sauf à ça.", "La création n'a pas modifié les données");
 			} else {
 				if (!_daos.getClientDAO()
 						.update(new Client(idCli, tfNom.getText(), tfPrenom.getText(), tfIdentifiant.getText(),
-								pfPassword.getText(), Integer.parseInt(tfAdrNumero.getText()), tfAdrVoie.getText(),
+								pfMotDePasse.getText(), Integer.parseInt(tfAdrNumero.getText()), tfAdrVoie.getText(),
 								Integer.parseInt(tfAdrCodePostal.getText()), tfAdrVille.getText(),
 								tfAdrPays.getText())))
 					showErrorAlert("On s'attendait à tout, sauf à ça.", "La modification n'a pas modifié les données");
@@ -69,7 +69,7 @@ public class ClientController extends BaseController {
 		tfNom.setText(cli.getNom());
 		tfPrenom.setText(cli.getPrenom());
 		tfIdentifiant.setText(cli.getIdentifiant());
-		pfPassword.setText(cli.getMotDePasse());
+		pfMotDePasse.setText(cli.getMotDePasse());
 		tfAdrNumero.setText(Integer.toString(cli.getAdrNumero()));
 		tfAdrVoie.setText(cli.getAdrVoie());
 		tfAdrCodePostal.setText(Integer.toString(cli.getAdrCodePostal()));

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -14,6 +16,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
@@ -70,9 +73,9 @@
                      <right>
                         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnCliAdd" mnemonicParsing="false" text="Ajouter" onAction="#createClientClick" />
-                              <Button fx:id="btnCliEdit" mnemonicParsing="false" text="Modifier" onAction="#editClientClick" />
-                              <Button fx:id="btnCliRem" mnemonicParsing="false" text="Supprimer" onAction="#delClientClick" />
+                              <Button fx:id="btnCliAdd" mnemonicParsing="false" onAction="#createClientClick" text="Ajouter" />
+                              <Button fx:id="btnCliEdit" mnemonicParsing="false" onAction="#editClientClick" text="Modifier" />
+                              <Button fx:id="btnCliRem" mnemonicParsing="false" onAction="#delClientClick" text="Supprimer" />
                            </children>
                         </VBox>
                      </right></BorderPane>
@@ -94,9 +97,9 @@
                      <right>
                         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnCategAdd" mnemonicParsing="false" text="Ajouter" onAction="#createCategClick" />
-                              <Button fx:id="btnCategEdit" mnemonicParsing="false" text="Modifier" onAction="#editCategClick" />
-                              <Button fx:id="btnCategRem" mnemonicParsing="false" text="Supprimer" onAction="#delCategClick" />
+                              <Button fx:id="btnCategAdd" mnemonicParsing="false" onAction="#createCategClick" text="Ajouter" />
+                              <Button fx:id="btnCategEdit" mnemonicParsing="false" onAction="#editCategClick" text="Modifier" />
+                              <Button fx:id="btnCategRem" mnemonicParsing="false" onAction="#delCategClick" text="Supprimer" />
                            </children>
                         </VBox>
                      </right></BorderPane>
@@ -121,12 +124,93 @@
                      <right>
                         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnProdAdd" mnemonicParsing="false" text="Ajouter"  onAction="#createProdClick" />
-                              <Button fx:id="btnProdEdit" mnemonicParsing="false" text="Modifier" onAction="#editProdClick" />
-                              <Button fx:id="btnProdRem" mnemonicParsing="false" text="Supprimer" onAction="#delProdClick" />
+                              <Button fx:id="btnProdAdd" mnemonicParsing="false" onAction="#createProdClick" text="Ajouter" />
+                              <Button fx:id="btnProdEdit" mnemonicParsing="false" onAction="#editProdClick" text="Modifier" />
+                              <Button fx:id="btnProdRem" mnemonicParsing="false" onAction="#delProdClick" text="Supprimer" />
                            </children>
                         </VBox>
                      </right>
+                     <bottom>
+                        <GridPane fx:id="gridProdInfo" BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <GridPane GridPane.rowIndex="2">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="Tarif :">
+                                             <padding>
+                                                <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="lblProdInfoTarif" text="">
+                                             <padding>
+                                                <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label text="Catégorie :">
+                                             <padding>
+                                                <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="lblProdInfoCateg" text="">
+                                             <padding>
+                                                <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Nom :">
+                                       <padding>
+                                          <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="lblProdInfoNom" text="">
+                                       <padding>
+                                          <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="Description :">
+                                       <padding>
+                                          <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="lblProdInfoDescription" text="">
+                                       <padding>
+                                          <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </bottom>
                   </BorderPane>
                </content>
             </Tab>

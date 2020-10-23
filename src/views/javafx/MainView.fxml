@@ -83,11 +83,17 @@
                      <top>
                         <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <TextField>
+                              <Button fx:id="btnSearchClient" mnemonicParsing="false" text="Rechercher">
+                                 <graphic>
+                                    <TextField fx:id="tfSearchClient" promptText="Rechercher..." />
+                                 </graphic>
                                  <HBox.margin>
-                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                    <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
-                              </TextField>
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Button>
                            </children>
                         </HBox>
                      </top></BorderPane>
@@ -240,9 +246,9 @@
                      <right>
                         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnCmdAdd" mnemonicParsing="false" text="Ajouter" onAction="#createCmdClick" />
-                              <Button fx:id="btnCmdEdit" mnemonicParsing="false" text="Modifier" onAction="#editCmdClick"  />
-                              <Button fx:id="btnCmdRem" mnemonicParsing="false" text="Supprimer" onAction="#delCmdClick"  />
+                              <Button fx:id="btnCmdAdd" mnemonicParsing="false" onAction="#createCmdClick" text="Ajouter" />
+                              <Button fx:id="btnCmdEdit" mnemonicParsing="false" onAction="#editCmdClick" text="Modifier" />
+                              <Button fx:id="btnCmdRem" mnemonicParsing="false" onAction="#delCmdClick" text="Supprimer" />
                            </children>
                         </VBox>
                      </right></BorderPane>

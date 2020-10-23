@@ -25,7 +25,7 @@
   <rowConstraints>
     <RowConstraints />
     <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="374.0" minHeight="10.0" prefHeight="368.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="368.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <MenuBar GridPane.rowIndex="1">
@@ -45,7 +45,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="2">
+      <TabPane maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="2">
         <tabs>
           <Tab text="Client">
                <content>

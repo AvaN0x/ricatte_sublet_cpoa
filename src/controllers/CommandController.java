@@ -48,10 +48,10 @@ public class CommandController extends BaseController {
 
             colProdQuant.setCellFactory(col -> {
                 TableCell<ProductLine, ProductLine> cell = new TableCell<ProductLine, ProductLine>() {
-                    private final Spinner<Integer> count;
+                    private Spinner<Integer> count;
 
-                    private final SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory;
-                    private final ChangeListener<Number> valueChangeListener;
+                    private SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory;
+                    private ChangeListener<Number> valueChangeListener;
 
                     {
                         valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 0);

@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -78,7 +79,18 @@
                               <Button fx:id="btnCliRem" mnemonicParsing="false" onAction="#delClientClick" text="Supprimer" />
                            </children>
                         </VBox>
-                     </right></BorderPane>
+                     </right>
+                     <top>
+                        <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField>
+                                 <HBox.margin>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </top></BorderPane>
                </content>
             </Tab>
             <Tab text="Catégorie">

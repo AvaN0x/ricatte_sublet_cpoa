@@ -15,7 +15,9 @@ public class Main extends Application {
             Scene scene = new Scene((GridPane) fxmlLoader.load());
             scene.getStylesheets().add("views/javafx/style.css");
             primaryStage.setScene(scene);
-            primaryStage.setTitle("TITRE");
+            primaryStage.setTitle("ClothesMas");
+            primaryStage.setMinWidth(400);
+            primaryStage.setMinHeight(320);
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();

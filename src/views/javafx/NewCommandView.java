@@ -7,6 +7,8 @@ public class NewCommandView extends BaseView {
     public NewCommandView() throws IOException {
         super("NewClientView.fxml");
         this.setTitle("Création d'un client");
+        this.setMinWidth(300);
+        this.setMinHeight(200);
     }
 
     public NewCommandView(models.Command cmd) throws IOException {

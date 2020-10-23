@@ -35,6 +35,12 @@ public class MySQLCategoryDAO extends MySQLDAO implements CategoryDAO {
     @Override
     public boolean create(Category categ) throws SQLException {
         Connection con = startConnection();
+        PreparedStatement select = con.prepareStatement("SELECT COUNT(*) FROM categorie WHERE titre=? LIMIT 1");
+        select.setString(1, categ.getTitle());
+        ResultSet categRes = select.executeQuery();
+        while (categRes.next())
+            if (categRes.getInt(1) > 0)
+                throw new SQLException("Duplicate key `titre`");
         PreparedStatement update = con.prepareStatement("INSERT INTO categorie(titre, visuel) VALUES (?, ?)");
         update.setString(1, categ.getTitle());
         update.setString(2, categ.getVisuel());

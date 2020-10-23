@@ -39,6 +39,14 @@ public class MySQLProductDAO extends MySQLDAO implements ProductDAO {
     @Override
     public boolean create(Product prod) throws SQLException {
         Connection con = startConnection();
+        PreparedStatement select = con
+                .prepareStatement("SELECT COUNT(*) FROM produit WHERE nom=? AND id_categorie=? LIMIT 1");
+        select.setString(1, prod.getNom());
+        select.setInt(2, prod.getCategory().getId());
+        ResultSet prodRes = select.executeQuery();
+        while (prodRes.next())
+            if (prodRes.getInt(1) > 0)
+                throw new SQLException("Duplicate key `nom` and `id_category`");
         PreparedStatement update = con.prepareStatement(
                 "INSERT INTO produit(nom, description, tarif, visuel, id_categorie) VALUES (?, ?, ?, ?, ?)",
                 Statement.RETURN_GENERATED_KEYS);

@@ -38,6 +38,12 @@ public class MySQLClientDAO extends MySQLDAO implements ClientDAO {
     @Override
     public boolean create(Client cli) throws SQLException {
         Connection con = startConnection();
+        PreparedStatement select = con.prepareStatement("SELECT COUNT(*) FROM client WHERE identifiant=? LIMIT 1");
+        select.setString(1, cli.getIdentifiant());
+        ResultSet cliRes = select.executeQuery();
+        while (cliRes.next())
+            if (cliRes.getInt(1) > 0)
+                throw new SQLException("Duplicate key `identifiant`");
         PreparedStatement update = con.prepareStatement(
                 "INSERT INTO client(nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         update.setString(1, cli.getNom());

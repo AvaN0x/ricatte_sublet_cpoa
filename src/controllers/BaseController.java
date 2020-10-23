@@ -8,11 +8,11 @@ public abstract class BaseController implements javafx.fxml.Initializable {
     protected Stage _view;
 
     public BaseController() {
-        reloadPersistance();
+        reloadPersistance(dao.Persistance.MYSQL);
     }
 
-    public static void reloadPersistance() {
-        _daos = dao.DAOFactory.getDAOFactory(dao.Persistance.MYSQL);
+    public static void reloadPersistance(dao.Persistance persistance) {
+        _daos = dao.DAOFactory.getDAOFactory(persistance);
     }
 
     public void setVue(Stage view) {

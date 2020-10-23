@@ -4,11 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.EnumSet;
 import java.util.ResourceBundle;
 
 import models.*;
@@ -71,12 +73,38 @@ public class MainController extends BaseController {
     @Override
     public void initialize(URL location, ResourceBundle ressources) {
         try {
+            for (var mode : EnumSet.allOf(dao.Persistance.class)) {
+                var cmi = new CheckMenuItem(mode.toString());
+                cmi.setOnAction(e -> changeMode(mode, cmi));
+                if (mode == dao.Persistance.MYSQL)
+                    cmi.setSelected(true);
+                menuPersistance.getItems().add(cmi);
+            }
+
             initClients();
             initCategs();
             initProducts();
             initCommands();
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+        }
+    }
+
+    private void changeMode(dao.Persistance persistance, CheckMenuItem sender) {
+        for (var cmi : menuPersistance.getItems()) {
+            if (cmi instanceof CheckMenuItem)
+                ((CheckMenuItem) cmi).setSelected(false);
+        }
+        sender.setSelected(true);
+
+        reloadPersistance(persistance);
+        try {
+            updateCategTable();
+            updateClientTable();
+            updateCommandTable();
+            updateProductTable();
+        } catch (Exception e) {
+            showErrorAlert("On s'attendait à tout, sauf à ça.", "Certains éléments n'ont pû être rechargés.");
         }
     }
 

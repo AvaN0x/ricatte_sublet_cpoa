@@ -86,8 +86,8 @@ public class ClientController extends BaseController {
 		tfAdrNumero.setText(Integer.toString(cli.getAdrNumero()));
 		tfAdrVoie.setText(cli.getAdrVoie());
 		tfAdrCodePostal.setText(Integer.toString(cli.getAdrCodePostal()));
-		tfAdrVille.setText(cli.getNom());
-		tfAdrPays.setText(cli.getNom());
+		tfAdrVille.setText(cli.getAdrVille());
+		tfAdrPays.setText(cli.getAdrPays());
 		btnCreate.setText("Editer");
 		this.idCli = cli.getId();
 	}

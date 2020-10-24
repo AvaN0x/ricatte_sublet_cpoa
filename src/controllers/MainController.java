@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.ResourceBundle;
 
@@ -125,11 +126,11 @@ public class MainController extends BaseController {
 
     // region Client Methods/Events
     public void updateClientTable() throws Exception {
-        tvClients.getItems().clear();
         filteredClients = new FilteredList<>(FXCollections.observableArrayList(_daos.getClientDAO().getAll()),
                 p -> true);
         SortedList<Client> sortedData = new SortedList<>(filteredClients);
         tvClients.setItems(sortedData);
+        tvClients.refresh();
     }
 
     private void initClients() throws Exception {
@@ -148,12 +149,27 @@ public class MainController extends BaseController {
 
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (client.getPrenom().toLowerCase().contains(lowerCaseFilter)
-                        || client.getNom().toLowerCase().contains(lowerCaseFilter)
-                        || client.getAdrVille().toLowerCase().contains(lowerCaseFilter)
-                        || client.getAdrPays().toLowerCase().contains(lowerCaseFilter))
-                    return true;
-                return false;
+                try {
+                    if (lowerCaseFilter.startsWith(":")) {
+                        var filter = lowerCaseFilter.split("\\b:");
+                        filter[0] = filter[0].substring(1);
+
+                        if (colCliNom.getText().toLowerCase().startsWith(filter[0]))
+                            return client.getNom().toLowerCase().contains(filter[1]);
+                        else if (colCliPrenom.getText().toLowerCase().startsWith(filter[0]))
+                            return client.getPrenom().toLowerCase().contains(filter[1]);
+                        else if (colCliVille.getText().toLowerCase().startsWith(filter[0]))
+                            return client.getAdrVille().toLowerCase().contains(filter[1]);
+                        else if (colCliPays.getText().toLowerCase().startsWith(filter[0]))
+                            return client.getAdrPays().toLowerCase().contains(filter[1]);
+                        return false;
+                    }
+                } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                    return false;
+                }
+
+                return (client.getPrenom().toLowerCase().contains(lowerCaseFilter)
+                        || client.getNom().toLowerCase().contains(lowerCaseFilter));
             });
         });
 
@@ -191,11 +207,11 @@ public class MainController extends BaseController {
 
     // region Category Methods/Events
     public void updateCategTable() throws Exception {
-        tvCategories.getItems().clear();
         filteredCategs = new FilteredList<>(FXCollections.observableArrayList(_daos.getCategoryDAO().getAll()),
                 p -> true);
         SortedList<Category> sortedData = new SortedList<>(filteredCategs);
         tvCategories.setItems(sortedData);
+        tvCategories.refresh();
     }
 
     private void initCategs() throws Exception {
@@ -210,6 +226,19 @@ public class MainController extends BaseController {
                 }
 
                 String lowerCaseFilter = newValue.toLowerCase();
+
+                try {
+                    if (lowerCaseFilter.startsWith(":")) {
+                        var filter = lowerCaseFilter.split("\\b:");
+                        filter[0] = filter[0].substring(1);
+
+                        if (colCategTitre.getText().toLowerCase().startsWith(filter[0]))
+                            return categ.getTitle().toLowerCase().contains(filter[1]);
+                        return false;
+                    }
+                } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                    return false;
+                }
 
                 if (categ.getTitle().toLowerCase().contains(lowerCaseFilter))
                     return true;
@@ -251,11 +280,11 @@ public class MainController extends BaseController {
 
     // region Products Methods/Events
     public void updateProductTable() throws Exception {
-        tvProduits.getItems().clear();
         filteredProds = new FilteredList<>(FXCollections.observableArrayList(_daos.getProductDAO().getAll()),
                 p -> true);
         SortedList<Product> sortedData = new SortedList<>(filteredProds);
         tvProduits.setItems(sortedData);
+        tvProduits.refresh();
     }
 
     private void initProducts() throws Exception {
@@ -275,10 +304,40 @@ public class MainController extends BaseController {
 
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (prod.getNom().toLowerCase().contains(lowerCaseFilter)
-                        || prod.getCategory().getTitle().toLowerCase().contains(lowerCaseFilter))
-                    return true;
-                return false;
+                try {
+                    if (lowerCaseFilter.startsWith(":")) {
+                        var filter = lowerCaseFilter.split("\\b:");
+                        filter[0] = filter[0].substring(1);
+
+                        if (colProdNom.getText().toLowerCase().startsWith(filter[0]))
+                            return prod.getNom().toLowerCase().contains(filter[1]);
+                        else if (colProdDescription.getText().toLowerCase().startsWith(filter[0]))
+                            return prod.getDescription().toLowerCase().contains(filter[1]);
+                        else if (colProdCategorie.getText().toLowerCase().startsWith(filter[0]))
+                            return prod.getCategory().getTitle().toLowerCase().contains(filter[1]);
+                        return false;
+                    }
+                } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                    return false;
+                }
+
+                try {
+                    if (lowerCaseFilter.startsWith(">")) {
+                        if (lowerCaseFilter.charAt(1) == '=')
+                            return (prod.getTarif() >= Float.parseFloat(lowerCaseFilter.substring(2)));
+                        return (prod.getTarif() > Float.parseFloat(lowerCaseFilter.substring(1)));
+                    } else if (lowerCaseFilter.startsWith("<")) {
+                        if (lowerCaseFilter.charAt(1) == '=')
+                            return (prod.getTarif()) <= Float.parseFloat(lowerCaseFilter.substring(2));
+                        return (prod.getTarif()) < Float.parseFloat(lowerCaseFilter.substring(1));
+                    } else if (lowerCaseFilter.startsWith("="))
+                        return (prod.getTarif()) == Float.parseFloat(lowerCaseFilter.substring(1));
+                } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+                    return false;
+                }
+
+                return (prod.getNom().toLowerCase().contains(lowerCaseFilter)
+                        || prod.getCategory().getTitle().toLowerCase().contains(lowerCaseFilter));
             });
         });
 
@@ -325,10 +384,10 @@ public class MainController extends BaseController {
 
     // region Commands Methods/Events
     public void updateCommandTable() throws Exception {
-        tvCommandes.getItems().clear();
         filteredCmds = new FilteredList<>(FXCollections.observableArrayList(_daos.getCommandDAO().getAll()), p -> true);
         SortedList<Command> sortedData = new SortedList<>(filteredCmds);
         tvCommandes.setItems(sortedData);
+        tvCommandes.refresh();
     }
 
     private void initCommands() throws Exception {
@@ -344,6 +403,22 @@ public class MainController extends BaseController {
                 }
 
                 String lowerCaseFilter = newValue.toLowerCase();
+
+                try {
+                    if (lowerCaseFilter.startsWith(":")) {
+                        var filter = lowerCaseFilter.split("\\b:");
+                        filter[0] = filter[0].substring(1);
+
+                        if (colCmdCli.getText().toLowerCase().startsWith(filter[0]))
+                            return (cmd.getClient().getNom().toLowerCase().contains(filter[1])
+                                    || cmd.getClient().getPrenom().toLowerCase().contains(filter[1]));
+                        else if (colCmdDate.getText().toLowerCase().startsWith(filter[0]))
+                            return (cmd.getDateCommand().toString().toLowerCase().contains(filter[1]));
+                        return false;
+                    }
+                } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                    return false;
+                }
 
                 if (cmd.getClient().getPrenom().toLowerCase().contains(lowerCaseFilter)
                         || cmd.getClient().getNom().toLowerCase().contains(lowerCaseFilter)

@@ -80,17 +80,11 @@
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="btnSearchClient" mnemonicParsing="false" text="Rechercher">
-                                 <graphic>
-                                    <TextField fx:id="tfSearchClient" promptText="Rechercher..." />
-                                 </graphic>
+                              <TextField fx:id="tfSearchClient" promptText="Rechercher...">
                                  <HBox.margin>
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
-                                 <padding>
-                                    <Insets right="5.0" />
-                                 </padding>
-                              </Button>
+                              </TextField>
                            </children>
                         </HBox>
                      </top></BorderPane>
@@ -126,17 +120,11 @@
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="btnSearchCateg" mnemonicParsing="false" text="Rechercher">
-                                 <graphic>
-                                    <TextField fx:id="tfSearchCateg" promptText="Rechercher..." />
-                                 </graphic>
+                              <TextField fx:id="tfSearchCateg" promptText="Rechercher...">
                                  <HBox.margin>
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
-                                 <padding>
-                                    <Insets right="5.0" />
-                                 </padding>
-                              </Button>
+                              </TextField>
                            </children>
                         </HBox>
                      </top></BorderPane>
@@ -285,17 +273,11 @@
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="btnSearchProd" mnemonicParsing="false" text="Rechercher">
-                                 <graphic>
-                                    <TextField fx:id="tfSearchProd" promptText="Rechercher..." />
-                                 </graphic>
+                              <TextField fx:id="tfSearchProd" promptText="Rechercher...">
                                  <HBox.margin>
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
-                                 <padding>
-                                    <Insets right="5.0" />
-                                 </padding>
-                              </Button>
+                              </TextField>
                            </children>
                         </HBox>
                      </top>
@@ -330,17 +312,11 @@
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="btnSearchCommand" mnemonicParsing="false" text="Rechercher">
-                                 <graphic>
-                                    <TextField fx:id="tfSearchCommand" promptText="Rechercher..." />
-                                 </graphic>
+                              <TextField fx:id="tfSearchCommand" promptText="Rechercher...">
                                  <HBox.margin>
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </HBox.margin>
-                                 <padding>
-                                    <Insets right="5.0" />
-                                 </padding>
-                              </Button>
+                              </TextField>
                            </children>
                         </HBox>
                      </top></BorderPane>

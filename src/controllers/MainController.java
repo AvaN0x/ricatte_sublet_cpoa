@@ -179,6 +179,7 @@ public class MainController extends BaseController {
                 var filteredList = new FilteredList<>(FXCollections.observableArrayList(_daos.getClientDAO().getAll()),
                         p -> true);
                 SortedList<Client> sortedData = new SortedList<>(filteredList);
+                sortedData.comparatorProperty().bind(tvClients.comparatorProperty());
                 Platform.runLater(() -> {
                     filteredClients = filteredList;
                     tvClients.setItems(sortedData);
@@ -195,8 +196,6 @@ public class MainController extends BaseController {
         colCliPrenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         colCliVille.setCellValueFactory(new PropertyValueFactory<>("adrVille"));
         colCliPays.setCellValueFactory(new PropertyValueFactory<>("adrPays"));
-
-        colCliNom.setSortType(TableColumn.SortType.DESCENDING);
 
         btnCliEdit.setDisable(true);
         btnCliRem.setDisable(true);
@@ -298,6 +297,7 @@ public class MainController extends BaseController {
                 var filteredList = new FilteredList<>(
                         FXCollections.observableArrayList(_daos.getCategoryDAO().getAll()), p -> true);
                 SortedList<Category> sortedData = new SortedList<>(filteredList);
+                sortedData.comparatorProperty().bind(tvCategories.comparatorProperty());
                 Platform.runLater(() -> {
                     filteredCategs = filteredList;
                     tvCategories.setItems(sortedData);
@@ -311,8 +311,6 @@ public class MainController extends BaseController {
 
     private void initCategs() throws Exception {
         colCategTitre.setCellValueFactory(new PropertyValueFactory<>("title"));
-
-        colCategTitre.setSortType(TableColumn.SortType.DESCENDING);
 
         btnCategEdit.setDisable(true);
         btnCategRem.setDisable(true);
@@ -400,6 +398,7 @@ public class MainController extends BaseController {
                 var filteredList = new FilteredList<>(FXCollections.observableArrayList(_daos.getProductDAO().getAll()),
                         p -> true);
                 SortedList<Product> sortedData = new SortedList<>(filteredList);
+                sortedData.comparatorProperty().bind(tvProduits.comparatorProperty());
                 Platform.runLater(() -> {
                     filteredProds = filteredList;
                     tvProduits.setItems(sortedData);
@@ -414,11 +413,9 @@ public class MainController extends BaseController {
     private void initProducts() throws Exception {
         colProdNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         colProdDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colProdDescription.setSortable(false);
         colProdTarif.setCellValueFactory(new PropertyValueFactory<>("tarif"));
         colProdCategorie.setCellValueFactory(new PropertyValueFactory<>("category"));
-
-        colProdNom.setSortType(TableColumn.SortType.DESCENDING);
-        colProdDescription.setSortable(false);
 
         btnProdEdit.setDisable(true);
         btnProdRem.setDisable(true);
@@ -543,6 +540,7 @@ public class MainController extends BaseController {
                 var filteredList = new FilteredList<>(FXCollections.observableArrayList(_daos.getCommandDAO().getAll()),
                         p -> true);
                 SortedList<Command> sortedData = new SortedList<>(filteredList);
+                sortedData.comparatorProperty().bind(tvCommandes.comparatorProperty());
                 Platform.runLater(() -> {
                     filteredCmds = filteredList;
                     tvCommandes.setItems(sortedData);
@@ -557,8 +555,6 @@ public class MainController extends BaseController {
     private void initCommands() throws Exception {
         colCmdCli.setCellValueFactory(new PropertyValueFactory<>("client"));
         colCmdDate.setCellValueFactory(new PropertyValueFactory<>("dateCommand"));
-
-        colCmdCli.setSortType(TableColumn.SortType.DESCENDING);
 
         btnCmdEdit.setDisable(true);
         btnCmdRem.setDisable(true);

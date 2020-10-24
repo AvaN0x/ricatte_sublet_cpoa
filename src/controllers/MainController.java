@@ -184,9 +184,7 @@ public class MainController extends BaseController {
                     tvClients.refresh();
                 });
             } catch (Exception e) {
-                Platform.runLater(() -> {
-                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-                });
+                Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
             }
         }).start();
     }
@@ -275,10 +273,8 @@ public class MainController extends BaseController {
         new Thread(() -> {
             try {
                 if (!_daos.getClientDAO().delete(tvClients.getSelectionModel().getSelectedItem()))
-                    Platform.runLater(() -> {
-                        showErrorAlert("On s'attendait à tout, sauf à ça.",
-                                "La supression n'a pas modifié les données");
-                    });
+                    Platform.runLater(() -> showErrorAlert("On s'attendait à tout, sauf à ça.",
+                            "La supression n'a pas modifié les données"));
 
                 lblCliInfoNom.setText("");
                 lblCliInfoPrenom.setText("");
@@ -288,9 +284,7 @@ public class MainController extends BaseController {
 
                 updateClientTable();
             } catch (Exception e) {
-                Platform.runLater(() -> {
-                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-                });
+                Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
             }
         }).start();
     }
@@ -309,9 +303,7 @@ public class MainController extends BaseController {
                     tvCategories.refresh();
                 });
             } catch (Exception e) {
-                Platform.runLater(() -> {
-                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-                });
+                Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
             }
         }).start();
     }
@@ -386,19 +378,15 @@ public class MainController extends BaseController {
         new Thread(() -> {
             try {
                 if (!_daos.getCategoryDAO().delete(tvCategories.getSelectionModel().getSelectedItem()))
-                    Platform.runLater(() -> {
-                        showErrorAlert("On s'attendait à tout, sauf à ça.",
-                                "La supression n'a pas modifié les données");
-                    });
+                    Platform.runLater(() -> showErrorAlert("On s'attendait à tout, sauf à ça.",
+                            "La supression n'a pas modifié les données"));
 
                 lblCategInfoTitre.setText("");
                 lblCategInfoVisuel.setText("");
 
                 updateCategTable();
             } catch (Exception e) {
-                Platform.runLater(() -> {
-                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-                });
+                Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
             }
         }).start();
     }
@@ -417,9 +405,7 @@ public class MainController extends BaseController {
                     tvProduits.refresh();
                 });
             } catch (Exception e) {
-                Platform.runLater(() -> {
-                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-                });
+                Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
             }
         }).start();
     }
@@ -531,10 +517,8 @@ public class MainController extends BaseController {
 
             try {
                 if (!_daos.getProductDAO().delete(tvProduits.getSelectionModel().getSelectedItem()))
-                    Platform.runLater(() -> {
-                        showErrorAlert("On s'attendait à tout, sauf à ça.",
-                                "La supression n'a pas modifié les données");
-                    });
+                    Platform.runLater(() -> showErrorAlert("On s'attendait à tout, sauf à ça.",
+                            "La supression n'a pas modifié les données"));
 
                 lblProdInfoTarif.setText("");
                 lblProdInfoCateg.setText("");
@@ -545,9 +529,7 @@ public class MainController extends BaseController {
 
                 updateProductTable();
             } catch (Exception e) {
-                Platform.runLater(() -> {
-                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-                });
+                Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
             }
         }).start();
     }
@@ -566,9 +548,7 @@ public class MainController extends BaseController {
                     tvCommandes.refresh();
                 });
             } catch (Exception e) {
-                Platform.runLater(() -> {
-                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-                });
+                Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
             }
         }).start();
     }
@@ -627,12 +607,9 @@ public class MainController extends BaseController {
 
                 new Thread(() -> {
                     ArrayList<ProductLine> prodLines = new ArrayList<>();
-                    newSelection.getCommandLines().forEach((prod, cmdline) -> {
-                        prodLines.add(new ProductLine(prod, cmdline.getQuantite()));
-                    });
-                    Platform.runLater(() -> 
-                        tvCmdInfo.setItems(FXCollections.observableArrayList(prodLines))
-                    );
+                    newSelection.getCommandLines()
+                            .forEach((prod, cmdline) -> prodLines.add(new ProductLine(prod, cmdline.getQuantite())));
+                    Platform.runLater(() -> tvCmdInfo.setItems(FXCollections.observableArrayList(prodLines)));
                 }).start();
             }
         });
@@ -662,19 +639,15 @@ public class MainController extends BaseController {
         new Thread(() -> {
             try {
                 if (!_daos.getCommandDAO().delete(tvCommandes.getSelectionModel().getSelectedItem()))
-                    Platform.runLater(() -> {
-                        showErrorAlert("On s'attendait à tout, sauf à ça.",
-                                "La supression n'a pas modifié les données");
-                    });
+                    Platform.runLater(() -> showErrorAlert("On s'attendait à tout, sauf à ça.",
+                            "La supression n'a pas modifié les données"));
 
                 lblCmdInfoClient.setText("");
                 lblCmdInfoDateCommande.setText("");
 
                 updateCommandTable();
             } catch (Exception e) {
-                Platform.runLater(() -> {
-                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-                });
+                Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
             }
         }).start();
     }

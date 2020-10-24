@@ -129,13 +129,9 @@ public class CommandController extends BaseController {
                     else
                         prodLine.add(new ProductLine(product, 0));
                 }
-                Platform.runLater(() -> {
-                    tvProducts.setItems(FXCollections.observableArrayList(prodLine));
-                });
+                Platform.runLater(() -> tvProducts.setItems(FXCollections.observableArrayList(prodLine)));
             } catch (Exception e) {
-                Platform.runLater(() -> {
-                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-                });
+                Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
             }
         }).start();
     }
@@ -162,25 +158,17 @@ public class CommandController extends BaseController {
                 cmd.setCommandLines(commandLines);
                 if (command == null) {
                     if (!_daos.getCommandDAO().create(cmd))
-                        Platform.runLater(() -> {
-                            showErrorAlert("On s'attendait à tout, sauf à ça.",
-                                    "La création n'a pas modifié les données");
-                        });
+                        Platform.runLater(() -> showErrorAlert("On s'attendait à tout, sauf à ça.",
+                                "La création n'a pas modifié les données"));
                 } else {
                     cmd.setId(command.getId());
                     if (!_daos.getCommandDAO().update(cmd))
-                        Platform.runLater(() -> {
-                            showErrorAlert("On s'attendait à tout, sauf à ça.",
-                                    "La modification n'a pas modifié les données");
-                        });
+                        Platform.runLater(() -> showErrorAlert("On s'attendait à tout, sauf à ça.",
+                                "La modification n'a pas modifié les données"));
                 }
-                Platform.runLater(() -> {
-                    fermer();
-                });
+                Platform.runLater(() -> fermer());
             } catch (Exception e) {
-                Platform.runLater(() -> {
-                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-                });
+                Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
             }
         }).start();
     }

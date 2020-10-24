@@ -245,6 +245,12 @@ public class MainController extends BaseController {
                 lblCliInfoIdentifiant.setText(newSelection.getIdentifiant());
                 // lblCliInfoMotDePasse.setText(newSelection.getMotDePasse());
                 lblCliInfoMotDePasse.setText("********");
+            } else {
+                lblCliInfoNom.setText("");
+                lblCliInfoPrenom.setText("");
+                lblCliInfoAdr.setText("");
+                lblCliInfoIdentifiant.setText("");
+                lblCliInfoMotDePasse.setText("");
             }
         });
 
@@ -275,12 +281,6 @@ public class MainController extends BaseController {
                 if (!_daos.getClientDAO().delete(tvClients.getSelectionModel().getSelectedItem()))
                     Platform.runLater(() -> showErrorAlert("On s'attendait à tout, sauf à ça.",
                             "La supression n'a pas modifié les données"));
-
-                lblCliInfoNom.setText("");
-                lblCliInfoPrenom.setText("");
-                lblCliInfoAdr.setText("");
-                lblCliInfoIdentifiant.setText("");
-                lblCliInfoMotDePasse.setText("");
 
                 updateClientTable();
             } catch (Exception e) {
@@ -350,6 +350,9 @@ public class MainController extends BaseController {
 
                 lblCategInfoTitre.setText(newSelection.getTitle());
                 lblCategInfoVisuel.setText(newSelection.getVisuel());
+            } else {
+                lblCategInfoTitre.setText("");
+                lblCategInfoVisuel.setText("");
             }
         });
 
@@ -380,9 +383,6 @@ public class MainController extends BaseController {
                 if (!_daos.getCategoryDAO().delete(tvCategories.getSelectionModel().getSelectedItem()))
                     Platform.runLater(() -> showErrorAlert("On s'attendait à tout, sauf à ça.",
                             "La supression n'a pas modifié les données"));
-
-                lblCategInfoTitre.setText("");
-                lblCategInfoVisuel.setText("");
 
                 updateCategTable();
             } catch (Exception e) {
@@ -488,6 +488,13 @@ public class MainController extends BaseController {
                     lblProdInfoQuantityOrdered.setText(Integer.toString(quantityOrdered.value));
                 } else
                     lblProdInfoQuantityOrdered.setText("?");
+            } else {
+                lblProdInfoTarif.setText("");
+                lblProdInfoCateg.setText("");
+                lblProdInfoNom.setText("");
+                lblProdInfoDescription.setText("");
+                lblProdInfoVisuel.setText("");
+                lblProdInfoQuantityOrdered.setText("");
             }
         });
 
@@ -519,13 +526,6 @@ public class MainController extends BaseController {
                 if (!_daos.getProductDAO().delete(tvProduits.getSelectionModel().getSelectedItem()))
                     Platform.runLater(() -> showErrorAlert("On s'attendait à tout, sauf à ça.",
                             "La supression n'a pas modifié les données"));
-
-                lblProdInfoTarif.setText("");
-                lblProdInfoCateg.setText("");
-                lblProdInfoNom.setText("");
-                lblProdInfoDescription.setText("");
-                lblProdInfoVisuel.setText("");
-                lblProdInfoQuantityOrdered.setText("");
 
                 updateProductTable();
             } catch (Exception e) {
@@ -611,6 +611,9 @@ public class MainController extends BaseController {
                             .forEach((prod, cmdline) -> prodLines.add(new ProductLine(prod, cmdline.getQuantite())));
                     Platform.runLater(() -> tvCmdInfo.setItems(FXCollections.observableArrayList(prodLines)));
                 }).start();
+            } else {
+                lblCmdInfoClient.setText("");
+                lblCmdInfoDateCommande.setText("");
             }
         });
 
@@ -641,9 +644,6 @@ public class MainController extends BaseController {
                 if (!_daos.getCommandDAO().delete(tvCommandes.getSelectionModel().getSelectedItem()))
                     Platform.runLater(() -> showErrorAlert("On s'attendait à tout, sauf à ça.",
                             "La supression n'a pas modifié les données"));
-
-                lblCmdInfoClient.setText("");
-                lblCmdInfoDateCommande.setText("");
 
                 updateCommandTable();
             } catch (Exception e) {

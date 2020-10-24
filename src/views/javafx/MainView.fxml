@@ -512,12 +512,12 @@
                                           </HBox>
                                           <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                              <children>
-                                                <Label text="Visuel :">
+                                                <Label text="Date de commande : ">
                                                    <padding>
                                                       <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                                    </padding>
                                                 </Label>
-                                                <Label fx:id="lblCmdInfoVisuel" text="">
+                                                <Label fx:id="lblCmdInfoDateCommande" text="">
                                                    <padding>
                                                       <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                                    </padding>

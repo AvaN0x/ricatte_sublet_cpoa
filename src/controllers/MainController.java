@@ -100,6 +100,10 @@ public class MainController extends BaseController {
     private TableColumn<Command, Client> colCmdCli;
     @FXML
     private TableColumn<Command, java.time.LocalTime> colCmdDate;
+    @FXML
+    private Label lblCmdInfoClient;
+    @FXML
+    private Label lblCmdInfoDateCommande;
     // endregion
 
     @Override
@@ -462,6 +466,13 @@ public class MainController extends BaseController {
                     return true;
                 return false;
             });
+        });
+
+        tvCommandes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                lblCmdInfoClient.setText(newSelection.getClient().toString());
+                lblCmdInfoDateCommande.setText(newSelection.getDateCommand().toString());
+            }
         });
 
         updateCommandTable();

@@ -13,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.ResourceBundle;
 
@@ -38,6 +37,17 @@ public class MainController extends BaseController {
     private TableColumn<Client, Float> colCliVille;
     @FXML
     private TableColumn<Client, String> colCliPays;
+    @FXML
+    private Label lblCliInfoNom;
+    @FXML
+    private Label lblCliInfoPrenom;
+    @FXML
+    private Label lblCliInfoAdr;
+    @FXML
+    private Label lblCliInfoIdentifiant;
+    @FXML
+    private Label lblCliInfoMotDePasse;
+
     // endregion
 
     // region Category Fields
@@ -48,6 +58,10 @@ public class MainController extends BaseController {
     private TableView<Category> tvCategories;
     @FXML
     private TableColumn<Category, String> colCategTitre;
+    @FXML
+    private Label lblCategInfoTitre;
+    @FXML
+    private Label lblCategInfoVisuel;
     // endregion
 
     // region Products Fields
@@ -72,6 +86,8 @@ public class MainController extends BaseController {
     private Label lblProdInfoNom;
     @FXML
     private Label lblProdInfoDescription;
+    @FXML
+    private Label lblProdInfoVisuel;
     // endregion
 
     // region Commands Fields
@@ -173,6 +189,18 @@ public class MainController extends BaseController {
             });
         });
 
+        tvClients.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                lblCliInfoNom.setText(newSelection.getNom());
+                lblCliInfoPrenom.setText(newSelection.getPrenom());
+                lblCliInfoAdr.setText(newSelection.getAdrNumero() + ", " + newSelection.getAdrVoie() + ", "
+                        + newSelection.getAdrCodePostal() + ", " + newSelection.getAdrVille() + ", "
+                        + newSelection.getAdrPays());
+                lblCliInfoIdentifiant.setText(newSelection.getIdentifiant());
+                lblCliInfoMotDePasse.setText(newSelection.getMotDePasse());
+            }
+        });
+
         updateClientTable();
     }
 
@@ -244,6 +272,13 @@ public class MainController extends BaseController {
                     return true;
                 return false;
             });
+        });
+
+        tvCategories.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                lblCategInfoTitre.setText(newSelection.getTitle());
+                lblCategInfoVisuel.setText(newSelection.getVisuel());
+            }
         });
 
         updateCategTable();
@@ -347,6 +382,7 @@ public class MainController extends BaseController {
                 lblProdInfoCateg.setText(newSelection.getCategory().getTitle());
                 lblProdInfoNom.setText(newSelection.getNom());
                 lblProdInfoDescription.setText(newSelection.getDescription());
+                lblProdInfoVisuel.setText(newSelection.getVisuel());
             }
         });
 

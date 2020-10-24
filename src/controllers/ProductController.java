@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -42,21 +43,32 @@ public class ProductController extends BaseController {
     }
 
     public void createClick() {
-        try {
-            if (idProd == -1) {
-                if (!_daos.getProductDAO().create(new Product(tfNom.getText(), taDescription.getText(),
-                        Float.parseFloat(tfTarif.getText()), tfVisuel.getText(), cbCategorie.getValue())))
-                    showErrorAlert("On s'attendait à tout, sauf à ça.", "La création n'a pas modifié les données");
-            } else {
-
-                if (!_daos.getProductDAO().update(new Product(idProd, tfNom.getText(), taDescription.getText(),
-                        Float.parseFloat(tfTarif.getText()), tfVisuel.getText(), cbCategorie.getValue())))
-                    showErrorAlert("On s'attendait à tout, sauf à ça.", "La modification n'a pas modifié les données");
+        new Thread(() -> {
+            try {
+                if (idProd == -1) {
+                    if (!_daos.getProductDAO().create(new Product(tfNom.getText(), taDescription.getText(),
+                            Float.parseFloat(tfTarif.getText()), tfVisuel.getText(), cbCategorie.getValue())))
+                        Platform.runLater(() -> {
+                            showErrorAlert("On s'attendait à tout, sauf à ça.",
+                                    "La création n'a pas modifié les données");
+                        });
+                } else {
+                    if (!_daos.getProductDAO().update(new Product(idProd, tfNom.getText(), taDescription.getText(),
+                            Float.parseFloat(tfTarif.getText()), tfVisuel.getText(), cbCategorie.getValue())))
+                        Platform.runLater(() -> {
+                            showErrorAlert("On s'attendait à tout, sauf à ça.",
+                                    "La modification n'a pas modifié les données");
+                        });
+                }
+                Platform.runLater(() -> {
+                    fermer();
+                });
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+                });
             }
-            fermer();
-        } catch (Exception e) {
-            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-        }
+        }).start();
     }
 
     public void setProduct(Product prod) {

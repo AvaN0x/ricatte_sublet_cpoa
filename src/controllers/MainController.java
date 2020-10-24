@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -165,11 +166,22 @@ public class MainController extends BaseController {
 
     // region Client Methods/Events
     public void updateClientTable() throws Exception {
-        filteredClients = new FilteredList<>(FXCollections.observableArrayList(_daos.getClientDAO().getAll()),
-                p -> true);
-        SortedList<Client> sortedData = new SortedList<>(filteredClients);
-        tvClients.setItems(sortedData);
-        tvClients.refresh();
+        new Thread(() -> {
+            try {
+                var filteredList = new FilteredList<>(FXCollections.observableArrayList(_daos.getClientDAO().getAll()),
+                        p -> true);
+                SortedList<Client> sortedData = new SortedList<>(filteredList);
+                Platform.runLater(() -> {
+                    filteredClients = filteredList;
+                    tvClients.setItems(sortedData);
+                    tvClients.refresh();
+                });
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+                });
+            }
+        }).start();
     }
 
     private void initClients() throws Exception {
@@ -253,30 +265,48 @@ public class MainController extends BaseController {
     }
 
     public void delClientClick() {
-        try {
-            if (!_daos.getClientDAO().delete(tvClients.getSelectionModel().getSelectedItem()))
-                showErrorAlert("On s'attendait à tout, sauf à ça.", "La supression n'a pas modifié les données");
+        new Thread(() -> {
+            try {
+                if (!_daos.getClientDAO().delete(tvClients.getSelectionModel().getSelectedItem()))
+                    Platform.runLater(() -> {
+                        showErrorAlert("On s'attendait à tout, sauf à ça.",
+                                "La supression n'a pas modifié les données");
+                    });
 
-            lblCliInfoNom.setText("");
-            lblCliInfoPrenom.setText("");
-            lblCliInfoAdr.setText("");
-            lblCliInfoIdentifiant.setText("");
-            lblCliInfoMotDePasse.setText("");
+                lblCliInfoNom.setText("");
+                lblCliInfoPrenom.setText("");
+                lblCliInfoAdr.setText("");
+                lblCliInfoIdentifiant.setText("");
+                lblCliInfoMotDePasse.setText("");
 
-            updateClientTable();
-        } catch (Exception e) {
-            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-        }
+                updateClientTable();
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+                });
+            }
+        }).start();
     }
     // endregion
 
     // region Category Methods/Events
     public void updateCategTable() throws Exception {
-        filteredCategs = new FilteredList<>(FXCollections.observableArrayList(_daos.getCategoryDAO().getAll()),
-                p -> true);
-        SortedList<Category> sortedData = new SortedList<>(filteredCategs);
-        tvCategories.setItems(sortedData);
-        tvCategories.refresh();
+        new Thread(() -> {
+            try {
+                var filteredList = new FilteredList<>(
+                        FXCollections.observableArrayList(_daos.getCategoryDAO().getAll()), p -> true);
+                SortedList<Category> sortedData = new SortedList<>(filteredList);
+                Platform.runLater(() -> {
+                    filteredCategs = filteredList;
+                    tvCategories.setItems(sortedData);
+                    tvCategories.refresh();
+                });
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+                });
+            }
+        }).start();
     }
 
     private void initCategs() throws Exception {
@@ -346,27 +376,45 @@ public class MainController extends BaseController {
     }
 
     public void delCategClick() {
-        try {
-            if (!_daos.getCategoryDAO().delete(tvCategories.getSelectionModel().getSelectedItem()))
-                showErrorAlert("On s'attendait à tout, sauf à ça.", "La supression n'a pas modifié les données");
+        new Thread(() -> {
+            try {
+                if (!_daos.getCategoryDAO().delete(tvCategories.getSelectionModel().getSelectedItem()))
+                    Platform.runLater(() -> {
+                        showErrorAlert("On s'attendait à tout, sauf à ça.",
+                                "La supression n'a pas modifié les données");
+                    });
 
-            lblCategInfoTitre.setText("");
-            lblCategInfoVisuel.setText("");
+                lblCategInfoTitre.setText("");
+                lblCategInfoVisuel.setText("");
 
-            updateCategTable();
-        } catch (Exception e) {
-            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-        }
+                updateCategTable();
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+                });
+            }
+        }).start();
     }
     // endregion
 
     // region Products Methods/Events
     public void updateProductTable() throws Exception {
-        filteredProds = new FilteredList<>(FXCollections.observableArrayList(_daos.getProductDAO().getAll()),
-                p -> true);
-        SortedList<Product> sortedData = new SortedList<>(filteredProds);
-        tvProduits.setItems(sortedData);
-        tvProduits.refresh();
+        new Thread(() -> {
+            try {
+                var filteredList = new FilteredList<>(FXCollections.observableArrayList(_daos.getProductDAO().getAll()),
+                        p -> true);
+                SortedList<Product> sortedData = new SortedList<>(filteredList);
+                Platform.runLater(() -> {
+                    filteredProds = filteredList;
+                    tvProduits.setItems(sortedData);
+                    tvProduits.refresh();
+                });
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+                });
+            }
+        }).start();
     }
 
     private void initProducts() throws Exception {
@@ -462,30 +510,50 @@ public class MainController extends BaseController {
     }
 
     public void delProdClick() {
-        try {
-            if (!_daos.getProductDAO().delete(tvProduits.getSelectionModel().getSelectedItem()))
-                showErrorAlert("On s'attendait à tout, sauf à ça.", "La supression n'a pas modifié les données");
+        new Thread(() -> {
 
-            lblProdInfoTarif.setText("");
-            lblProdInfoCateg.setText("");
-            lblProdInfoNom.setText("");
-            lblProdInfoDescription.setText("");
-            lblProdInfoVisuel.setText("");
-            lblProdInfoQuantityOrdered.setText("");
+            try {
+                if (!_daos.getProductDAO().delete(tvProduits.getSelectionModel().getSelectedItem()))
+                    Platform.runLater(() -> {
+                        showErrorAlert("On s'attendait à tout, sauf à ça.",
+                                "La supression n'a pas modifié les données");
+                    });
 
-            updateProductTable();
-        } catch (Exception e) {
-            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-        }
+                lblProdInfoTarif.setText("");
+                lblProdInfoCateg.setText("");
+                lblProdInfoNom.setText("");
+                lblProdInfoDescription.setText("");
+                lblProdInfoVisuel.setText("");
+                lblProdInfoQuantityOrdered.setText("");
+
+                updateProductTable();
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+                });
+            }
+        }).start();
     }
     // endregion
 
     // region Commands Methods/Events
     public void updateCommandTable() throws Exception {
-        filteredCmds = new FilteredList<>(FXCollections.observableArrayList(_daos.getCommandDAO().getAll()), p -> true);
-        SortedList<Command> sortedData = new SortedList<>(filteredCmds);
-        tvCommandes.setItems(sortedData);
-        tvCommandes.refresh();
+        new Thread(() -> {
+            try {
+                var filteredList = new FilteredList<>(FXCollections.observableArrayList(_daos.getCommandDAO().getAll()),
+                        p -> true);
+                SortedList<Command> sortedData = new SortedList<>(filteredList);
+                Platform.runLater(() -> {
+                    filteredCmds = filteredList;
+                    tvCommandes.setItems(sortedData);
+                    tvCommandes.refresh();
+                });
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+                });
+            }
+        }).start();
     }
 
     private void initCommands() throws Exception {
@@ -561,17 +629,24 @@ public class MainController extends BaseController {
     }
 
     public void delCmdClick() {
-        try {
-            if (!_daos.getCommandDAO().delete(tvCommandes.getSelectionModel().getSelectedItem()))
-                showErrorAlert("On s'attendait à tout, sauf à ça.", "La supression n'a pas modifié les données");
+        new Thread(() -> {
+            try {
+                if (!_daos.getCommandDAO().delete(tvCommandes.getSelectionModel().getSelectedItem()))
+                    Platform.runLater(() -> {
+                        showErrorAlert("On s'attendait à tout, sauf à ça.",
+                                "La supression n'a pas modifié les données");
+                    });
 
-            lblCmdInfoClient.setText("");
-            lblCmdInfoDateCommande.setText("");
+                lblCmdInfoClient.setText("");
+                lblCmdInfoDateCommande.setText("");
 
-            updateCommandTable();
-        } catch (Exception e) {
-            showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-        }
+                updateCommandTable();
+s            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+                });
+            }
+        }).start();
     }
     // endregion
 }

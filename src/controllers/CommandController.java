@@ -171,7 +171,9 @@ public class CommandController extends BaseController {
                                     "La modification n'a pas modifié les données");
                         });
                 }
-                fermer();
+                Platform.runLater(() -> {
+                    fermer();
+                });
             } catch (Exception e) {
                 Platform.runLater(() -> {
                     showErrorAlert(e.getClass().getSimpleName(), e.getMessage());

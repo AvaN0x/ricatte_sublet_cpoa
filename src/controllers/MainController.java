@@ -641,7 +641,7 @@ public class MainController extends BaseController {
                 lblCmdInfoDateCommande.setText("");
 
                 updateCommandTable();
-s            } catch (Exception e) {
+            } catch (Exception e) {
                 Platform.runLater(() -> {
                     showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
                 });

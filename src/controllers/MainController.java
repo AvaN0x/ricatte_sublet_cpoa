@@ -6,6 +6,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -38,6 +39,10 @@ public class MainController extends BaseController {
     @FXML
     private TableColumn<Client, String> colCliPays;
     @FXML
+    private Button btnCliEdit;
+    @FXML
+    private Button btnCliRem;
+    @FXML
     private Label lblCliInfoNom;
     @FXML
     private Label lblCliInfoPrenom;
@@ -59,6 +64,10 @@ public class MainController extends BaseController {
     @FXML
     private TableColumn<Category, String> colCategTitre;
     @FXML
+    private Button btnCategEdit;
+    @FXML
+    private Button btnCategRem;
+    @FXML
     private Label lblCategInfoTitre;
     @FXML
     private Label lblCategInfoVisuel;
@@ -78,6 +87,10 @@ public class MainController extends BaseController {
     private TableColumn<Product, Float> colProdTarif;
     @FXML
     private TableColumn<Product, String> colProdCategorie;
+    @FXML
+    private Button btnProdEdit;
+    @FXML
+    private Button btnProdRem;
     @FXML
     private Label lblProdInfoTarif;
     @FXML
@@ -100,6 +113,10 @@ public class MainController extends BaseController {
     private TableColumn<Command, Client> colCmdCli;
     @FXML
     private TableColumn<Command, java.time.LocalTime> colCmdDate;
+    @FXML
+    private Button btnCmdEdit;
+    @FXML
+    private Button btnCmdRem;
     @FXML
     private Label lblCmdInfoClient;
     @FXML
@@ -161,6 +178,9 @@ public class MainController extends BaseController {
 
         colCliNom.setSortType(TableColumn.SortType.DESCENDING);
 
+        btnCliEdit.setDisable(true);
+        btnCliRem.setDisable(true);
+
         tfSearchClient.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredClients.setPredicate(client -> {
                 if (newValue == null || newValue.isEmpty()) {
@@ -195,6 +215,9 @@ public class MainController extends BaseController {
 
         tvClients.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
+                btnCliEdit.setDisable(false);
+                btnCliRem.setDisable(false);
+
                 lblCliInfoNom.setText(newSelection.getNom());
                 lblCliInfoPrenom.setText(newSelection.getPrenom());
                 lblCliInfoAdr.setText(newSelection.getAdrNumero() + ", " + newSelection.getAdrVoie() + ", "
@@ -251,6 +274,9 @@ public class MainController extends BaseController {
 
         colCategTitre.setSortType(TableColumn.SortType.DESCENDING);
 
+        btnCategEdit.setDisable(true);
+        btnCategRem.setDisable(true);
+
         tfSearchCateg.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredCategs.setPredicate(categ -> {
                 if (newValue == null || newValue.isEmpty()) {
@@ -280,6 +306,9 @@ public class MainController extends BaseController {
 
         tvCategories.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
+                btnCategEdit.setDisable(false);
+                btnCategRem.setDisable(false);
+
                 lblCategInfoTitre.setText(newSelection.getTitle());
                 lblCategInfoVisuel.setText(newSelection.getVisuel());
             }
@@ -335,6 +364,9 @@ public class MainController extends BaseController {
         colProdNom.setSortType(TableColumn.SortType.DESCENDING);
         colProdDescription.setSortable(false);
 
+        btnProdEdit.setDisable(true);
+        btnProdRem.setDisable(true);
+
         tfSearchProd.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredProds.setPredicate(prod -> {
                 if (newValue == null || newValue.isEmpty()) {
@@ -382,6 +414,9 @@ public class MainController extends BaseController {
 
         tvProduits.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
+                btnProdEdit.setDisable(false);
+                btnProdRem.setDisable(false);
+
                 lblProdInfoTarif.setText(Float.toString(newSelection.getTarif()) + " €");
                 lblProdInfoCateg.setText(newSelection.getCategory().getTitle());
                 lblProdInfoNom.setText(newSelection.getNom());
@@ -436,6 +471,9 @@ public class MainController extends BaseController {
 
         colCmdCli.setSortType(TableColumn.SortType.DESCENDING);
 
+        btnCmdEdit.setDisable(true);
+        btnCmdRem.setDisable(true);
+
         tfSearchCommand.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredCmds.setPredicate(cmd -> {
                 if (newValue == null || newValue.isEmpty()) {
@@ -470,6 +508,9 @@ public class MainController extends BaseController {
 
         tvCommandes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
+                btnCmdEdit.setDisable(false);
+                btnCmdRem.setDisable(false);
+
                 lblCmdInfoClient.setText(newSelection.getClient().toString());
                 lblCmdInfoDateCommande.setText(newSelection.getDateCommand().toString());
             }

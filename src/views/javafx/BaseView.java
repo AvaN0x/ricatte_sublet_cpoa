@@ -7,7 +7,7 @@ import controllers.BaseController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -17,7 +17,7 @@ public abstract class BaseView extends Stage {
     public BaseView(String filename) throws IOException {
         URL fxmlURL = getClass().getResource(filename);
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
-        var node = (VBox) fxmlLoader.load();
+        var node = (ScrollPane) fxmlLoader.load();
 
         _controller = (BaseController) fxmlLoader.getController();
         _controller.setVue(this);

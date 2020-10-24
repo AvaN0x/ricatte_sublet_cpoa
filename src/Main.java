@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -13,7 +13,7 @@ public class Main extends Application {
         try {
             URL fxmlURL = getClass().getResource("views/javafx/MainView.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
-            Scene scene = new Scene((GridPane) fxmlLoader.load());
+            Scene scene = new Scene((ScrollPane) fxmlLoader.load());
             scene.getStylesheets().add("views/javafx/style.css");
             primaryStage.setScene(scene);
             primaryStage.setTitle("ClothesMas");

@@ -484,7 +484,17 @@ public class MainController extends BaseController {
                 lblProdInfoNom.setText(newSelection.getNom());
                 lblProdInfoDescription.setText(newSelection.getDescription());
                 lblProdInfoVisuel.setText(newSelection.getVisuel());
-                lblProdInfoQuantityOrdered.setText("Au moins 0");
+                if (filteredCmds != null) {
+                    var quantityOrdered = new Object() {
+                        int value = 0;
+                    };
+                    filteredCmds.forEach(cmd -> {
+                        var cmdLine = cmd.getCommandLines().getOrDefault(newSelection, null);
+                        quantityOrdered.value += (cmdLine != null ? cmdLine.getQuantite() : 0);
+                    });
+                    lblProdInfoQuantityOrdered.setText(Integer.toString(quantityOrdered.value));
+                } else
+                    lblProdInfoQuantityOrdered.setText("?");
             }
         });
 

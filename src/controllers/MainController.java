@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.ResourceBundle;
 
@@ -124,6 +125,12 @@ public class MainController extends BaseController {
     private Label lblCmdInfoClient;
     @FXML
     private Label lblCmdInfoDateCommande;
+    @FXML
+    private TableView<ProductLine> tvCmdInfo;
+    @FXML
+    private TableColumn<ProductLine, Product> colCmdInfoProd;
+    @FXML
+    private TableColumn<ProductLine, Integer> colCmdInfoQuantite;
     // endregion
 
     @Override
@@ -614,6 +621,19 @@ public class MainController extends BaseController {
 
                 lblCmdInfoClient.setText(newSelection.getClient().toString());
                 lblCmdInfoDateCommande.setText(newSelection.getDateCommand().toString());
+
+                colCmdInfoProd.setCellValueFactory(new PropertyValueFactory<>("prod"));
+                colCmdInfoQuantite.setCellValueFactory(new PropertyValueFactory<>("quant"));
+
+                new Thread(() -> {
+                    ArrayList<ProductLine> prodLines = new ArrayList<>();
+                    newSelection.getCommandLines().forEach((prod, cmdline) -> {
+                        prodLines.add(new ProductLine(prod, cmdline.getQuantite()));
+                    });
+                    Platform.runLater(() -> 
+                        tvCmdInfo.setItems(FXCollections.observableArrayList(prodLines))
+                    );
+                }).start();
             }
         });
 

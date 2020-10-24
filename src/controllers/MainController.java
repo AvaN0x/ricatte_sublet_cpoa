@@ -98,6 +98,8 @@ public class MainController extends BaseController {
     @FXML
     private Label lblProdInfoNom;
     @FXML
+    private Label lblProdInfoQuantityOrdered;
+    @FXML
     private Label lblProdInfoDescription;
     @FXML
     private Label lblProdInfoVisuel;
@@ -254,6 +256,13 @@ public class MainController extends BaseController {
         try {
             if (!_daos.getClientDAO().delete(tvClients.getSelectionModel().getSelectedItem()))
                 showErrorAlert("On s'attendait à tout, sauf à ça.", "La supression n'a pas modifié les données");
+
+            lblCliInfoNom.setText("");
+            lblCliInfoPrenom.setText("");
+            lblCliInfoAdr.setText("");
+            lblCliInfoIdentifiant.setText("");
+            lblCliInfoMotDePasse.setText("");
+
             updateClientTable();
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
@@ -340,6 +349,10 @@ public class MainController extends BaseController {
         try {
             if (!_daos.getCategoryDAO().delete(tvCategories.getSelectionModel().getSelectedItem()))
                 showErrorAlert("On s'attendait à tout, sauf à ça.", "La supression n'a pas modifié les données");
+
+            lblCategInfoTitre.setText("");
+            lblCategInfoVisuel.setText("");
+
             updateCategTable();
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
@@ -423,6 +436,7 @@ public class MainController extends BaseController {
                 lblProdInfoNom.setText(newSelection.getNom());
                 lblProdInfoDescription.setText(newSelection.getDescription());
                 lblProdInfoVisuel.setText(newSelection.getVisuel());
+                lblProdInfoQuantityOrdered.setText("Au moins 0");
             }
         });
 
@@ -451,6 +465,14 @@ public class MainController extends BaseController {
         try {
             if (!_daos.getProductDAO().delete(tvProduits.getSelectionModel().getSelectedItem()))
                 showErrorAlert("On s'attendait à tout, sauf à ça.", "La supression n'a pas modifié les données");
+
+            lblProdInfoTarif.setText("");
+            lblProdInfoCateg.setText("");
+            lblProdInfoNom.setText("");
+            lblProdInfoDescription.setText("");
+            lblProdInfoVisuel.setText("");
+            lblProdInfoQuantityOrdered.setText("");
+
             updateProductTable();
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
@@ -542,6 +564,10 @@ public class MainController extends BaseController {
         try {
             if (!_daos.getCommandDAO().delete(tvCommandes.getSelectionModel().getSelectedItem()))
                 showErrorAlert("On s'attendait à tout, sauf à ça.", "La supression n'a pas modifié les données");
+
+            lblCmdInfoClient.setText("");
+            lblCmdInfoDateCommande.setText("");
+
             updateCommandTable();
         } catch (Exception e) {
             showErrorAlert(e.getClass().getSimpleName(), e.getMessage());

@@ -103,7 +103,10 @@ public class CommandController extends BaseController {
     public void updateClientBox() {
         new Thread(() -> {
             try {
-                this.cbClient.setItems(FXCollections.observableArrayList(_daos.getClientDAO().getAll()));
+                var clients = FXCollections.observableArrayList(_daos.getClientDAO().getAll());
+                Platform.runLater(() -> {
+                    this.cbClient.setItems(clients);
+                });
             } catch (Exception e) {
                 Platform.runLater(() -> {
                     showErrorAlert(e.getClass().getSimpleName(), e.getMessage());

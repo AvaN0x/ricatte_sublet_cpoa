@@ -224,7 +224,8 @@ public class MainController extends BaseController {
                         + newSelection.getAdrCodePostal() + ", " + newSelection.getAdrVille() + ", "
                         + newSelection.getAdrPays());
                 lblCliInfoIdentifiant.setText(newSelection.getIdentifiant());
-                lblCliInfoMotDePasse.setText(newSelection.getMotDePasse());
+                // lblCliInfoMotDePasse.setText(newSelection.getMotDePasse());
+                lblCliInfoMotDePasse.setText("********");
             }
         });
 

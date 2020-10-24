@@ -17,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import models.*;
@@ -580,6 +581,15 @@ public class MainController extends BaseController {
                                     || cmd.getClient().getPrenom().toLowerCase().contains(filter[1]));
                         else if (colCmdDate.getText().toLowerCase().startsWith(filter[0]))
                             return (cmd.getDateCommand().toString().toLowerCase().contains(filter[1]));
+                        else if (colCmdInfoProd.getText().toLowerCase().startsWith(filter[0])) {
+                            boolean prodIsPresent = false;
+                            for (Map.Entry<Product, CommandLine> entry : cmd.getCommandLines().entrySet()) {
+                                prodIsPresent = entry.getKey().getNom().toLowerCase().contains(filter[1]);
+                                if (prodIsPresent)
+                                    break;
+                            }
+                            return prodIsPresent;
+                        }
                         return false;
                     }
                 } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
@@ -614,6 +624,7 @@ public class MainController extends BaseController {
             } else {
                 lblCmdInfoClient.setText("");
                 lblCmdInfoDateCommande.setText("");
+                tvCmdInfo.getItems().clear();
             }
         });
 

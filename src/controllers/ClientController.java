@@ -3,6 +3,7 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -43,26 +44,38 @@ public class ClientController extends BaseController {
 	}
 
 	public void createClick() {
-		try {
-			if (idCli == -1) {
-				if (!_daos.getClientDAO()
-						.create(new Client(tfNom.getText(), tfPrenom.getText(), tfIdentifiant.getText(),
-								pfMotDePasse.getText(), Integer.parseInt(tfAdrNumero.getText()), tfAdrVoie.getText(),
-								Integer.parseInt(tfAdrCodePostal.getText()), tfAdrVille.getText(),
-								tfAdrPays.getText())))
-					showErrorAlert("On s'attendait à tout, sauf à ça.", "La création n'a pas modifié les données");
-			} else {
-				if (!_daos.getClientDAO()
-						.update(new Client(idCli, tfNom.getText(), tfPrenom.getText(), tfIdentifiant.getText(),
-								pfMotDePasse.getText(), Integer.parseInt(tfAdrNumero.getText()), tfAdrVoie.getText(),
-								Integer.parseInt(tfAdrCodePostal.getText()), tfAdrVille.getText(),
-								tfAdrPays.getText())))
-					showErrorAlert("On s'attendait à tout, sauf à ça.", "La modification n'a pas modifié les données");
+		new Thread(() -> {
+			try {
+				if (idCli == -1) {
+					if (!_daos.getClientDAO()
+							.create(new Client(tfNom.getText(), tfPrenom.getText(), tfIdentifiant.getText(),
+									pfMotDePasse.getText(), Integer.parseInt(tfAdrNumero.getText()),
+									tfAdrVoie.getText(), Integer.parseInt(tfAdrCodePostal.getText()),
+									tfAdrVille.getText(), tfAdrPays.getText())))
+						Platform.runLater(() -> {
+							showErrorAlert("On s'attendait à tout, sauf à ça.",
+									"La création n'a pas modifié les données");
+						});
+				} else {
+					if (!_daos.getClientDAO()
+							.update(new Client(idCli, tfNom.getText(), tfPrenom.getText(), tfIdentifiant.getText(),
+									pfMotDePasse.getText(), Integer.parseInt(tfAdrNumero.getText()),
+									tfAdrVoie.getText(), Integer.parseInt(tfAdrCodePostal.getText()),
+									tfAdrVille.getText(), tfAdrPays.getText())))
+						Platform.runLater(() -> {
+							showErrorAlert("On s'attendait à tout, sauf à ça.",
+									"La modification n'a pas modifié les données");
+						});
+				}
+				Platform.runLater(() -> {
+					fermer();
+				});
+			} catch (Exception e) {
+				Platform.runLater(() -> {
+					showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
+				});
 			}
-			fermer();
-		} catch (Exception e) {
-			showErrorAlert(e.getClass().getSimpleName(), e.getMessage());
-		}
+		}).start();
 	}
 
 	public void setClient(Client cli) {

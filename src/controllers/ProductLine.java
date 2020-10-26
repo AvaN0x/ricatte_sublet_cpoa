@@ -39,6 +39,10 @@ public class ProductLine {
         this._quant.setValue(quant);
     }
 
+    public float getTotal() {
+        return this._quant.getValue() * this._prod.getTarif();
+    }
+
     @Override
     public String toString() {
         return this._prod.toString() + " - " + _quant;

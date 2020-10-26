@@ -769,10 +769,11 @@ public class MainController extends BaseController {
                     tvClients.getSelectionModel().select(newSelection.getClient());
                 });
                 lblCmdInfoDateCommande.setText(newSelection.getDateCommand().toString());
-                lblCmdInfoTotalPrice.setText(Float.toString(newSelection.getTotalPrice()));
+                lblCmdInfoTotalPrice.setText(Float.toString(newSelection.getTotalPrice()) + " €");
 
                 colCmdInfoProd.setCellValueFactory(new PropertyValueFactory<>("prod"));
                 colCmdInfoQuantite.setCellValueFactory(new PropertyValueFactory<>("quant"));
+                colCmdInfoPrice.setCellValueFactory(new PropertyValueFactory<>("total"));
 
                 new Thread(() -> {
                     ArrayList<ProductLine> prodLines = new ArrayList<>();

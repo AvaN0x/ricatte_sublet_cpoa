@@ -724,8 +724,10 @@ public class MainController extends BaseController {
                                 if (matcher.matches()) {
                                     String field = matcher.group("field").replace(':', ' ').trim();
                                     if (colCmdCli.getText().toLowerCase().startsWith(field))
-                                        isSearched = (matcher.group("value").contains(cmd.getClient().getPrenom().toLowerCase())
-                                                        || matcher.group("value").contains(cmd.getClient().getNom().toLowerCase());
+                                        isSearched = (matcher.group("value")
+                                                .contains(cmd.getClient().getPrenom().toLowerCase())
+                                                || matcher.group("value")
+                                                        .contains(cmd.getClient().getNom().toLowerCase()));
                                     else if (colCmdDate.getText().toLowerCase().startsWith(field))
                                         isSearched = (cmd.getDateCommand().toString().toLowerCase()
                                                 .contains(matcher.group("value")));

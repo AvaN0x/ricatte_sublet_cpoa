@@ -7,6 +7,8 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Hyperlink;
@@ -27,9 +29,12 @@ public class MainController extends BaseController {
 
     @FXML
     private Menu menuPersistance;
-
+    @FXML
+    private TabPane tpMain;
     // region Client Fields
     private FilteredList<Client> filteredClients;
+    @FXML
+    private Tab tabCli;
     @FXML
     private TextField tfSearchClient;
     @FXML
@@ -62,6 +67,8 @@ public class MainController extends BaseController {
     // region Category Fields
     private FilteredList<Category> filteredCategs;
     @FXML
+    private Tab tabCateg;
+    @FXML
     private TextField tfSearchCateg;
     @FXML
     private TableView<Category> tvCategories;
@@ -79,6 +86,8 @@ public class MainController extends BaseController {
 
     // region Products Fields
     private FilteredList<Product> filteredProds;
+    @FXML
+    private Tab tabProd;
     @FXML
     private TextField tfSearchProd;
     @FXML
@@ -111,6 +120,8 @@ public class MainController extends BaseController {
 
     // region Commands Fields
     private FilteredList<Command> filteredCmds;
+    @FXML
+    private Tab tabCmd;
     @FXML
     private TextField tfSearchCommand;
     @FXML
@@ -473,6 +484,11 @@ public class MainController extends BaseController {
 
                 lblProdInfoTarif.setText(Float.toString(newSelection.getTarif()) + " €");
                 hlProdInfoCateg.setText(newSelection.getCategory().getTitle());
+                hlProdInfoCateg.setId(Integer.toString(newSelection.getId()));
+                hlProdInfoCateg.setOnAction(e -> {
+                    tpMain.getSelectionModel().select(tabCateg);
+                    tvCategories.getSelectionModel().select(newSelection.getCategory());
+                });
                 lblProdInfoNom.setText(newSelection.getNom());
                 lblProdInfoDescription.setText(newSelection.getDescription());
                 lblProdInfoVisuel.setText(newSelection.getVisuel());
@@ -490,6 +506,8 @@ public class MainController extends BaseController {
             } else {
                 lblProdInfoTarif.setText("");
                 hlProdInfoCateg.setText("");
+                hlProdInfoCateg.setOnAction(e -> {
+                });
                 lblProdInfoNom.setText("");
                 lblProdInfoDescription.setText("");
                 lblProdInfoVisuel.setText("");
@@ -607,6 +625,10 @@ public class MainController extends BaseController {
                 btnCmdRem.setDisable(false);
 
                 hlCmdInfoClient.setText(newSelection.getClient().toString());
+                hlCmdInfoClient.setOnAction(e -> {
+                    tpMain.getSelectionModel().select(tabCli);
+                    tvClients.getSelectionModel().select(newSelection.getClient());
+                });
                 lblCmdInfoDateCommande.setText(newSelection.getDateCommand().toString());
 
                 colCmdInfoProd.setCellValueFactory(new PropertyValueFactory<>("prod"));
@@ -620,6 +642,8 @@ public class MainController extends BaseController {
                 }).start();
             } else {
                 hlCmdInfoClient.setText("");
+                hlCmdInfoClient.setOnAction(e -> {
+                });
                 lblCmdInfoDateCommande.setText("");
                 tvCmdInfo.getItems().clear();
             }

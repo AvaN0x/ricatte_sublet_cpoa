@@ -49,9 +49,9 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <TabPane maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="2">
+            <TabPane fx:id="tpMain" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="2">
               <tabs>
-                <Tab text="Client">
+                <Tab fx:id="tabCli" text="Client">
                      <content>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <center>
@@ -206,7 +206,7 @@
                         </BorderPane>
                      </content>
                   </Tab>
-                  <Tab text="Catégorie">
+                  <Tab fx:id="tabCateg" text="Catégorie">
                      <content>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <center>
@@ -289,7 +289,7 @@
                         </BorderPane>
                      </content>
                   </Tab>
-                  <Tab text="Produit">
+                  <Tab fx:id="tabProd" text="Produit">
                      <content>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <center>
@@ -458,7 +458,7 @@
                         </BorderPane>
                      </content>
                   </Tab>
-                <Tab text="Commande">
+                <Tab fx:id="tabCmd" text="Commande">
                      <content>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <center>

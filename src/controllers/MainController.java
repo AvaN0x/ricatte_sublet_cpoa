@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import models.*;
 
@@ -461,17 +463,59 @@ public class MainController extends BaseController {
                 }
 
                 try {
-                    if (lowerCaseFilter.startsWith(">")) {
-                        if (lowerCaseFilter.charAt(1) == '=')
-                            return (prod.getTarif() >= Float.parseFloat(lowerCaseFilter.substring(2)));
-                        return (prod.getTarif() > Float.parseFloat(lowerCaseFilter.substring(1)));
-                    } else if (lowerCaseFilter.startsWith("<")) {
-                        if (lowerCaseFilter.charAt(1) == '=')
-                            return (prod.getTarif()) <= Float.parseFloat(lowerCaseFilter.substring(2));
-                        return (prod.getTarif()) < Float.parseFloat(lowerCaseFilter.substring(1));
-                    } else if (lowerCaseFilter.startsWith("="))
-                        return (prod.getTarif()) == Float.parseFloat(lowerCaseFilter.substring(1));
-                } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+                    if (lowerCaseFilter.startsWith(">") || lowerCaseFilter.startsWith("<")) {
+                        Matcher matcher = Pattern
+                                .compile("^(?<comp1>[><]=?)(?<value1>[\\d.,]+)(?<comp2>[><]?=?)(?<value2>[\\d.|,]*)")
+                                .matcher(lowerCaseFilter);
+                        boolean isSearched = false;
+                        if (matcher.matches() && !matcher.group("value1").isEmpty()) {
+                            float value = Float.parseFloat(matcher.group("value1"));
+                            switch (matcher.group("comp1")) {
+                                case ">=":
+                                    isSearched = (prod.getTarif() >= value);
+                                    break;
+                                case ">":
+                                    isSearched = (prod.getTarif() > value);
+                                    break;
+                                case "<=":
+                                    isSearched = (prod.getTarif() <= value);
+                                    break;
+                                case "<":
+                                    isSearched = (prod.getTarif() < value);
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            if (isSearched && !matcher.group("value2").isEmpty()) {
+                                value = Float.parseFloat(matcher.group("value2"));
+                                switch (matcher.group("comp2")) {
+                                    case ">=":
+                                        isSearched = isSearched && (prod.getTarif() >= value);
+                                        break;
+                                    case ">":
+                                        isSearched = isSearched && (prod.getTarif() > value);
+                                        break;
+                                    case "<=":
+                                        isSearched = isSearched && (prod.getTarif() <= value);
+                                        break;
+                                    case "<":
+                                        isSearched = isSearched && (prod.getTarif() < value);
+                                        break;
+
+                                    default:
+                                        isSearched = false;
+                                        break;
+                                }
+                            }
+                        }
+                        return isSearched;
+                    } else if (lowerCaseFilter.startsWith("=")) {
+                        Matcher matcher = Pattern.compile("^(=)(?<value>[\\d.,]+)").matcher(lowerCaseFilter);
+                        if (matcher.matches() && !matcher.group("value").isEmpty())
+                            return prod.getTarif() == Float.parseFloat(matcher.group("value"));
+                    }
+                } catch (NumberFormatException e) {
                     return false;
                 }
 

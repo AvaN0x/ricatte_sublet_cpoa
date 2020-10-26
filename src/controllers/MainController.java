@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -87,6 +88,9 @@ public class MainController extends BaseController {
     private Label lblCategInfoTitre;
     @FXML
     private Label lblCategInfoVisuel;
+    @FXML
+    private Hyperlink hlCategInfoGetProds;
+
     // endregion
 
     // region Products Fields
@@ -296,7 +300,9 @@ public class MainController extends BaseController {
                     if (filteredCmds != null) {
                         tpMain.getSelectionModel().select(tabCmd);
                         tfSearchCommand.setText(":client:" + newSelection.getNom() + " " + newSelection.getPrenom());
-                    }
+                    } else
+                        showAlert("Contenu manquant", "Réessayez plus tard",
+                                "La liste des commandes n'a pas encore chargé", AlertType.WARNING);
                 });
 
             } else {
@@ -369,6 +375,7 @@ public class MainController extends BaseController {
 
         btnCategEdit.setDisable(true);
         btnCategRem.setDisable(true);
+        hlCategInfoGetProds.setVisible(false);
 
         tfSearchCateg.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredCategs.setPredicate(categ -> {
@@ -422,9 +429,21 @@ public class MainController extends BaseController {
 
                 lblCategInfoTitre.setText(newSelection.getTitle());
                 lblCategInfoVisuel.setText(newSelection.getVisuel());
+
+                hlCategInfoGetProds.setVisible(true);
+                hlCategInfoGetProds.setOnAction(e -> {
+                    if (filteredProds != null) {
+                        tpMain.getSelectionModel().select(tabProd);
+                        tfSearchProd.setText(":cat:" + newSelection.getTitle());
+                    } else
+                        showAlert("Contenu manquant", "Réessayez plus tard",
+                                "La liste des produits n'a pas encore chargé", AlertType.WARNING);
+                });
+
             } else {
                 lblCategInfoTitre.setText("");
                 lblCategInfoVisuel.setText("");
+                hlCategInfoGetProds.setVisible(false);
             }
         });
 

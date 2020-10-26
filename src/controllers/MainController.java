@@ -64,6 +64,8 @@ public class MainController extends BaseController {
     private Label lblCliInfoIdentifiant;
     @FXML
     private Label lblCliInfoMotDePasse;
+    @FXML
+    private Hyperlink hlCliInfoGetCmds;
 
     // endregion
 
@@ -216,6 +218,7 @@ public class MainController extends BaseController {
 
         btnCliEdit.setDisable(true);
         btnCliRem.setDisable(true);
+        hlCliInfoGetCmds.setVisible(false);
 
         tfSearchClient.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredClients.setPredicate(client -> {
@@ -281,12 +284,22 @@ public class MainController extends BaseController {
                 lblCliInfoIdentifiant.setText(newSelection.getIdentifiant());
                 // lblCliInfoMotDePasse.setText(newSelection.getMotDePasse());
                 lblCliInfoMotDePasse.setText("********");
+
+                hlCliInfoGetCmds.setVisible(true);
+                hlCliInfoGetCmds.setOnAction(e -> {
+                    if (filteredCmds != null) {
+                        tpMain.getSelectionModel().select(tabCmd);
+                        tfSearchCommand.setText(":client:" + newSelection.getNom() + " " + newSelection.getPrenom());
+                    }
+                });
+
             } else {
                 lblCliInfoNom.setText("");
                 lblCliInfoPrenom.setText("");
                 lblCliInfoAdr.setText("");
                 lblCliInfoIdentifiant.setText("");
                 lblCliInfoMotDePasse.setText("");
+                hlCliInfoGetCmds.setVisible(false);
             }
         });
 

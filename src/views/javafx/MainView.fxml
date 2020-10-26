@@ -358,7 +358,7 @@
                                                 </Label>
                                                 <Hyperlink fx:id="hlProdInfoCateg">
                                                    <padding>
-                                                      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                                      <Insets bottom="4.0" left="4.0" right="4.0" top="3.0" />
                                                    </padding>
                                                 </Hyperlink>
                                              </children>
@@ -507,7 +507,7 @@
                                                 </Label>
                                                 <Hyperlink fx:id="hlCmdInfoClient">
                                                    <padding>
-                                                      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                                      <Insets bottom="4.0" left="4.0" right="4.0" top="3.0" />
                                                    </padding>
                                                 </Hyperlink>
                                              </children>

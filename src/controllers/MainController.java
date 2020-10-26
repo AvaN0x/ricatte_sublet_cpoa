@@ -227,18 +227,37 @@ public class MainController extends BaseController {
 
                 try {
                     if (lowerCaseFilter.startsWith(":")) {
-                        var filter = lowerCaseFilter.split("\\b:");
-                        filter[0] = filter[0].substring(1);
+                        return new IFilterRunnable() {
+                            @Override
+                            public boolean isObjectSearched(String toSearch) {
+                                Matcher matcher = Pattern.compile(
+                                        "^(?<field>:[a-z]+:)(?<value>[^0-9\\n|&]+)(?<modifier>&|\\|)?(?<next>.+)?")
+                                        .matcher(toSearch);
+                                boolean isSearched = false;
 
-                        if (colCliNom.getText().toLowerCase().startsWith(filter[0]))
-                            return client.getNom().toLowerCase().contains(filter[1]);
-                        else if (colCliPrenom.getText().toLowerCase().startsWith(filter[0]))
-                            return client.getPrenom().toLowerCase().contains(filter[1]);
-                        else if (colCliVille.getText().toLowerCase().startsWith(filter[0]))
-                            return client.getAdrVille().toLowerCase().contains(filter[1]);
-                        else if (colCliPays.getText().toLowerCase().startsWith(filter[0]))
-                            return client.getAdrPays().toLowerCase().contains(filter[1]);
-                        return false;
+                                if (matcher.matches()) {
+                                    String field = matcher.group("field").replace(':', ' ').trim();
+                                    if (colCliNom.getText().toLowerCase().startsWith(field))
+                                        isSearched = client.getNom().toLowerCase().contains(matcher.group("value"));
+                                    else if (colCliPrenom.getText().toLowerCase().startsWith(field))
+                                        isSearched = client.getPrenom().toLowerCase().contains(matcher.group("value"));
+                                    else if (colCliVille.getText().toLowerCase().startsWith(field))
+                                        isSearched = client.getAdrVille().toLowerCase()
+                                                .contains(matcher.group("value"));
+                                    else if (colCliPays.getText().toLowerCase().startsWith(field))
+                                        isSearched = client.getAdrPays().toLowerCase().contains(matcher.group("value"));
+
+                                    if ((matcher.group("modifier") != null && !matcher.group("modifier").isEmpty())
+                                            && (matcher.group("next") != null && !matcher.group("next").isEmpty())) {
+                                        if (matcher.group("modifier").startsWith("|"))
+                                            return isSearched | isObjectSearched(matcher.group("next"));
+                                        else
+                                            return isSearched && isObjectSearched(matcher.group("next"));
+                                    }
+                                }
+                                return isSearched;
+                            }
+                        }.isObjectSearched(lowerCaseFilter);
                     }
                 } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
                     return false;
@@ -342,12 +361,30 @@ public class MainController extends BaseController {
 
                 try {
                     if (lowerCaseFilter.startsWith(":")) {
-                        var filter = lowerCaseFilter.split("\\b:");
-                        filter[0] = filter[0].substring(1);
+                        return new IFilterRunnable() {
+                            @Override
+                            public boolean isObjectSearched(String toSearch) {
+                                Matcher matcher = Pattern.compile(
+                                        "^(?<field>:[a-z]+:)(?<value>[^0-9\\n|&]+)(?<modifier>&|\\|)?(?<next>.+)?")
+                                        .matcher(toSearch);
+                                boolean isSearched = false;
 
-                        if (colCategTitre.getText().toLowerCase().startsWith(filter[0]))
-                            return categ.getTitle().toLowerCase().contains(filter[1]);
-                        return false;
+                                if (matcher.matches()) {
+                                    String field = matcher.group("field").replace(':', ' ').trim();
+                                    if (colCategTitre.getText().toLowerCase().startsWith(field))
+                                        isSearched = categ.getTitle().toLowerCase().contains(matcher.group("value"));
+
+                                    if ((matcher.group("modifier") != null && !matcher.group("modifier").isEmpty())
+                                            && (matcher.group("next") != null && !matcher.group("next").isEmpty())) {
+                                        if (matcher.group("modifier").startsWith("|"))
+                                            return isSearched | isObjectSearched(matcher.group("next"));
+                                        else
+                                            return isSearched && isObjectSearched(matcher.group("next"));
+                                    }
+                                }
+                                return isSearched;
+                            }
+                        }.isObjectSearched(lowerCaseFilter);
                     }
                 } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
                     return false;
@@ -447,16 +484,36 @@ public class MainController extends BaseController {
 
                 try {
                     if (lowerCaseFilter.startsWith(":")) {
-                        var filter = lowerCaseFilter.split("\\b:");
-                        filter[0] = filter[0].substring(1);
+                        return new IFilterRunnable() {
+                            @Override
+                            public boolean isObjectSearched(String toSearch) {
+                                Matcher matcher = Pattern.compile(
+                                        "^(?<field>:[a-z]+:)(?<value>[^0-9\\n|&]+)(?<modifier>&|\\|)?(?<next>.+)?")
+                                        .matcher(toSearch);
+                                boolean isSearched = false;
 
-                        if (colProdNom.getText().toLowerCase().startsWith(filter[0]))
-                            return prod.getNom().toLowerCase().contains(filter[1]);
-                        else if (colProdDescription.getText().toLowerCase().startsWith(filter[0]))
-                            return prod.getDescription().toLowerCase().contains(filter[1]);
-                        else if (colProdCategorie.getText().toLowerCase().startsWith(filter[0]))
-                            return prod.getCategory().getTitle().toLowerCase().contains(filter[1]);
-                        return false;
+                                if (matcher.matches()) {
+                                    String field = matcher.group("field").replace(':', ' ').trim();
+                                    if (colProdNom.getText().toLowerCase().startsWith(field))
+                                        isSearched = prod.getNom().toLowerCase().contains(matcher.group("value"));
+                                    else if (colProdDescription.getText().toLowerCase().startsWith(field))
+                                        isSearched = prod.getDescription().toLowerCase()
+                                                .contains(matcher.group("value"));
+                                    else if (colProdCategorie.getText().toLowerCase().startsWith(field))
+                                        isSearched = prod.getCategory().getTitle().toLowerCase()
+                                                .contains(matcher.group("value"));
+
+                                    if ((matcher.group("modifier") != null && !matcher.group("modifier").isEmpty())
+                                            && (matcher.group("next") != null && !matcher.group("next").isEmpty())) {
+                                        if (matcher.group("modifier").startsWith("|"))
+                                            return isSearched | isObjectSearched(matcher.group("next"));
+                                        else
+                                            return isSearched && isObjectSearched(matcher.group("next"));
+                                    }
+                                }
+                                return isSearched;
+                            }
+                        }.isObjectSearched(lowerCaseFilter);
                     }
                 } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
                     return false;
@@ -468,7 +525,8 @@ public class MainController extends BaseController {
                                 .compile("^(?<comp1>[><]=?)(?<value1>[\\d.,]+)(?<comp2>[><]?=?)(?<value2>[\\d.|,]*)")
                                 .matcher(lowerCaseFilter);
                         boolean isSearched = false;
-                        if (matcher.matches() && !matcher.group("value1").isEmpty()) {
+                        if (matcher.matches()
+                                && (matcher.group("value1") != null && !matcher.group("value1").isEmpty())) {
                             float value = Float.parseFloat(matcher.group("value1"));
                             switch (matcher.group("comp1")) {
                                 case ">=":
@@ -487,7 +545,7 @@ public class MainController extends BaseController {
                                     break;
                             }
 
-                            if (isSearched && !matcher.group("value2").isEmpty()) {
+                            if (isSearched && (matcher.group("value2") != null && !matcher.group("value2").isEmpty())) {
                                 value = Float.parseFloat(matcher.group("value2"));
                                 switch (matcher.group("comp2")) {
                                     case ">=":
@@ -512,7 +570,7 @@ public class MainController extends BaseController {
                         return isSearched;
                     } else if (lowerCaseFilter.startsWith("=")) {
                         Matcher matcher = Pattern.compile("^(=)(?<value>[\\d.,]+)").matcher(lowerCaseFilter);
-                        if (matcher.matches() && !matcher.group("value").isEmpty())
+                        if (matcher.matches() && (matcher.group("value") != null && !matcher.group("value").isEmpty()))
                             return prod.getTarif() == Float.parseFloat(matcher.group("value"));
                     }
                 } catch (NumberFormatException e) {
@@ -635,24 +693,47 @@ public class MainController extends BaseController {
 
                 try {
                     if (lowerCaseFilter.startsWith(":")) {
-                        var filter = lowerCaseFilter.split("\\b:");
-                        filter[0] = filter[0].substring(1);
+                        return new IFilterRunnable() {
+                            @Override
+                            public boolean isObjectSearched(String toSearch) {
+                                Matcher matcher = Pattern
+                                        .compile(
+                                                "^(?<field>:[a-z]+:)(?<value>[^\\n|&]+)(?<modifier>&|\\|)?(?<next>.+)?")
+                                        .matcher(toSearch);
+                                boolean isSearched = false;
 
-                        if (colCmdCli.getText().toLowerCase().startsWith(filter[0]))
-                            return (cmd.getClient().getNom().toLowerCase().contains(filter[1])
-                                    || cmd.getClient().getPrenom().toLowerCase().contains(filter[1]));
-                        else if (colCmdDate.getText().toLowerCase().startsWith(filter[0]))
-                            return (cmd.getDateCommand().toString().toLowerCase().contains(filter[1]));
-                        else if (colCmdInfoProd.getText().toLowerCase().startsWith(filter[0])) {
-                            boolean prodIsPresent = false;
-                            for (Map.Entry<Product, CommandLine> entry : cmd.getCommandLines().entrySet()) {
-                                prodIsPresent = entry.getKey().getNom().toLowerCase().contains(filter[1]);
-                                if (prodIsPresent)
-                                    break;
+                                if (matcher.matches()) {
+                                    String field = matcher.group("field").replace(':', ' ').trim();
+                                    if (colCmdCli.getText().toLowerCase().startsWith(field))
+                                        isSearched = (cmd.getClient().getNom().toLowerCase()
+                                                .contains(matcher.group("value"))
+                                                || cmd.getClient().getPrenom().toLowerCase()
+                                                        .contains(matcher.group("value")));
+                                    else if (colCmdDate.getText().toLowerCase().startsWith(field))
+                                        isSearched = (cmd.getDateCommand().toString().toLowerCase()
+                                                .contains(matcher.group("value")));
+                                    else if (colCmdInfoProd.getText().toLowerCase().startsWith(field)) {
+                                        boolean prodIsPresent = false;
+                                        for (Map.Entry<Product, CommandLine> entry : cmd.getCommandLines().entrySet()) {
+                                            prodIsPresent = entry.getKey().getNom().toLowerCase()
+                                                    .contains(matcher.group("value"));
+                                            if (prodIsPresent)
+                                                break;
+                                        }
+                                        isSearched = prodIsPresent;
+                                    }
+
+                                    if ((matcher.group("modifier") != null && !matcher.group("modifier").isEmpty())
+                                            && (matcher.group("next") != null && !matcher.group("next").isEmpty())) {
+                                        if (matcher.group("modifier").startsWith("|"))
+                                            return isSearched | isObjectSearched(matcher.group("next"));
+                                        else
+                                            return isSearched && isObjectSearched(matcher.group("next"));
+                                    }
+                                }
+                                return isSearched;
                             }
-                            return prodIsPresent;
-                        }
-                        return false;
+                        }.isObjectSearched(lowerCaseFilter);
                     }
                 } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
                     return false;

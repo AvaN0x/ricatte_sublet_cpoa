@@ -149,7 +149,13 @@ public class MainController extends BaseController {
     private TableColumn<ProductLine, Product> colCmdInfoProd;
     @FXML
     private TableColumn<ProductLine, Integer> colCmdInfoQuantite;
+    @FXML
+    private TableColumn<ProductLine, Float> colCmdInfoPrice;
     // endregion
+
+    public MainController() {
+        reloadPersistance(dao.Persistance.MYSQL);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle ressources) {

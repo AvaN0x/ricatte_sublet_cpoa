@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -97,7 +98,7 @@ public class MainController extends BaseController {
     @FXML
     private Label lblProdInfoTarif;
     @FXML
-    private Label lblProdInfoCateg;
+    private Hyperlink hlProdInfoCateg;
     @FXML
     private Label lblProdInfoNom;
     @FXML
@@ -123,7 +124,7 @@ public class MainController extends BaseController {
     @FXML
     private Button btnCmdRem;
     @FXML
-    private Label lblCmdInfoClient;
+    private Hyperlink hlCmdInfoClient;
     @FXML
     private Label lblCmdInfoDateCommande;
     @FXML
@@ -471,7 +472,7 @@ public class MainController extends BaseController {
                 btnProdRem.setDisable(false);
 
                 lblProdInfoTarif.setText(Float.toString(newSelection.getTarif()) + " €");
-                lblProdInfoCateg.setText(newSelection.getCategory().getTitle());
+                hlProdInfoCateg.setText(newSelection.getCategory().getTitle());
                 lblProdInfoNom.setText(newSelection.getNom());
                 lblProdInfoDescription.setText(newSelection.getDescription());
                 lblProdInfoVisuel.setText(newSelection.getVisuel());
@@ -488,7 +489,7 @@ public class MainController extends BaseController {
                     lblProdInfoQuantityOrdered.setText("?");
             } else {
                 lblProdInfoTarif.setText("");
-                lblProdInfoCateg.setText("");
+                hlProdInfoCateg.setText("");
                 lblProdInfoNom.setText("");
                 lblProdInfoDescription.setText("");
                 lblProdInfoVisuel.setText("");
@@ -605,7 +606,7 @@ public class MainController extends BaseController {
                 btnCmdEdit.setDisable(false);
                 btnCmdRem.setDisable(false);
 
-                lblCmdInfoClient.setText(newSelection.getClient().toString());
+                hlCmdInfoClient.setText(newSelection.getClient().toString());
                 lblCmdInfoDateCommande.setText(newSelection.getDateCommand().toString());
 
                 colCmdInfoProd.setCellValueFactory(new PropertyValueFactory<>("prod"));
@@ -618,7 +619,7 @@ public class MainController extends BaseController {
                     Platform.runLater(() -> tvCmdInfo.setItems(FXCollections.observableArrayList(prodLines)));
                 }).start();
             } else {
-                lblCmdInfoClient.setText("");
+                hlCmdInfoClient.setText("");
                 lblCmdInfoDateCommande.setText("");
                 tvCmdInfo.getItems().clear();
             }

@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -355,11 +356,11 @@
                                                       <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                                    </padding>
                                                 </Label>
-                                                <Label fx:id="lblProdInfoCateg" text="">
+                                                <Hyperlink fx:id="hlProdInfoCateg">
                                                    <padding>
                                                       <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                                    </padding>
-                                                </Label>
+                                                </Hyperlink>
                                              </children>
                                           </HBox>
                                        </children>
@@ -503,11 +504,11 @@
                                                       <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                                    </padding>
                                                 </Label>
-                                                <Label fx:id="lblCmdInfoClient" text="">
+                                                <Hyperlink fx:id="hlCmdInfoClient">
                                                    <padding>
                                                       <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                                    </padding>
-                                                </Label>
+                                                </Hyperlink>
                                              </children>
                                           </HBox>
                                           <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">

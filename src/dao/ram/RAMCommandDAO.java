@@ -3,6 +3,7 @@ package dao.ram;
 import java.util.ArrayList;
 
 import dao.CommandDAO;
+import models.Client;
 import models.Command;
 
 public class RAMCommandDAO implements CommandDAO {
@@ -49,6 +50,17 @@ public class RAMCommandDAO implements CommandDAO {
     @Override
     public ArrayList<Command> getAll() {
         return data;
+    }
+
+    @Override
+    public ArrayList<Command> getByClient(Client cli) {
+        ArrayList<Command> cmds = new ArrayList<>();
+        for (Command cmd : data)
+            if (cmd.getClient() == cli)
+                cmds.add(cmd);
+        if (cmds.size() > 0)
+            return cmds;
+        throw new IllegalArgumentException("No command have this client");
     }
 
     public static RAMCommandDAO getInstance() {

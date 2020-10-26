@@ -46,6 +46,8 @@ public class RAMClientDAO implements ClientDAO {
         int i = data.indexOf(cli);
         if (i == -1)
             throw new IllegalArgumentException("This client doesn't exist");
+        if (RAMCommandDAO.getInstance().getByClient(cli).size() > 0)
+            throw new IllegalArgumentException("This client is used in commands");
         return cli.equals(data.remove(i));
     }
 

@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.util.HashMap;
 
 import dao.CommandDAO;
+import models.Client;
 import models.Command;
 import models.CommandLine;
 import models.Product;
@@ -127,6 +128,37 @@ public class MySQLCommandDAO extends MySQLDAO implements CommandDAO {
 
         Connection con = startConnection();
         PreparedStatement query = con.prepareStatement("SELECT * FROM commande");
+        ResultSet comRes = query.executeQuery();
+
+        query = con.prepareStatement("SELECT * FROM ligne_commande WHERE id_commande=?");
+
+        ArrayList<Command> cmds = new ArrayList<Command>();
+        while (comRes.next()) {
+            Command cmd = new Command(comRes.getInt("id_commande"), comRes.getDate("date_commande").toLocalDate(),
+                    MySQLClientDAO.getInstance().getById(comRes.getInt("id_client")));
+
+            // ! Can't use MySQLCommandLineDAO => Stack Overflow
+            query.setInt(1, comRes.getInt("id_commande"));
+            ResultSet lineRes = query.executeQuery();
+            HashMap<Product, CommandLine> lines = new HashMap<Product, CommandLine>();
+            while (lineRes.next()) { // multiple result
+                lines.put(MySQLProductDAO.getInstance().getById(lineRes.getInt("id_produit")),
+                        new CommandLine(cmd, lineRes.getInt("quantite"), lineRes.getFloat("tarif_unitaire")));
+            }
+
+            cmd.setCommandLines(lines);
+            cmds.add(cmd);
+        }
+
+        con.close();
+        return cmds;
+    }
+
+    @Override
+    public ArrayList<Command> getByClient(Client cli) throws SQLException, IOException {
+        Connection con = startConnection();
+        PreparedStatement query = con.prepareStatement("SELECT * FROM commande WHERE id_client=?");
+        query.setInt(1, cli.getId());
         ResultSet comRes = query.executeQuery();
 
         query = con.prepareStatement("SELECT * FROM ligne_commande WHERE id_commande=?");

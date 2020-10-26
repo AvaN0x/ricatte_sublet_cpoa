@@ -103,6 +103,13 @@ public class Command {
             throw new IllegalArgumentException("This product is not in the command");
     }
 
+    public float getTotalPrice() {
+        float price = 0;
+        for (var entry : this._commandLines.entrySet())
+            price += entry.getKey().getTarif() * entry.getValue().getQuantite();
+        return price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)

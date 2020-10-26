@@ -140,6 +140,8 @@ public class MainController extends BaseController {
     @FXML
     private Label lblCmdInfoDateCommande;
     @FXML
+    private Label lblCmdInfoTotalPrice;
+    @FXML
     private TableView<ProductLine> tvCmdInfo;
     @FXML
     private TableColumn<ProductLine, Product> colCmdInfoProd;
@@ -642,6 +644,7 @@ public class MainController extends BaseController {
                     tvClients.getSelectionModel().select(newSelection.getClient());
                 });
                 lblCmdInfoDateCommande.setText(newSelection.getDateCommand().toString());
+                lblCmdInfoTotalPrice.setText(Float.toString(newSelection.getTotalPrice()));
 
                 colCmdInfoProd.setCellValueFactory(new PropertyValueFactory<>("prod"));
                 colCmdInfoQuantite.setCellValueFactory(new PropertyValueFactory<>("quant"));

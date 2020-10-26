@@ -230,6 +230,8 @@ public class MainController extends BaseController {
         btnCliRem.setDisable(true);
         hlCliInfoGetCmds.setVisible(false);
 
+        tvClients.getSortOrder().add(colCliNom);
+
         tfSearchClient.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredClients.setPredicate(client -> {
                 if (newValue == null || newValue.isEmpty()) {
@@ -377,6 +379,8 @@ public class MainController extends BaseController {
         btnCategRem.setDisable(true);
         hlCategInfoGetProds.setVisible(false);
 
+        tvCategories.getSortOrder().add(colCategTitre);
+
         tfSearchCateg.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredCategs.setPredicate(categ -> {
                 if (newValue == null || newValue.isEmpty()) {
@@ -511,6 +515,8 @@ public class MainController extends BaseController {
 
         btnProdEdit.setDisable(true);
         btnProdRem.setDisable(true);
+
+        tvProduits.getSortOrder().add(colProdNom);
 
         tfSearchProd.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredProds.setPredicate(prod -> {
@@ -720,6 +726,8 @@ public class MainController extends BaseController {
 
         btnCmdEdit.setDisable(true);
         btnCmdRem.setDisable(true);
+
+        tvCommandes.getSortOrder().add(colCmdDate);
 
         tfSearchCommand.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredCmds.setPredicate(cmd -> {

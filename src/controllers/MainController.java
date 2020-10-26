@@ -724,10 +724,8 @@ public class MainController extends BaseController {
                                 if (matcher.matches()) {
                                     String field = matcher.group("field").replace(':', ' ').trim();
                                     if (colCmdCli.getText().toLowerCase().startsWith(field))
-                                        isSearched = (cmd.getClient().getNom().toLowerCase()
-                                                .contains(matcher.group("value"))
-                                                || cmd.getClient().getPrenom().toLowerCase()
-                                                        .contains(matcher.group("value")));
+                                        isSearched = (matcher.group("value").contains(cmd.getClient().getPrenom().toLowerCase())
+                                                        || matcher.group("value").contains(cmd.getClient().getNom().toLowerCase());
                                     else if (colCmdDate.getText().toLowerCase().startsWith(field))
                                         isSearched = (cmd.getDateCommand().toString().toLowerCase()
                                                 .contains(matcher.group("value")));
@@ -758,8 +756,8 @@ public class MainController extends BaseController {
                     return false;
                 }
 
-                if (cmd.getClient().getPrenom().toLowerCase().contains(lowerCaseFilter)
-                        || cmd.getClient().getNom().toLowerCase().contains(lowerCaseFilter)
+                if (lowerCaseFilter.contains(cmd.getClient().getPrenom().toLowerCase())
+                        || lowerCaseFilter.contains(cmd.getClient().getNom().toLowerCase())
                         || cmd.getDateCommand().toString().toLowerCase().contains(lowerCaseFilter))
                     return true;
                 return false;

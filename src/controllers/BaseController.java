@@ -29,11 +29,6 @@ public abstract class BaseController implements javafx.fxml.Initializable {
     }
 
     protected void showErrorAlert(String header, String content) {
-        var alert = new Alert(Alert.AlertType.ERROR);
-        alert.initOwner(_view);
-        alert.setTitle("Une erreur est survenue !");
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.showAndWait();
+        showAlert("Une erreur est survenue !", header, content, Alert.AlertType.ERROR);
     }
 }

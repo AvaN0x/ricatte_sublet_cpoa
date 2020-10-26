@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -617,6 +618,17 @@ public class MainController extends BaseController {
                     return true;
                 return false;
             });
+        });
+
+        tvCmdInfo.setRowFactory(tv -> {
+            TableRow<ProductLine> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    tpMain.getSelectionModel().select(tabProd);
+                    tvProduits.getSelectionModel().select(row.getItem().getProd());
+                }
+            });
+            return row;
         });
 
         tvCommandes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {

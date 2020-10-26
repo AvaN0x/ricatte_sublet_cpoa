@@ -24,8 +24,8 @@ public class RAMCategoryDAO implements CategoryDAO {
 
     @Override
     public boolean create(Category categ) throws IllegalArgumentException {
-        while (data.contains(categ)){
-            if(data.get(categ.getId()).getTitle() == categ.getTitle())
+        while (data.contains(categ)) {
+            if (data.get(categ.getId()).getTitle() == categ.getTitle())
                 throw new IllegalAccessError("Duplicate key `titre`");
             categ.setId(categ.getId() + 1);
         }
@@ -46,6 +46,8 @@ public class RAMCategoryDAO implements CategoryDAO {
         int i = data.indexOf(categ);
         if (i == -1)
             throw new IllegalArgumentException("This category doesn't exist");
+        if (RAMProductDAO.getInstance().getByCategory(categ).size() > 0)
+            throw new IllegalArgumentException("This category is used in products");
         return categ.equals(data.remove(i));
     }
 

@@ -46,6 +46,8 @@ public class CommandController extends BaseController {
     public void initialize(URL location, ResourceBundle ressources) {
         updateClientBox();
 
+        tvProducts.getSortOrder().add(colProdName);
+
         colProdQuant.setCellFactory(col -> {
             TableCell<ProductLine, ProductLine> cell = new TableCell<ProductLine, ProductLine>() {
                 private Spinner<Integer> count;
@@ -129,7 +131,11 @@ public class CommandController extends BaseController {
                     else
                         prodLine.add(new ProductLine(product, 0));
                 }
-                Platform.runLater(() -> tvProducts.setItems(FXCollections.observableArrayList(prodLine)));
+
+                Platform.runLater(() -> {
+                    tvProducts.setItems(FXCollections.observableArrayList(prodLine));
+                    tvProducts.getSortOrder().add(colProdName);
+                });
             } catch (Exception e) {
                 Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
             }

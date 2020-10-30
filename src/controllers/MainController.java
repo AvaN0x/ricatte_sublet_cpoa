@@ -213,6 +213,7 @@ public class MainController extends BaseController {
                     filteredClients = filteredList;
                     tvClients.setItems(sortedData);
                     tvClients.refresh();
+                    tvClients.getSortOrder().add(colCliNom);
                 });
             } catch (Exception e) {
                 Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
@@ -229,8 +230,6 @@ public class MainController extends BaseController {
         btnCliEdit.setDisable(true);
         btnCliRem.setDisable(true);
         hlCliInfoGetCmds.setVisible(false);
-
-        tvClients.getSortOrder().add(colCliNom);
 
         tfSearchClient.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredClients.setPredicate(client -> {
@@ -366,6 +365,7 @@ public class MainController extends BaseController {
                     filteredCategs = filteredList;
                     tvCategories.setItems(sortedData);
                     tvCategories.refresh();
+                    tvCategories.getSortOrder().add(colCategTitre);
                 });
             } catch (Exception e) {
                 Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
@@ -379,8 +379,6 @@ public class MainController extends BaseController {
         btnCategEdit.setDisable(true);
         btnCategRem.setDisable(true);
         hlCategInfoGetProds.setVisible(false);
-
-        tvCategories.getSortOrder().add(colCategTitre);
 
         tfSearchCateg.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredCategs.setPredicate(categ -> {
@@ -500,6 +498,7 @@ public class MainController extends BaseController {
                     filteredProds = filteredList;
                     tvProduits.setItems(sortedData);
                     tvProduits.refresh();
+                    tvProduits.getSortOrder().add(colProdNom);
                 });
             } catch (Exception e) {
                 Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
@@ -516,8 +515,6 @@ public class MainController extends BaseController {
 
         btnProdEdit.setDisable(true);
         btnProdRem.setDisable(true);
-
-        tvProduits.getSortOrder().add(colProdNom);
 
         tfSearchProd.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredProds.setPredicate(prod -> {
@@ -714,6 +711,7 @@ public class MainController extends BaseController {
                     filteredCmds = filteredList;
                     tvCommandes.setItems(sortedData);
                     tvCommandes.refresh();
+                    tvCommandes.getSortOrder().add(colCmdDate);
                 });
             } catch (Exception e) {
                 Platform.runLater(() -> showErrorAlert(e.getClass().getSimpleName(), e.getMessage()));
@@ -727,8 +725,6 @@ public class MainController extends BaseController {
 
         btnCmdEdit.setDisable(true);
         btnCmdRem.setDisable(true);
-
-        tvCommandes.getSortOrder().add(colCmdDate);
 
         tfSearchCommand.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredCmds.setPredicate(cmd -> {

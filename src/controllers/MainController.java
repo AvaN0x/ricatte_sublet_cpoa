@@ -825,7 +825,10 @@ public class MainController extends BaseController {
                     ArrayList<ProductLine> prodLines = new ArrayList<>();
                     newSelection.getCommandLines()
                             .forEach((prod, cmdline) -> prodLines.add(new ProductLine(prod, cmdline.getQuantite())));
-                    Platform.runLater(() -> tvCmdInfo.setItems(FXCollections.observableArrayList(prodLines)));
+                    Platform.runLater(() -> {
+                        tvCmdInfo.setItems(FXCollections.observableArrayList(prodLines));
+                        tvCmdInfo.getSortOrder().add(colCmdInfoProd);
+                    });
                 }).start();
             } else {
                 hlCmdInfoClient.setText("");

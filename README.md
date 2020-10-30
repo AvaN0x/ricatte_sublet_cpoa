@@ -31,7 +31,7 @@ _Tom_ : 50%
 | Modification          | ✅   |
 | Suppression           | ✅   |
 | Filtre par nom        | ✅   |
-| Filtre par nom prenom | ❌   |
+| Filtre par nom prenom | ✅   |
 
 | Catégories   |     |
 | :----------- | --- |

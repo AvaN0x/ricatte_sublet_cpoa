@@ -278,8 +278,9 @@ public class MainController extends BaseController {
                     return false;
                 }
 
-                return (client.getPrenom().toLowerCase().contains(lowerCaseFilter)
-                        || client.getNom().toLowerCase().contains(lowerCaseFilter));
+                return (client.toString().toLowerCase().contains(lowerCaseFilter)
+                        || client.getNom().toLowerCase().contains(lowerCaseFilter)
+                        || client.getPrenom().toLowerCase().contains(lowerCaseFilter));
             });
         });
 

@@ -46,7 +46,13 @@ public class RAMCategoryDAO implements CategoryDAO {
         int i = data.indexOf(categ);
         if (i == -1)
             throw new IllegalArgumentException("This category doesn't exist");
-        if (RAMProductDAO.getInstance().getByCategory(categ).size() > 0)
+        boolean isUsed;
+        try {
+            isUsed = RAMProductDAO.getInstance().getByCategory(categ).size() > 0;
+        } catch (IllegalArgumentException e) {
+            isUsed = false;
+        }
+        if (isUsed)
             throw new IllegalArgumentException("This category is used in products");
         return categ.equals(data.remove(i));
     }

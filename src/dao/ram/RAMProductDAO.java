@@ -26,7 +26,7 @@ public class RAMProductDAO implements ProductDAO {
     @Override
     public boolean create(Product prod) {
         while (data.contains(prod)) {
-            if (data.get(prod.getId()).getNom() == prod.getNom()
+            if (data.get(prod.getId()).getNom().equals(prod.getNom())
                     && data.get(prod.getId()).getCategory().getId() == prod.getCategory().getId())
                 throw new IllegalAccessError("Duplicate key `nom` and `id_category`");
             prod.setId(prod.getId() + 1);
@@ -48,6 +48,11 @@ public class RAMProductDAO implements ProductDAO {
         int i = data.indexOf(prod);
         if (i == -1)
             throw new IllegalArgumentException("This product doesn't exist");
+        var cmds = RAMCommandDAO.getInstance().getAll();
+        for (var cmd : cmds) {
+            if (cmd.getCommandLines().containsKey(prod))
+                throw new IllegalArgumentException("This category is used in products");
+        }
         return prod.equals(data.remove(i));
     }
 

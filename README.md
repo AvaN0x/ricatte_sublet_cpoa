@@ -64,6 +64,6 @@ Il s'est chargé de tout les fichiers `FXML`, d'une partie des contrôleurs (not
 
 **Tom** : 50%
 
-Il s'est chargé de toute la structure (division en plusieurs `packages`) du reste des contrôleurs (notamment l'asynchrone, la barre de recherche, du changement de persistance) ainsi que de divers réparations de [bugs](https://github.com/AvaN0x/ricatte_sublet_cpoa/issues?q=is%3Aissue).
+Il s'est chargé de toute la structure (division en plusieurs `packages`), du reste des contrôleurs (notamment l'asynchrone, la barre de recherche, du changement de persistance) ainsi que de divers réparations de [bugs](https://github.com/AvaN0x/ricatte_sublet_cpoa/issues?q=is%3Aissue).
 
 Vous pouvez voir le détail de la répartition dans le [projet GitHub](https://github.com/AvaN0x/ricatte_sublet_cpoa/projects/4).

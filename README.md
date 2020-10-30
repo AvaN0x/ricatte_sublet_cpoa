@@ -56,7 +56,7 @@ La connexion à la base de données nécessite un fichier `creditentials.propert
 
 ## Répartition
 
-Les tâches ont bien étaient répartie et on arrive a un équilibre parfait :
+Les tâches ont bien étaient répartie et on arrive à un équilibre parfait :
 
 **Clément** : 50%
 

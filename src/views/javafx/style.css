@@ -1,0 +1,9 @@
+Button {
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+}
+
+.exception {
+    -fx-text-fill: #FF0000;
+    -fx-font-weight: bold;
+    font-weight: bold;
+}

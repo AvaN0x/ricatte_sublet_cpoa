@@ -1,9 +1,6 @@
 # AvaN0x icons
 desktop.ini
 
-# Security duh
-config/creditentials.private.properties
-
 # Java debug files
 lib/
 .settings
